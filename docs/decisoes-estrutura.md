@@ -56,10 +56,12 @@ Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** 
 
 - **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**
 - **framer-motion** para o motion (assinatura "passar a conta"), **lucide-react** para ícones, **shadcn** como base de componentes (sempre re-estilizados com nossos tokens — nunca o look default), **sonner** para toasts, **react-day-picker**/`date-fns` para calendário, **next-themes** para o futuro dark mode.
-- Testes com **vitest**.
+- Testes com **vitest** (`lib/escala/agenda.test.ts`).
 - Tokens de design entram como CSS custom properties + `theme` do Tailwind — componentes referenciam tokens por nome, nunca hex solto.
 
-Pendentes de decisão: banco/backend, autenticação (fluxo por convite), plataforma do widget (nativo vs PWA), estratégia de push.
+**Estado atual do app:** todas as rotas existem — `app/(app)/` (escala, calendário, cadastro, reuniões) e `app/(app)/coordenador/` (painel, escala, funções, participantes, reuniões), com `app/login/` fora do shell. Componentes por domínio em `components/` (shell, escala, calendario, cadastro, gestao) sobre a base `components/ui/` (shadcn). Dados vêm de `lib/mock/` através da camada `lib/data/` — trocar essa camada por backend real é o caminho de evolução.
+
+Pendentes: aplicar a identidade "O Fio" na UI do app (hoje está no look default do shadcn — ver decisoes-design.md), banco/backend, autenticação (fluxo por convite), plataforma do widget (nativo vs PWA), estratégia de push.
 
 ## 7. Fluxo de trabalho em duas máquinas
 

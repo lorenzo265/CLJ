@@ -10,7 +10,7 @@ Plataforma interna de gestão de pessoas do Departamento Cultural da **Paróquia
 |---|---|
 | `design/` | Fonte da verdade do design: 18 artboards `.dc.html` + `canvas.json` (layout) + o canvas montado `clj-nsr-estrutura-paginas.html`. Editável no canvas publicado (link abaixo) ou nos arquivos. |
 | `docs/` | Decisões documentadas: [decisoes-design.md](docs/decisoes-design.md) (identidade, tokens, princípios) e [decisoes-estrutura.md](docs/decisoes-estrutura.md) (produto, papéis, telas). `abertura-clj-nsr.html` é o documento de abertura do projeto. |
-| `web/` | O app — Next.js 16 (App Router) + TypeScript + Tailwind 4 + framer-motion. Em estágio inicial. |
+| `web/` | O app — Next.js 16 (App Router) + TypeScript + Tailwind 4 + framer-motion. Todas as rotas e telas já existem com **dados mock** (`lib/mock/`); falta backend, autenticação e a aplicação da identidade "O Fio" na UI. |
 
 ## Links vivos
 

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   Bookmark,
   Calendar,
@@ -58,13 +57,9 @@ function NavLink({ href, label, icon: Icon }: NavEntry) {
   return (
     <SidebarMenuItem>
       <SidebarMenuButton render={<Link href={href} />} className="relative">
-        {isActive && (
-          <motion.span
-            layoutId="nav-active-pill"
-            className="absolute inset-0 rounded-md bg-sidebar-accent"
-            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-          />
-        )}
+        {/* Pílula estática por ora — a transição "passar a conta" (GSAP Flip)
+            entra junto com o redesign sidebar-terço da identidade "O Fio". */}
+        {isActive && <span className="absolute inset-0 rounded-md bg-sidebar-accent" />}
         <Icon className="relative z-10 size-4" />
         <span className="relative z-10">{label}</span>
       </SidebarMenuButton>

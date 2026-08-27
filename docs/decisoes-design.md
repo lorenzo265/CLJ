@@ -41,6 +41,19 @@ Light (padrão). Dark mode existe derivado no doc de abertura — re-derivar por
 
 Regras: um destaque por tela; azul é marca-texto, não tinta de parede; contraste AA mínimo.
 
+## 3b. Contas — tratamento visual (v2, flat)
+
+Redesenhadas em 2026-08-27: a primeira versão (esferas com gradiente radial, brilho e sombra interna) lia "site anos 2000" — **skeuomorfismo é proibido** na identidade. A conta agora lê pela **geometria no fio**, não pela renderização 3D:
+
+| Estado | Tratamento |
+|---|---|
+| Inativa | círculo 12px, fundo `--panel`, contorno 1.5px `--text-faint` |
+| Ativa / sua | disco chapado `--accent` + **anel-auréola** de 3px em `--accent-soft` (`box-shadow: 0 0 0 3px`) |
+| Suplência | anel 2px `--accent`, sem preenchimento |
+| Ave-Marias (separador) | pontos 5px `--text-faint` a 60% |
+
+O anel-auréola é a referência mariana embutida no estado ativo. Fio: hairline sólida `--border` (sem gradiente). Cruz interina do cabeçalho: sólida `--accent` — será substituída pela marca escolhida.
+
 ## 4. Tipografia
 
 | Papel | Fonte | Uso |
@@ -51,15 +64,17 @@ Regras: um destaque por tela; azul é marca-texto, não tinta de parede; contras
 
 Nunca `system-ui`/Inter/Roboto como identidade. Carregadas via Google Fonts em cada artboard; no app, self-host.
 
-## 5. Motion — assinatura "passar a conta"
+## 5. Motion — GSAP, assinatura "passar a conta"
 
-Tokens: `--dur-micro:140ms · --dur-base:240ms · --dur-entrance:420ms · ease-out: cubic-bezier(0.16,1,0.3,1) · stagger: 35ms`.
+**Biblioteca oficial: GSAP** (`gsap` + `@gsap/react` com o hook `useGSAP`) — decidido em 2026-08-27; substituiu framer-motion (removido). Primeiro uso: entrada em stagger da `AgendaList`. A pílula ativa do sidebar atual está estática de propósito — a transição definitiva usa **GSAP Flip** e entra junto com o redesign sidebar-terço.
+
+Tokens: `--dur-micro:140ms · --dur-base:240ms · --dur-entrance:420ms · stagger: 35–40ms`. Easing da casa `cubic-bezier(0.16,1,0.3,1)` ≈ `power3.out` no GSAP (ou `CustomEase` com a curva exata).
 
 Dois momentos de fanfarra (os únicos):
-1. **Navegar = passar as contas.** Ao trocar de item do menu, cada conta desliza 4px e volta, em cascata a partir da conta clicada (stagger 35ms); a conta de destino assenta preenchendo-se de azul (escala 1.4→1.0, 320ms, ease-out). Vibração leve no celular (`navigator.vibrate(8)`).
-2. **Concluir = conta se preenche** (240ms, ease-out) + carimbo dourado "Publicado".
+1. **Navegar = passar as contas.** Timeline GSAP: cada conta desliza 4px e volta, com `stagger: { each: 0.035, from: <índice da conta clicada> }`; a conta de destino assenta preenchendo-se de azul (escala 1.4→1.0, 320ms, `power3.out`). Vibração leve no celular (`navigator.vibrate(8)`).
+2. **Concluir = conta se preenche** (240ms) + carimbo dourado "Publicado".
 
-Com `prefers-reduced-motion`: apenas cross-fade de cor. Protótipo clicável na seção 04 do briefing.
+Sempre checar `prefers-reduced-motion` (via `gsap.matchMedia()` ou guarda manual): reduzido = apenas cross-fade de cor. Protótipo clicável na seção 04 do briefing.
 
 ## 6. Hierarquia e voz
 
@@ -83,11 +98,24 @@ Microcopy em 2ª pessoa, ordem fixa: situação → o que é seu → um próximo
 - **Widget de tela inicial** (dois estados: manchete / "Semana em dia ✓") = check de custo zero. Depende da plataforma técnica (nativo ou PWA) — decidir na etapa mobile do app.
 - Push na janela em que a pessoa costuma responder, não em horário fixo.
 
-## 9. Status do design (2026-08-26)
+## 9. Marca & branding (em decisão)
 
-- ✅ Identidade aplicada nos 18 artboards do canvas (desktop + mobile + componentes)
+Três direções desenhadas no canvas (fileira "Marca"), todas ancoradas em Nossa Senhora do Rosário, flat, uma cor:
+
+- **A — Auréola:** nove contas + a cruz fechando a dezena em círculo; lê como auréola/coroa de Nossa Senhora e vira sistema (as contas da marca acendem com o progresso). Custo: favicon precisa de variante simplificada.
+- **B — Rosa:** a rosa em espiral num traço só (Rosário = coroa de rosas); o fio florescendo; abre-se desenhando (GSAP). Custo: menos literal ao produto.
+- **C — Monograma:** M de Maria com a cruz nascendo do centro (Medalha Milagrosa geometrizada); força de selo, o mais robusto em 16px. Custo: lê mais "instituição" que "ferramenta".
+
+**Decisão pendente do time.** A marca escolhida substitui a cruz interina do sidebar/login e define favicon + avatar do WhatsApp.
+
+## 10. Status do design (2026-08-27)
+
+- ✅ Identidade aplicada nos 21 artboards do canvas (desktop + mobile + componentes + marcas)
 - ✅ Sidebar-terço e MobileNav como componentes reutilizados
+- ✅ Contas em flat com anel-auréola (v2 — §3b)
+- ✅ GSAP adotado como biblioteca de motion (§5); framer-motion removido do app
+- ⏳ Escolher a direção da marca (A/B/C — §9)
 - ⏳ Escolher a direção da tela Escala do participante (Opções A/B/C no canvas)
 - ⏳ Validar aplicação do terço com coordenação/pároco
-- ⏳ Marca final (cruz/medalha) como exploração própria
+- ⏳ Aplicar "O Fio" na UI do app web (tokens + sidebar-terço com GSAP)
 - ⏳ Dark mode das telas (derivado, não invertido)

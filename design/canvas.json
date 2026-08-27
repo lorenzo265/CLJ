@@ -140,6 +140,30 @@
       "w": 390,
       "h": 140,
       "title": "Componente — Bottom nav"
+    },
+    {
+      "file": "MarcaAureola.dc.html",
+      "x": 0,
+      "y": 4760,
+      "w": 640,
+      "h": 540,
+      "title": "Marca A — Auréola"
+    },
+    {
+      "file": "MarcaRosa.dc.html",
+      "x": 760,
+      "y": 4760,
+      "w": 640,
+      "h": 540,
+      "title": "Marca B — Rosa"
+    },
+    {
+      "file": "MarcaMonograma.dc.html",
+      "x": 1520,
+      "y": 4760,
+      "w": 640,
+      "h": 540,
+      "title": "Marca C — Monograma"
     }
   ],
   "annotations": [
@@ -191,6 +215,13 @@
       "y": 3640,
       "w": 900,
       "text": "Mobile — participante (390px): tela Hoje (manchete + dezena da semana), Escala e Calendário, com bottom nav na zona do polegar"
+    },
+    {
+      "id": "lbl-marca",
+      "x": 0,
+      "y": 4680,
+      "w": 900,
+      "text": "Marca & branding — 3 direções com referências de Nossa Senhora do Rosário; escolha uma. Contas do menu refeitas em flat (sem brilho 3D) com anel-auréola no estado ativo."
     }
   ],
   "launch": {

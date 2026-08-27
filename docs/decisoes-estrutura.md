@@ -55,7 +55,7 @@ Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** 
 ## 6. Stack do app (`web/`)
 
 - **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**
-- **framer-motion** para o motion (assinatura "passar a conta"), **lucide-react** para ícones, **shadcn** como base de componentes (sempre re-estilizados com nossos tokens — nunca o look default), **sonner** para toasts, **react-day-picker**/`date-fns` para calendário, **next-themes** para o futuro dark mode.
+- **GSAP** (`gsap` + `@gsap/react`) para motion e efeitos (assinatura "passar a conta"; framer-motion foi removido em 2026-08-27), **lucide-react** para ícones, **shadcn** como base de componentes (sempre re-estilizados com nossos tokens — nunca o look default), **sonner** para toasts, **react-day-picker**/`date-fns` para calendário, **next-themes** para o futuro dark mode.
 - Testes com **vitest** (`lib/escala/agenda.test.ts`).
 - Tokens de design entram como CSS custom properties + `theme` do Tailwind — componentes referenciam tokens por nome, nunca hex solto.
 

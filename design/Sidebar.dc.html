@@ -24,34 +24,24 @@ a{color:var(--accent-ink)} a:hover{color:var(--accent)}
 
 /* A cruz — âncora do fio, a marca */
 .s-cross{width:26px;height:30px;position:relative;flex-shrink:0;}
-.s-cross::before{content:"";position:absolute;left:50%;top:1px;transform:translateX(-50%);width:5px;height:26px;border-radius:3px;background:linear-gradient(135deg,var(--accent-hi),var(--accent-ink));}
-.s-cross::after{content:"";position:absolute;left:50%;top:8px;transform:translateX(-50%);width:18px;height:5px;border-radius:3px;background:linear-gradient(135deg,var(--accent-hi),var(--accent-ink));}
+.s-cross::before{content:"";position:absolute;left:50%;top:1px;transform:translateX(-50%);width:5px;height:26px;border-radius:3px;background:var(--accent);}
+.s-cross::after{content:"";position:absolute;left:50%;top:8px;transform:translateX(-50%);width:18px;height:5px;border-radius:3px;background:var(--accent);}
 
 /* O fio — o cordão que atravessa a navegação */
 .r-list{position:relative;display:flex;flex-direction:column;}
-.r-list::before{content:"";position:absolute;left:6px;top:-12px;bottom:6px;width:2px;border-radius:2px;background:linear-gradient(to bottom,var(--border-soft),var(--border) 10%,var(--border) 90%,var(--border-soft));}
+.r-list::before{content:"";position:absolute;left:6px;top:-12px;bottom:6px;width:2px;border-radius:2px;background:var(--border);}
 
 .r-klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:9.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--text-faint);margin:0 0 5px 28px;}
 
 /* As contas do Pai-Nosso — os itens do menu */
 .r-item{display:flex;align-items:center;gap:13px;padding:8px 6px 8px 0;position:relative;font-size:13.5px;color:var(--text);font-weight:500;transition:color 160ms ease;}
-.r-bead{width:14px;height:14px;border-radius:50%;z-index:1;flex-shrink:0;
-  background:radial-gradient(circle at 35% 28%, var(--panel) 0%, var(--bg) 60%, #D9D2C4 100%);
-  border:1px solid var(--border);
-  box-shadow:inset -1px -2px 3px rgba(38,35,32,0.13), 0 1px 2px rgba(38,35,32,0.10);
-  transition:transform 200ms cubic-bezier(0.16,1,0.3,1);}
+.r-bead{width:12px;height:12px;border-radius:50%;z-index:1;flex-shrink:0;background:var(--panel);border:1.5px solid var(--text-faint);transition:transform 200ms cubic-bezier(0.16,1,0.3,1),background 200ms ease,border-color 200ms ease,box-shadow 200ms ease;}
 .r-item.on{color:var(--accent-ink);font-weight:700;}
-.r-item.on .r-bead{
-  background:radial-gradient(circle at 35% 28%, var(--accent-hi) 0%, var(--accent) 60%, var(--accent-ink) 100%);
-  border-color:var(--accent-ink);
-  box-shadow:inset -1px -2px 3px rgba(0,0,0,0.24), 0 1px 3px rgba(37,57,144,0.35);}
+.r-item.on .r-bead{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
 
 /* As três Ave-Marias — separador entre grupos */
 .r-sep{position:relative;z-index:1;display:flex;flex-direction:column;gap:4px;padding:7px 0 7px 3.5px;}
-.r-sep i{width:7px;height:7px;border-radius:50%;display:block;
-  background:radial-gradient(circle at 35% 28%, var(--panel) 0%, var(--bg) 65%, #D9D2C4 100%);
-  border:1px solid var(--border);
-  box-shadow:inset -1px -1px 2px rgba(38,35,32,0.11);}
+.r-sep i{width:5px;height:5px;border-radius:50%;display:block;background:var(--text-faint);opacity:0.6;}
 </style>
 </helmet>
 <div style="width:260px;height:100%;min-height:760px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 16px;gap:20px;overflow:hidden;">

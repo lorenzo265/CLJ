@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --warn:#B4682A;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+ul{margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:7px;font-size:13px;line-height:1.5;}
+.favbox{width:44px;height:44px;border-radius:10px;background:var(--panel);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+</style>
+</helmet>
+<div style="width:640px;height:540px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div>
+    <div class="mono" style="font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent-ink);">Direção B</div>
+    <div class="serif" style="font-size:24px;font-weight:700;margin-top:4px;">A Rosa</div>
+    <div style="font-size:13px;color:var(--text-muted);margin-top:3px;">"Rosário" vem de coroa de rosas — a rosa em espiral, vista de cima, num traço só.</div>
+  </div>
+
+  <div style="display:flex;gap:22px;align-items:stretch;flex:1;">
+    <div style="width:220px;flex-shrink:0;background:var(--panel);border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;">
+      <svg width="132" height="132" viewBox="0 0 120 120" fill="none">
+        <path d="M60 16 A40 40 0 0 1 60 104 A28 28 0 0 1 60 48 A18 18 0 0 1 60 84 A11 11 0 0 1 60 62"
+              stroke="#253990" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center;">
+      <ul>
+        <li><b>O símbolo mais direto do nome:</b> Nossa Senhora do <i>Rosário</i> — a coroa de rosas.</li>
+        <li>Botão de rosa visto de cima = <b>espiral num traço único</b> — o mesmo "fio" do conceito, agora florescendo.</li>
+        <li>Assinatura de motion natural: a espiral <b>se desenha</b> na abertura (GSAP DrawSVG-like, traço progressivo).</li>
+        <li>Caligráfica e calorosa sem ser infantil; única no espaço de marcas religiosas.</li>
+      </ul>
+      <div style="font-size:12px;color:var(--warn);"><b>Custo:</b> menos literal ao produto (escala/contas); em 16px a espiral precisa de menos voltas para não virar borrão.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:22px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="favbox"><svg width="32" height="32" viewBox="0 0 120 120" fill="none"><path d="M60 18 A38 38 0 0 1 60 102 A25 25 0 0 1 60 52 A14 14 0 0 1 60 80" stroke="#253990" stroke-width="13" stroke-linecap="round"/></svg></div>
+      <div class="favbox" style="width:32px;height:32px;border-radius:8px;"><svg width="18" height="18" viewBox="0 0 120 120" fill="none"><path d="M60 18 A38 38 0 0 1 60 102 A25 25 0 0 1 60 52 A14 14 0 0 1 60 80" stroke="#253990" stroke-width="16" stroke-linecap="round"/></svg></div>
+      <div class="mono" style="font-size:10px;color:var(--text-faint);">favicon<br>menos voltas</div>
+    </div>
+    <div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:11px;">
+      <svg width="26" height="26" viewBox="0 0 120 120" fill="none"><path d="M60 16 A40 40 0 0 1 60 104 A28 28 0 0 1 60 48 A18 18 0 0 1 60 84 A11 11 0 0 1 60 62" stroke="#253990" stroke-width="10" stroke-linecap="round"/></svg>
+      <div>
+        <div class="serif" style="font-size:15px;font-weight:700;">CLJ NSR</div>
+        <div style="font-size:10.5px;color:var(--text-muted);">Departamento Cultural</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

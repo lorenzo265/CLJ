@@ -1,18 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { AgendaRow } from "@/components/escala/agenda-row";
 import type { AtividadeComPapel } from "@/lib/escala/agenda";
 import type { Pessoa } from "@/lib/types";
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.04 } },
-};
-const linha = {
-  hidden: { opacity: 0, y: 6 },
-  show: { opacity: 1, y: 0 },
-};
 
 function Grupo({
   titulo,
@@ -25,6 +18,23 @@ function Grupo({
   mostrarData: boolean;
   pessoaPorId: Map<string, Pessoa>;
 }) {
+  const listaRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!listaRef.current) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      gsap.from(listaRef.current.children, {
+        opacity: 0,
+        y: 6,
+        duration: 0.24,
+        ease: "power3.out",
+        stagger: 0.04,
+      });
+    },
+    { scope: listaRef },
+  );
+
   if (itens.length === 0) return null;
 
   return (
@@ -32,18 +42,17 @@ function Grupo({
       <h2 className="mt-6 mb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase first:mt-0">
         {titulo}
       </h2>
-      <motion.div variants={container} initial="hidden" animate="show">
+      <div ref={listaRef}>
         {itens.map((it) => (
-          <motion.div key={it.atividade.id} variants={linha}>
-            <AgendaRow
-              item={it}
-              mostrarData={mostrarData}
-              responsavel={pessoaPorId.get(it.atividade.responsavelId)}
-              suplente={it.atividade.suplenteId ? pessoaPorId.get(it.atividade.suplenteId) : undefined}
-            />
-          </motion.div>
+          <AgendaRow
+            key={it.atividade.id}
+            item={it}
+            mostrarData={mostrarData}
+            responsavel={pessoaPorId.get(it.atividade.responsavelId)}
+            suplente={it.atividade.suplenteId ? pessoaPorId.get(it.atividade.suplenteId) : undefined}
+          />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,199 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": -1280,
+      "y": 0,
+      "w": 1180,
+      "h": 760,
+      "title": "Login"
+    },
+    {
+      "file": "Cadastro.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1180,
+      "h": 760
+    },
+    {
+      "file": "Escala.dc.html",
+      "x": 1280,
+      "y": 0,
+      "w": 1180,
+      "h": 760
+    },
+    {
+      "file": "Calendario.dc.html",
+      "x": 2560,
+      "y": 0,
+      "w": 1180,
+      "h": 760
+    },
+    {
+      "file": "Reunioes.dc.html",
+      "x": 3840,
+      "y": 0,
+      "w": 1180,
+      "h": 760,
+      "title": "Reuniões (leitura)"
+    },
+    {
+      "file": "PainelCoordenador.dc.html",
+      "x": 0,
+      "y": 860,
+      "w": 1180,
+      "h": 760,
+      "title": "Painel do coordenador"
+    },
+    {
+      "file": "GestaoFuncoes.dc.html",
+      "x": 1280,
+      "y": 860,
+      "w": 1180,
+      "h": 760,
+      "title": "Gestão de Funções"
+    },
+    {
+      "file": "GestaoEscala.dc.html",
+      "x": 2560,
+      "y": 860,
+      "w": 1180,
+      "h": 760,
+      "title": "Gestão de Escala"
+    },
+    {
+      "file": "GestaoReunioes.dc.html",
+      "x": 3840,
+      "y": 860,
+      "w": 1180,
+      "h": 760,
+      "title": "Gestão de Reuniões"
+    },
+    {
+      "file": "GestaoParticipantes.dc.html",
+      "x": 5120,
+      "y": 860,
+      "w": 1180,
+      "h": 760,
+      "title": "Gestão de Participantes"
+    },
+    {
+      "file": "Sidebar.dc.html",
+      "x": 0,
+      "y": 1720,
+      "w": 280,
+      "h": 760,
+      "title": "Componente — Navegação"
+    },
+    {
+      "file": "EscalaOpcaoA.dc.html",
+      "x": 0,
+      "y": 2620,
+      "w": 1180,
+      "h": 900,
+      "title": "Opção A — Agenda por prazo"
+    },
+    {
+      "file": "EscalaOpcaoB.dc.html",
+      "x": 1280,
+      "y": 2620,
+      "w": 1180,
+      "h": 900,
+      "title": "Opção B — Faixa de dias + destaque"
+    },
+    {
+      "file": "EscalaOpcaoC.dc.html",
+      "x": 2560,
+      "y": 2620,
+      "w": 1180,
+      "h": 900,
+      "title": "Opção C — Linha do tempo"
+    },
+    {
+      "file": "MobileHoje.dc.html",
+      "x": 0,
+      "y": 3720,
+      "w": 390,
+      "h": 844,
+      "title": "Mobile — Hoje"
+    },
+    {
+      "file": "MobileEscala.dc.html",
+      "x": 520,
+      "y": 3720,
+      "w": 390,
+      "h": 844,
+      "title": "Mobile — Escala"
+    },
+    {
+      "file": "MobileCalendario.dc.html",
+      "x": 1040,
+      "y": 3720,
+      "w": 390,
+      "h": 844,
+      "title": "Mobile — Calendário"
+    },
+    {
+      "file": "MobileNav.dc.html",
+      "x": 400,
+      "y": 1720,
+      "w": 390,
+      "h": 140,
+      "title": "Componente — Bottom nav"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "lbl-entrada",
+      "x": -1280,
+      "y": -70,
+      "w": 260,
+      "text": "Entrada"
+    },
+    {
+      "id": "lbl-participante",
+      "x": 0,
+      "y": -70,
+      "w": 760,
+      "text": "Participante — \"Meu espaço\""
+    },
+    {
+      "id": "lbl-coordenador",
+      "x": 0,
+      "y": 790,
+      "w": 760,
+      "text": "Coordenador — telas extras, além de tudo que o participante vê"
+    },
+    {
+      "id": "lbl-componente",
+      "x": 0,
+      "y": 1650,
+      "w": 420,
+      "text": "Componente compartilhado — a mesma barra de navegação usada em toda tela logada"
+    },
+    {
+      "id": "lbl-opcoes",
+      "x": 0,
+      "y": 2550,
+      "w": 900,
+      "text": "Novo: opções para a visão de tarefas do participante, no lugar da tabela densa — escolha uma direção"
+    },
+    {
+      "id": "lbl-identidade",
+      "x": -1280,
+      "y": 820,
+      "w": 320,
+      "text": "Identidade \"O Fio\" aplicada — azul da paróquia #253990, tipografia Source Serif 4 + Public Sans + IBM Plex Mono, menu como terço (fio, contas, cruz). Dourado reservado à celebração."
+    },
+    {
+      "id": "lbl-mobile",
+      "x": 0,
+      "y": 3640,
+      "w": 900,
+      "text": "Mobile — participante (390px): tela Hoje (manchete + dezena da semana), Escala e Calendário, com bottom nav na zona do polegar"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

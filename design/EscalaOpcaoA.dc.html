@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.pill-on{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--accent);color:#fff;}
+.pill-off{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;background:#fff;color:var(--text-muted);border:1px solid var(--border);}
+.grouplabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-transform:uppercase;padding:22px 4px 8px;}
+.grouplabel:first-child{padding-top:4px;}
+.row{display:flex;align-items:flex-start;gap:13px;padding:13px 4px;border-bottom:1px solid var(--border-soft);}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+.dot-mine{background:var(--accent);}
+.dot-backup{background:#fff;border:2px solid var(--accent);width:7px;height:7px;}
+.dot-other{background:var(--border);}
+.title{font-size:14.5px;font-weight:700;}
+.title-muted{font-size:14px;font-weight:600;color:var(--text-muted);}
+.badge{font-size:10px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-faint);background:var(--border-soft);padding:2px 7px;border-radius:5px;}
+.meta{font-size:12.5px;color:var(--text-muted);margin-top:3px;}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.datelbl{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:11px;color:var(--text-faint);font-weight:500;font-variant-numeric:tabular-nums;}
+.empty{padding:18px 4px;font-size:13px;color:var(--text-faint);font-style:italic;}
+</style>
+</helmet>
+<div style="width:1180px;height:900px;display:flex;">
+  <dc-import name="Sidebar" active="escala" role="participante" hint-size="260px,900px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Escala</div>
+      <div style="display:flex;gap:8px;"><div class="pill-on">Meus</div><div class="pill-off">Todos do departamento</div></div>
+    </div>
+    <div style="flex:1;padding:8px 32px 24px;overflow:auto;max-width:640px;">
+
+      <div class="grouplabel">Hoje · 25 de agosto</div>
+      <div class="row">
+        <div class="dot dot-mine"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="title">Post — Terço Diário</span><span class="badge">Post</span></div>
+          <div class="meta">Você é responsável</div>
+        </div>
+        <div class="right"><span class="st st-info">Agendado</span></div>
+      </div>
+
+      <div class="grouplabel">Esta semana</div>
+      <div class="row">
+        <div class="dot dot-mine"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="title">Reunião de equipe</span><span class="badge">Reunião</span></div>
+          <div class="meta">Você confirmou presença</div>
+        </div>
+        <div class="right"><span class="datelbl">Qua, 26/08</span><span class="st st-info">Agendado</span></div>
+      </div>
+      <div class="row">
+        <div class="dot dot-backup"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="title">Post — Terço Diário</span><span class="badge">Post</span></div>
+          <div class="meta">Você é suplente · Ana P. é responsável</div>
+        </div>
+        <div class="right"><span class="datelbl">Sex, 28/08</span><span class="st st-info">Agendado</span></div>
+      </div>
+
+      <div class="grouplabel">Depois</div>
+      <div class="row">
+        <div class="dot dot-mine"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="title">Evento — Cinecultural</span><span class="badge">Evento</span></div>
+          <div class="meta">Você é responsável</div>
+        </div>
+        <div class="right"><span class="datelbl">Qui, 03/09</span><span class="st st-warn">Rascunho</span></div>
+      </div>
+      <div class="row" style="border-bottom:none;">
+        <div class="dot dot-other"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="title-muted">Post — Terço Diário</span><span class="badge">Post</span></div>
+          <div class="meta">Pedro L. é responsável</div>
+        </div>
+        <div class="right"><span class="datelbl">Sáb, 05/09</span><span class="st st-ok">Publicado</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

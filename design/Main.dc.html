@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --accent-hi:#6C7CC9;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.s-cross{width:30px;height:36px;position:relative;margin:0 auto;}
+.s-cross::before{content:"";position:absolute;left:50%;top:1px;transform:translateX(-50%);width:6px;height:32px;border-radius:3px;background:linear-gradient(135deg,var(--accent-hi),var(--accent-ink));}
+.s-cross::after{content:"";position:absolute;left:50%;top:9px;transform:translateX(-50%);width:22px;height:6px;border-radius:3px;background:linear-gradient(135deg,var(--accent-hi),var(--accent-ink));}
+</style>
+</helmet>
+<div style="width:1180px;height:760px;background:var(--bg);display:flex;align-items:center;justify-content:center;">
+  <div style="width:380px;display:flex;flex-direction:column;gap:22px;">
+    <div style="text-align:center;">
+      <div class="s-cross" style="margin-bottom:12px;"></div>
+      <div class="serif" style="font-size:24px;font-weight:700;">CLJ NSR</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.4;">Departamento Cultural<br>Paróquia Nossa Senhora do Rosário</div>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:12px;font-weight:600;color:var(--text-muted);">E-mail</label>
+        <div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13.5px;color:var(--text-faint);">voce@email.com</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:12px;font-weight:600;color:var(--text-muted);">Senha</label>
+        <div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13.5px;color:var(--text-faint);">••••••••</div>
+      </div>
+      <div style="background:var(--accent);color:#fff;text-align:center;border-radius:8px;padding:11px;font-size:13.5px;font-weight:700;margin-top:6px;">Entrar</div>
+      <div style="display:flex;align-items:center;gap:10px;margin:2px 0;">
+        <div style="flex:1;height:1px;background:var(--border-soft);"></div>
+        <div style="font-size:11.5px;color:var(--text-faint);">ou</div>
+        <div style="flex:1;height:1px;background:var(--border-soft);"></div>
+      </div>
+      <div style="text-align:center;font-size:12.5px;color:var(--text-muted);">Recebeu um convite do coordenador?<br><span style="color:var(--accent-ink);font-weight:600;">Defina sua senha aqui</span></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

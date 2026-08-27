@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.chip-on{padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-soft);}
+.chip-off{padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:600;background:#fff;color:var(--text-muted);border:1px solid var(--border);}
+.day-on{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent-ink);}
+.day-off{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:#fff;color:var(--text-faint);border:1px solid var(--border);}
+label{font-size:12px;font-weight:600;color:var(--text-muted);}
+</style>
+</helmet>
+<div style="width:1180px;height:760px;display:flex;">
+  <dc-import name="Sidebar" active="cadastro" role="participante" hint-size="260px,760px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Cadastro</div>
+      <div style="font-size:13px;color:var(--text-muted);">Departamento Cultural</div>
+    </div>
+    <div style="flex:1;padding:28px 32px;overflow:auto;">
+      <div style="max-width:640px;">
+        <div style="margin-bottom:20px;">
+          <div class="serif" style="font-size:16px;font-weight:700;">Complete seu cadastro</div>
+          <div style="font-size:13px;color:var(--text-muted);margin-top:3px;">Isso ajuda a gente a te encaixar nas funções certas.</div>
+        </div>
+
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px;">
+
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;">MA</div>
+            <div style="font-size:12.5px;color:var(--text-muted);">Foto (opcional)</div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label>Nome</label>
+              <div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13.5px;">Maria Aparecida</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label>Contato</label>
+              <div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13.5px;">(11) 9xxxx-xxxx</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label>Departamento</label>
+            <div style="border:1px solid var(--border-soft);background:var(--bg);border-radius:8px;padding:10px 12px;font-size:13.5px;color:var(--text-muted);">Cultural</div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label>Função(ões)</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <div class="chip-on">Terço Diário</div>
+              <div class="chip-on">Post da tarde</div>
+              <div class="chip-off">Cinecultural</div>
+              <div class="chip-off">Curiosidade da fé</div>
+              <div class="chip-off">Aniversários</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label>Disponibilidade — dias da semana</label>
+            <div style="display:flex;gap:8px;">
+              <div class="day-on">S</div>
+              <div class="day-on">T</div>
+              <div class="day-on">Q</div>
+              <div class="day-on">Q</div>
+              <div class="day-on">S</div>
+              <div class="day-off">S</div>
+              <div class="day-off">D</div>
+            </div>
+            <label style="margin-top:4px;">Disponibilidade — período</label>
+            <div style="display:flex;gap:8px;">
+              <div class="chip-off">Manhã</div>
+              <div class="chip-on">Tarde</div>
+              <div class="chip-off">Noite</div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:4px;border-top:1px solid var(--border-soft);padding-top:18px;">
+            <div style="background:var(--accent);color:#fff;border-radius:8px;padding:10px 22px;font-size:13.5px;font-weight:700;">Salvar cadastro</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

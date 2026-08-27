@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.cal-cell{border-right:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);padding:8px;min-height:84px;}
+.cal-num{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:11.5px;color:var(--text-muted);font-variant-numeric:tabular-nums;}
+.cal-today{background:var(--accent-soft);}
+.cal-num-today{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:11.5px;}
+.cal-tag{font-size:9.5px;padding:2px 6px;border-radius:4px;background:var(--panel);border:1px solid var(--border);color:var(--text-muted);font-weight:700;margin-top:5px;display:inline-block;}
+.cal-tag-mine{font-size:9.5px;padding:2px 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent-ink);font-weight:700;margin-top:5px;display:inline-block;}
+.pill-on{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--accent);color:#fff;}
+.pill-off{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;background:#fff;color:var(--text-muted);border:1px solid var(--border);}
+</style>
+</helmet>
+<div style="width:1180px;height:760px;display:flex;">
+  <dc-import name="Sidebar" active="calendario" role="participante" hint-size="260px,760px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Meu Calendário</div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-muted);">
+        <span style="display:inline-flex;width:22px;height:22px;border-radius:6px;border:1px solid var(--border);align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="12,5 7,10 12,15"/></svg></span>
+        <span style="font-weight:600;color:var(--text);">Agosto 2026</span>
+        <span style="display:inline-flex;width:22px;height:22px;border-radius:6px;border:1px solid var(--border);align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8,5 13,10 8,15"/></svg></span>
+      </div>
+    </div>
+    <div style="flex:1;padding:24px 32px;display:flex;gap:24px;overflow:auto;">
+
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+        <div style="display:flex;gap:8px;margin-bottom:14px;">
+          <div class="pill-on">Meus compromissos</div>
+          <div class="pill-off">Tudo do departamento</div>
+        </div>
+
+        <div style="border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;background:var(--panel);">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border);">
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">DOM</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">SEG</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">TER</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">QUA</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">QUI</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">SEX</div>
+            <div class="mono" style="padding:8px;font-size:9.5px;font-weight:600;letter-spacing:0.08em;color:var(--text-faint);text-align:center;">SÁB</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);">
+            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+            <div class="cal-cell"><div class="cal-num">1</div></div>
+
+            <div class="cal-cell"><div class="cal-num">2</div></div>
+            <div class="cal-cell"><div class="cal-num">3</div><div class="cal-tag-mine">Post</div></div>
+            <div class="cal-cell"><div class="cal-num">4</div><div class="cal-tag">Post</div></div>
+            <div class="cal-cell"><div class="cal-num">5</div><div class="cal-tag">Post</div></div>
+            <div class="cal-cell"><div class="cal-num">6</div></div>
+            <div class="cal-cell"><div class="cal-num">7</div><div class="cal-tag">Reunião</div></div>
+            <div class="cal-cell"><div class="cal-num">8</div></div>
+
+            <div class="cal-cell"><div class="cal-num">9</div></div>
+            <div class="cal-cell"><div class="cal-num">10</div><div class="cal-tag-mine">Post</div></div>
+            <div class="cal-cell"><div class="cal-num">11</div></div>
+            <div class="cal-cell"><div class="cal-num">12</div></div>
+            <div class="cal-cell"><div class="cal-num">13</div></div>
+            <div class="cal-cell"><div class="cal-num">14</div><div class="cal-tag">Tarefa</div></div>
+            <div class="cal-cell"><div class="cal-num">15</div></div>
+
+            <div class="cal-cell"><div class="cal-num">16</div></div>
+            <div class="cal-cell"><div class="cal-num">17</div></div>
+            <div class="cal-cell"><div class="cal-num">18</div></div>
+            <div class="cal-cell"><div class="cal-num">19</div></div>
+            <div class="cal-cell"><div class="cal-num">20</div><div class="cal-tag-mine">Evento</div></div>
+            <div class="cal-cell"><div class="cal-num">21</div></div>
+            <div class="cal-cell"><div class="cal-num">22</div></div>
+
+            <div class="cal-cell"><div class="cal-num">23</div></div>
+            <div class="cal-cell"><div class="cal-num">24</div></div>
+            <div class="cal-cell cal-today"><div class="cal-num-today">25</div></div>
+            <div class="cal-cell"><div class="cal-num">26</div></div>
+            <div class="cal-cell"><div class="cal-num">27</div></div>
+            <div class="cal-cell"><div class="cal-num">28</div><div class="cal-tag">Reunião</div></div>
+            <div class="cal-cell"><div class="cal-num">29</div></div>
+
+            <div class="cal-cell" style="border-bottom:none;"><div class="cal-num">30</div></div>
+            <div class="cal-cell" style="border-bottom:none;"><div class="cal-num">31</div></div>
+            <div class="cal-cell" style="border-bottom:none;"></div><div class="cal-cell" style="border-bottom:none;"></div><div class="cal-cell" style="border-bottom:none;"></div><div class="cal-cell" style="border-bottom:none;"></div><div class="cal-cell" style="border-bottom:none;border-right:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:250px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;">
+        <div class="mono" style="font-size:11px;font-weight:600;color:var(--text-faint);letter-spacing:0.08em;">PRÓXIMOS</div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
+          <div style="font-size:12px;color:var(--text-muted);">28/08 · Sex</div>
+          <div style="font-size:13.5px;font-weight:600;margin-top:2px;">Reunião de equipe</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
+          <div style="font-size:12px;color:var(--text-muted);">20/08 · Qui</div>
+          <div style="font-size:13.5px;font-weight:600;margin-top:2px;">Cinecultural — sessão</div>
+        </div>
+        <div style="background:var(--accent-soft);border:1px solid var(--accent-soft);border-radius:10px;padding:12px 14px;">
+          <div style="font-size:12px;color:var(--accent-ink);">10/08 · Seg · é sua vez</div>
+          <div style="font-size:13.5px;font-weight:700;margin-top:2px;color:var(--accent-ink);">Post — Terço Diário</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

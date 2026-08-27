@@ -1,0 +1,30 @@
+# Dependências
+node_modules/
+
+# Builds do Next.js
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# Ambiente e segredos — nunca commitar
+.env
+.env.*
+!.env.example
+
+# Logs e caches
+*.log
+npm-debug.log*
+yarn-error.log*
+.eslintcache
+.vercel/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.idea/
+*.swp

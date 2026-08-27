@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-info: var(--info);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* CLJ NSR — identidade quente + acento dourado (docs/abertura-clj-nsr.html é a fonte canônica) */
+:root {
+  --background: #faf7f2;
+  --foreground: #262320;
+  --card: #ffffff;
+  --card-foreground: #262320;
+  --popover: #ffffff;
+  --popover-foreground: #262320;
+  --primary: #a9812f;
+  --primary-foreground: #ffffff;
+  --secondary: #f2ece1;
+  --secondary-foreground: #262320;
+  --muted: #f2ece1;
+  --muted-foreground: #6e6862;
+  --accent: #f3e9d2;
+  --accent-foreground: #7a5d22;
+  --destructive: #a6473c;
+  --border: #e4ddd0;
+  --input: #e4ddd0;
+  --ring: #a9812f;
+  --radius: 0.5rem;
+  --ok: #5c7a52;
+  --warn: #b4682a;
+  --info: #5b7a96;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #262320;
+  --sidebar-primary: #a9812f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3e9d2;
+  --sidebar-accent-foreground: #7a5d22;
+  --sidebar-border: #e4ddd0;
+  --sidebar-ring: #a9812f;
+}
+
+.dark {
+  --background: #1e1b17;
+  --foreground: #f1ebe0;
+  --card: #262220;
+  --card-foreground: #f1ebe0;
+  --popover: #262220;
+  --popover-foreground: #f1ebe0;
+  --primary: #d9ac5c;
+  --primary-foreground: #1e1b17;
+  --secondary: #18160f;
+  --secondary-foreground: #f1ebe0;
+  --muted: #18160f;
+  --muted-foreground: #b7ad9e;
+  --accent: #362b18;
+  --accent-foreground: #efc97e;
+  --destructive: #da8478;
+  --border: #3a342b;
+  --input: #3a342b;
+  --ring: #d9ac5c;
+  --ok: #93b584;
+  --warn: #e0985f;
+  --info: #93b7d4;
+  --sidebar: #262220;
+  --sidebar-foreground: #f1ebe0;
+  --sidebar-primary: #d9ac5c;
+  --sidebar-primary-foreground: #1e1b17;
+  --sidebar-accent: #362b18;
+  --sidebar-accent-foreground: #efc97e;
+  --sidebar-border: #3a342b;
+  --sidebar-ring: #d9ac5c;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+}

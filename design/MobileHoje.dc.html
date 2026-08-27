@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --accent-hi:#6C7CC9;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.bead{width:13px;height:13px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 35% 28%, var(--panel) 0%, var(--bg) 60%, #D9D2C4 100%);
+  border:1px solid var(--border);
+  box-shadow:inset -1px -2px 3px rgba(38,35,32,0.13);}
+.bead.full{
+  background:radial-gradient(circle at 35% 28%, var(--accent-hi) 0%, var(--accent) 60%, var(--accent-ink) 100%);
+  border-color:var(--accent-ink);
+  box-shadow:inset -1px -2px 3px rgba(0,0,0,0.24);}
+.row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border-soft);min-height:48px;}
+.row:last-child{border-bottom:none;}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;flex-shrink:0;}
+.st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+</style>
+</helmet>
+<div style="width:390px;height:844px;background:var(--bg);display:flex;flex-direction:column;">
+
+  <div style="flex:1;overflow:auto;padding:24px 20px 16px;display:flex;flex-direction:column;gap:22px;">
+
+    <div style="display:flex;align-items:baseline;justify-content:space-between;">
+      <div class="serif" style="font-size:22px;font-weight:700;">Hoje</div>
+      <div class="mono" style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);">TER · 25 AGO</div>
+    </div>
+
+    <div style="background:var(--accent-soft);border-radius:16px;padding:20px;">
+      <div class="mono" style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-ink);">Sua próxima conta</div>
+      <div class="serif" style="font-size:24px;font-weight:700;margin-top:8px;color:var(--accent-ink);line-height:1.2;">Post — Terço Diário</div>
+      <div style="font-size:13px;color:var(--accent-ink);margin-top:8px;opacity:0.85;">Sai amanhã às 7h · você é responsável</div>
+      <div style="margin-top:16px;display:inline-flex;align-items:center;background:var(--accent-ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:13.5px;font-weight:700;min-height:44px;">Ver detalhes</div>
+    </div>
+
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div class="klabel">Sua semana</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="bead full"></span><span class="bead full"></span><span class="bead"></span>
+          <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">2 de 3 contas</span>
+        </div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:4px 16px;">
+        <div class="row">
+          <span class="bead full"></span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:600;">Reunião de equipe</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:1px;">Qua, 26/08 · você confirmou presença</div>
+          </div>
+          <span class="st st-info">Agendado</span>
+        </div>
+        <div class="row">
+          <span class="bead" style="background:var(--panel);border:2px solid var(--accent);"></span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:600;">Post — Terço Diário</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:1px;">Sex, 28/08 · você é suplente de Ana P.</div>
+          </div>
+          <span class="st st-info">Agendado</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="klabel" style="margin-bottom:10px;display:block;">Departamento</div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:4px 16px;">
+        <div class="row">
+          <span class="bead"></span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:600;color:var(--text-muted);">Evento — Cinecultural</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:1px;">Qui, 03/09 · você é responsável</div>
+          </div>
+          <span class="st st-warn">Rascunho</span>
+        </div>
+        <div class="row">
+          <span class="bead"></span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:600;color:var(--text-muted);">Reunião quinzenal</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:1px;">Sex, 28/08 · 19h30</div>
+          </div>
+          <span class="st st-info">Agendado</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <dc-import name="MobileNav" active="hoje" hint-size="390px,64px"></dc-import>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

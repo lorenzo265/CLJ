@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.pill-on{padding:7px 15px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--accent);color:#fff;}
+.pill-off{padding:7px 15px;border-radius:999px;font-size:12.5px;font-weight:600;background:#fff;color:var(--text-muted);border:1px solid var(--border);}
+th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:0.5px;color:var(--text-faint);text-transform:uppercase;padding:0 14px 10px;border-bottom:1px solid var(--border);}
+td{padding:13px 14px;font-size:13.5px;border-bottom:1px solid var(--border-soft);vertical-align:middle;}
+td:first-child{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums;}
+.st{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;}
+.st-ok{background:var(--ok-soft);color:var(--ok);}
+.st-info{background:var(--info-soft);color:var(--info);}
+.st-warn{background:var(--warn-soft);color:var(--warn);}
+.st-neutral{background:var(--border-soft);color:var(--text-muted);}
+.mine{color:var(--accent-ink);font-weight:700;}
+</style>
+</helmet>
+<div style="width:1180px;height:760px;display:flex;">
+  <dc-import name="Sidebar" active="escala" role="participante" hint-size="260px,760px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Escala — Agosto 2026</div>
+      <div style="font-size:13px;color:var(--text-muted);">10 participantes ativos</div>
+    </div>
+    <div style="flex:1;padding:24px 32px;display:flex;flex-direction:column;gap:18px;overflow:auto;">
+
+      <div style="display:flex;gap:8px;">
+        <div class="pill-on">Todos</div>
+        <div class="pill-off">Posts</div>
+        <div class="pill-off">Tarefas</div>
+        <div class="pill-off">Eventos</div>
+        <div class="pill-off">Reuniões</div>
+      </div>
+
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;">
+          <thead><tr>
+            <th style="padding-left:16px;">Data</th><th>Tipo</th><th>Função</th><th>Responsável</th><th>Suplente</th><th>Status</th>
+          </tr></thead>
+          <tbody>
+            <tr style="background:var(--accent-soft);">
+              <td style="padding-left:16px;">03/08 · Qui</td><td>Post</td><td>Terço Diário</td><td class="mine">Você</td><td>João M.</td><td><span class="st st-ok">Publicado</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left:16px;">04/08 · Sex</td><td>Post</td><td>Terço Diário</td><td>Ana P.</td><td class="mine">Você</td><td><span class="st st-info">Agendado</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left:16px;">05/08 · Sáb</td><td>Post</td><td>Terço Diário</td><td>Pedro L.</td><td>—</td><td><span class="st st-warn">Rascunho</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left:16px;">07/08 · Seg</td><td>Reunião</td><td>Equipe</td><td>Coordenação</td><td>—</td><td><span class="st st-info">Agendado</span></td>
+            </tr>
+            <tr style="background:var(--accent-soft);">
+              <td style="padding-left:16px;">10/08 · Seg</td><td>Post</td><td>Terço Diário</td><td class="mine">Você</td><td>Carla S.</td><td><span class="st st-info">Agendado</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left:16px;">14/08 · Sex</td><td>Tarefa</td><td>Cinecultural</td><td>Pedro L.</td><td>Ana P.</td><td><span class="st st-neutral">Ideia</span></td>
+            </tr>
+            <tr style="background:var(--accent-soft);">
+              <td style="padding-left:16px;">20/08 · Qui</td><td>Evento</td><td>Cinecultural</td><td class="mine">Você</td><td>—</td><td><span class="st st-info">Agendado</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left:16px;border-bottom:none;">28/08 · Sex</td><td style="border-bottom:none;">Reunião</td><td style="border-bottom:none;">Equipe</td><td style="border-bottom:none;">Coordenação</td><td style="border-bottom:none;">—</td><td style="border-bottom:none;"><span class="st st-info">Agendado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;gap:18px;align-items:center;font-size:12px;color:var(--text-muted);">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-ink);display:inline-block;"></span>Linha destacada = envolve você</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

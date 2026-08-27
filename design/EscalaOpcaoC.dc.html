@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.tl{display:flex;flex-direction:column;}
+.tlrow{display:grid;grid-template-columns:76px 24px 1fr;}
+.tldate{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:12px;font-weight:600;color:var(--text-muted);padding:16px 0;}
+.tlrail{display:flex;flex-direction:column;align-items:center;}
+.tldot{width:11px;height:11px;border-radius:50%;margin-top:20px;flex-shrink:0;}
+.tldot-mine{background:var(--accent);}
+.tldot-backup{background:#fff;border:2px solid var(--accent);width:9px;height:9px;}
+.tldot-other{background:var(--border);}
+.tlline{flex:1;width:1px;background:var(--border);}
+.tlrow:last-child .tlline{display:none;}
+.tlbody{padding:12px 0 24px 18px;}
+.tltitle{font-size:14.5px;font-weight:700;}
+.tltitle-muted{font-size:14px;font-weight:600;color:var(--text-muted);}
+.tlmeta{font-size:12.5px;color:var(--text-muted);margin-top:3px;}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;margin-top:8px;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.todaymark{display:grid;grid-template-columns:76px 24px 1fr;align-items:center;}
+.todaydot{width:11px;height:11px;border-radius:50%;background:var(--accent-ink);margin:0 auto;}
+.todayline{height:1px;background:var(--accent);opacity:0.4;}
+.todaylbl{font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--accent-ink);padding-left:18px;text-transform:uppercase;}
+</style>
+</helmet>
+<div style="width:1180px;height:900px;display:flex;">
+  <dc-import name="Sidebar" active="escala" role="participante" hint-size="260px,900px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Escala</div>
+      <div style="font-size:13px;color:var(--text-muted);">Seu = azul sólido · Suplência = anel · Equipe = cinza</div>
+    </div>
+    <div style="flex:1;padding:24px 32px;overflow:auto;max-width:620px;">
+
+      <div class="tl">
+        <div class="todaymark"><div></div><div class="todaydot"></div><div class="todaylbl" style="display:flex;align-items:center;gap:10px;">Hoje, 25 de agosto<span class="todayline" style="flex:1;"></span></div></div>
+
+        <div class="tlrow">
+          <div class="tldate">HOJE</div>
+          <div class="tlrail"><div class="tldot tldot-mine"></div><div class="tlline"></div></div>
+          <div class="tlbody">
+            <div class="tltitle">Post — Terço Diário</div>
+            <div class="tlmeta">Você é responsável</div>
+            <div><span class="st st-info">Agendado</span></div>
+          </div>
+        </div>
+
+        <div class="tlrow">
+          <div class="tldate">26/08</div>
+          <div class="tlrail"><div class="tldot tldot-mine"></div><div class="tlline"></div></div>
+          <div class="tlbody">
+            <div class="tltitle">Reunião de equipe</div>
+            <div class="tlmeta">Você confirmou presença</div>
+            <div><span class="st st-info">Agendado</span></div>
+          </div>
+        </div>
+
+        <div class="tlrow">
+          <div class="tldate">28/08</div>
+          <div class="tlrail"><div class="tldot tldot-backup"></div><div class="tlline"></div></div>
+          <div class="tlbody">
+            <div class="tltitle">Post — Terço Diário</div>
+            <div class="tlmeta">Você é suplente · Ana P. é responsável</div>
+            <div><span class="st st-info">Agendado</span></div>
+          </div>
+        </div>
+
+        <div class="tlrow">
+          <div class="tldate">03/09</div>
+          <div class="tlrail"><div class="tldot tldot-mine"></div><div class="tlline"></div></div>
+          <div class="tlbody">
+            <div class="tltitle">Evento — Cinecultural</div>
+            <div class="tlmeta">Você é responsável</div>
+            <div><span class="st st-warn">Rascunho</span></div>
+          </div>
+        </div>
+
+        <div class="tlrow">
+          <div class="tldate">05/09</div>
+          <div class="tlrail"><div class="tldot tldot-other"></div></div>
+          <div class="tlbody">
+            <div class="tltitle-muted">Post — Terço Diário</div>
+            <div class="tlmeta">Pedro L. é responsável</div>
+            <div><span class="st st-ok">Publicado</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

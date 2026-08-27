@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.daycell{flex:1;border-radius:12px;padding:12px 10px;display:flex;flex-direction:column;gap:8px;min-height:88px;border:1px solid var(--border);background:var(--panel);}
+.daycell.today{background:var(--accent);border-color:var(--accent);}
+.daywd{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:9px;font-weight:600;letter-spacing:0.07em;color:var(--text-faint);text-transform:uppercase;}
+.daycell.today .daywd{color:rgba(255,255,255,0.75);}
+.daynum{font-size:17px;font-weight:700;}
+.daycell.today .daynum{color:#fff;}
+.daytag{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px;display:inline-block;background:var(--accent-soft);color:var(--accent-ink);}
+.daycell.today .daytag{background:rgba(255,255,255,0.22);color:#fff;}
+.daytag-outline{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px;display:inline-block;background:#fff;border:1px solid var(--border);color:var(--text-muted);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;}
+.st-warn{background:var(--warn-soft);color:var(--warn);} .st-ok{background:var(--ok-soft);color:var(--ok);}
+.laterrow{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--border-soft);}
+.laterrow:last-child{border-bottom:none;}
+.laterdate{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;width:64px;flex-shrink:0;font-size:11.5px;font-weight:500;color:var(--text-muted);font-variant-numeric:tabular-nums;}
+</style>
+</helmet>
+<div style="width:1180px;height:900px;display:flex;">
+  <dc-import name="Sidebar" active="escala" role="participante" hint-size="260px,900px"></dc-import>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <div style="height:64px;flex-shrink:0;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;">
+      <div class="serif" style="font-size:19px;font-weight:700;">Escala</div>
+    </div>
+    <div style="flex:1;padding:24px 32px;overflow:auto;display:flex;flex-direction:column;gap:26px;max-width:760px;">
+
+      <div style="background:var(--accent-soft);border-radius:16px;padding:22px 26px;">
+        <div class="mono" style="font-size:10.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-ink);">Sua próxima tarefa</div>
+        <div class="serif" style="font-size:26px;font-weight:700;margin-top:8px;color:var(--accent-ink);">Post — Terço Diário</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;">
+          <span style="font-size:13.5px;font-weight:700;color:var(--accent-ink);">Hoje · 25 de agosto</span>
+          <span style="width:4px;height:4px;border-radius:50%;background:var(--accent-ink);opacity:0.5;"></span>
+          <span style="font-size:13.5px;color:var(--accent-ink);opacity:0.8;">Você é responsável</span>
+        </div>
+        <div style="margin-top:16px;display:inline-flex;background:var(--accent-ink);color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;">Ver detalhes</div>
+      </div>
+
+      <div>
+        <div class="mono" style="font-size:11px;font-weight:600;color:var(--text-faint);letter-spacing:0.08em;margin-bottom:10px;">ESTA SEMANA</div>
+        <div style="display:flex;gap:8px;">
+          <div class="daycell"><div class="daywd">SEG</div><div class="daynum">24</div></div>
+          <div class="daycell today"><div class="daywd">TER</div><div class="daynum">25</div><div class="daytag">Post · sua</div></div>
+          <div class="daycell"><div class="daywd">QUA</div><div class="daynum">26</div><div class="daytag">Reunião · sua</div></div>
+          <div class="daycell"><div class="daywd">QUI</div><div class="daynum">27</div></div>
+          <div class="daycell"><div class="daywd">SEX</div><div class="daynum">28</div><div class="daytag-outline">Post · suplente</div></div>
+          <div class="daycell"><div class="daywd">SÁB</div><div class="daynum">29</div></div>
+          <div class="daycell"><div class="daywd">DOM</div><div class="daynum">30</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mono" style="font-size:11px;font-weight:600;color:var(--text-faint);letter-spacing:0.08em;margin-bottom:6px;">DEPOIS DESTA SEMANA</div>
+        <div class="laterrow">
+          <div class="laterdate">03/09</div>
+          <div style="flex:1;font-size:13.5px;font-weight:600;">Evento — Cinecultural <span style="font-weight:400;color:var(--text-muted);">· você é responsável</span></div>
+          <span class="st st-warn">Rascunho</span>
+        </div>
+        <div class="laterrow">
+          <div class="laterdate">05/09</div>
+          <div style="flex:1;font-size:13.5px;font-weight:600;color:var(--text-muted);">Post — Terço Diário <span style="font-weight:400;">· Pedro L. é responsável</span></div>
+          <span class="st st-ok">Publicado</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

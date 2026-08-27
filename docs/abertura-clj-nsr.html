@@ -1,0 +1,399 @@
+<title>Abertura do CLJ NSR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#FAF7F2; --paper-raised:#FFFFFF; --paper-sunk:#F2ECE1;
+    --ink:#262320; --ink-soft:#6E6862; --ink-faint:#A9A199;
+    --line:#E4DDD0; --line-soft:#EFEAE1;
+    --gold:#A9812F; --gold-deep:#7A5D22; --gold-wash:#F3E9D2;
+    --ok:#5C7A52; --ok-wash:#E7EEE3;
+    --warn:#B4682A; --warn-wash:#F5E5D3;
+    --info:#5B7A96; --info-wash:#E4ECF1;
+    --crit:#A6473C; --crit-wash:#F3DEDA;
+    --shadow: 0 1px 2px rgba(38,35,32,0.04), 0 8px 24px -12px rgba(38,35,32,0.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1E1B17; --paper-raised:#262220; --paper-sunk:#18160F;
+      --ink:#F1EBE0; --ink-soft:#B7AD9E; --ink-faint:#786E60;
+      --line:#3A342B; --line-soft:#2C2822;
+      --gold:#D9AC5C; --gold-deep:#EFC97E; --gold-wash:#362B18;
+      --ok:#93B584; --ok-wash:#232C1E;
+      --warn:#E0985F; --warn-wash:#3A2717;
+      --info:#93B7D4; --info-wash:#1F2A33;
+      --crit:#DA8478; --crit-wash:#3A211D;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1E1B17; --paper-raised:#262220; --paper-sunk:#18160F;
+    --ink:#F1EBE0; --ink-soft:#B7AD9E; --ink-faint:#786E60;
+    --line:#3A342B; --line-soft:#2C2822;
+    --gold:#D9AC5C; --gold-deep:#EFC97E; --gold-wash:#362B18;
+    --ok:#93B584; --ok-wash:#232C1E;
+    --warn:#E0985F; --warn-wash:#3A2717;
+    --info:#93B7D4; --info-wash:#1F2A33;
+    --crit:#DA8478; --crit-wash:#3A211D;
+    --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important; animation:none !important;} }
+
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--gold-wash); color:var(--gold-deep); }
+  a{ color:var(--gold-deep); text-decoration-color:var(--line); text-underline-offset:3px; }
+  a:hover{ color:var(--gold); }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; border-radius:2px; }
+
+  h1,h2,h3{ font-family:"Source Serif 4",Georgia,"Times New Roman",serif; font-weight:700; color:var(--ink); text-wrap:balance; margin:0; }
+  .eyebrow{ font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; font-size:11.5px; font-weight:600; letter-spacing:0.10em; text-transform:uppercase; color:var(--gold-deep); }
+  .mono{ font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; }
+  code{ font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; font-size:0.88em; background:var(--paper-sunk); padding:1px 6px; border-radius:4px; color:var(--ink-soft); }
+
+  .shell{ display:flex; max-width:1180px; margin:0 auto; align-items:flex-start; }
+
+  /* ---- TOC ---- */
+  nav.toc{
+    position:sticky; top:0; align-self:flex-start; width:236px; flex-shrink:0;
+    height:100vh; overflow-y:auto; padding:40px 20px 40px 32px;
+  }
+  nav.toc a{
+    display:flex; gap:10px; align-items:baseline; padding:6px 10px; border-radius:7px;
+    font-size:13px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+  }
+  nav.toc a:hover{ background:var(--paper-sunk); color:var(--ink); }
+  nav.toc a.active{ background:var(--gold-wash); color:var(--gold-deep); font-weight:600; }
+  nav.toc .n{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--ink-faint); width:16px; flex-shrink:0; }
+  nav.toc a.active .n{ color:var(--gold-deep); }
+  nav.toc .toclabel{ font-size:11px; font-weight:700; letter-spacing:0.08em; color:var(--ink-faint); padding:0 10px 10px; text-transform:uppercase; }
+
+  main.doc{ flex:1; min-width:0; padding:56px 40px 120px; max-width:820px; }
+
+  /* ---- Cover ---- */
+  .cover{ margin-bottom:64px; }
+  .cover h1{ font-size:44px; margin-top:12px; letter-spacing:-0.01em; }
+  .cover .tagline{ font-size:18px; color:var(--ink-soft); max-width:56ch; margin-top:14px; line-height:1.55; }
+  .metagrid{ margin-top:32px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .metagrid div{ background:var(--paper-raised); padding:14px 16px; }
+  .metagrid .k{ font-size:10.5px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-faint); }
+  .metagrid .v{ font-size:14px; font-weight:600; margin-top:4px; }
+
+  /* ---- Sections ---- */
+  section{ padding-top:64px; scroll-margin-top:24px; }
+  section + section{ border-top:1px solid var(--line-soft); }
+  .sechead{ display:flex; gap:16px; align-items:baseline; margin-bottom:22px; }
+  .sechead .num{ font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--gold); font-weight:600; }
+  section h2{ font-size:26px; }
+  section h3{ font-size:16px; margin-bottom:10px; }
+  section > p, section > ul li, .prose p{ max-width:68ch; color:var(--ink); }
+  section > p{ margin:0 0 14px; }
+  .lede{ font-size:16.5px; color:var(--ink-soft); max-width:66ch; margin-bottom:22px; }
+
+  ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  ul.plain li{ padding-left:22px; position:relative; }
+  ul.plain li::before{ content:"—"; position:absolute; left:0; color:var(--gold); }
+
+  .card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:20px 22px; box-shadow:var(--shadow); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+
+  .scope-in{ border-color:var(--line); }
+  .scope-out{ background:var(--paper-sunk); border-style:dashed; box-shadow:none; }
+  .scope-out .card-title{ color:var(--ink-soft); }
+  .card-title{ font-size:13px; font-weight:700; letter-spacing:0.03em; margin-bottom:12px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  .tablewrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  th{ text-align:left; font-size:10.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); padding:12px 16px; border-bottom:1px solid var(--line); background:var(--paper-sunk); white-space:nowrap; }
+  td{ padding:13px 16px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  tr:last-child td{ border-bottom:none; }
+
+  .chip{ display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .chip-crit{ background:var(--crit-wash); color:var(--crit); }
+  .chip-warn{ background:var(--warn-wash); color:var(--warn); }
+  .chip-info{ background:var(--info-wash); color:var(--info); }
+  .chip-ok{ background:var(--ok-wash); color:var(--ok); }
+  .chip-gold{ background:var(--gold-wash); color:var(--gold-deep); }
+
+  .callout{ border:1px solid var(--line); border-left:3px solid var(--warn); background:var(--paper-raised); border-radius:0 10px 10px 0; padding:14px 18px; }
+  .callout .callout-title{ font-size:13px; font-weight:700; color:var(--warn); margin-bottom:4px; }
+  .callout p{ font-size:13.5px; color:var(--ink-soft); margin:0; }
+
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-item{ display:grid; grid-template-columns:120px 20px 1fr; gap:0; }
+  .tl-phase{ font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; color:var(--gold-deep); padding:18px 0; }
+  .tl-rail{ display:flex; flex-direction:column; align-items:center; }
+  .tl-dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); margin-top:22px; flex-shrink:0; }
+  .tl-line{ flex:1; width:1px; background:var(--line); }
+  .tl-item:last-child .tl-line{ display:none; }
+  .tl-body{ padding:14px 0 26px 20px; }
+  .tl-body h3{ margin-bottom:4px; }
+  .tl-body p{ font-size:13.5px; color:var(--ink-soft); margin:0; max-width:56ch; }
+
+  .entity{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--paper-raised); }
+  .entity h3{ font-family:"IBM Plex Mono",monospace; font-size:13px; letter-spacing:0.02em; }
+  .entity p{ font-size:13px; color:var(--ink-soft); margin:8px 0 0; }
+
+  .checklist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; counter-reset:step; }
+  .checklist li{ display:flex; gap:14px; align-items:flex-start; counter-increment:step; }
+  .checklist li::before{ content:counter(step); flex-shrink:0; width:24px; height:24px; border-radius:50%; border:1px solid var(--gold); color:var(--gold-deep); font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+
+  .reflist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+  .reflist li{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px; align-items:baseline; padding:14px 0; border-bottom:1px solid var(--line-soft); }
+  .reflist li:last-child{ border-bottom:none; }
+  .reflist .reftitle{ font-weight:600; font-size:14px; }
+  .reflist .refmeta{ font-size:11.5px; color:var(--ink-faint); margin-top:3px; }
+  .reflist .refpath{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-faint); word-break:break-word; }
+
+  footer{ margin-top:80px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline; font-size:12.5px; color:var(--ink-faint); }
+
+  @media (max-width:900px){
+    .shell{ flex-direction:column; }
+    nav.toc{ position:sticky; top:0; z-index:5; width:100%; height:auto; padding:12px 16px; background:var(--paper); border-bottom:1px solid var(--line); overflow-x:auto; overflow-y:hidden; }
+    nav.toc .toclabel{ display:none; }
+    nav.toc ul{ display:flex; gap:4px; list-style:none; margin:0; padding:0; }
+    nav.toc a{ white-space:nowrap; }
+    main.doc{ padding:32px 20px 90px; }
+    .cover h1{ font-size:32px; }
+    .metagrid{ grid-template-columns:1fr 1fr; }
+    .grid2, .grid3{ grid-template-columns:1fr; }
+    .tl-item{ grid-template-columns:80px 16px 1fr; }
+    .reflist li{ flex-direction:column; align-items:flex-start; gap:4px; }
+  }
+
+  @media print{
+    nav.toc{ display:none; }
+    .shell{ display:block; }
+    main.doc{ max-width:100%; padding:0; }
+    a{ color:var(--ink); text-decoration:none; }
+    section{ break-inside:avoid-page; }
+  }
+</style>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sumário">
+    <div class="toclabel">Sumário</div>
+    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;">
+      <li><a href="#identificacao"><span class="n">01</span>Identificação</a></li>
+      <li><a href="#justificativa"><span class="n">02</span>Justificativa</a></li>
+      <li><a href="#objetivo"><span class="n">03</span>Objetivo</a></li>
+      <li><a href="#escopo"><span class="n">04</span>Escopo</a></li>
+      <li><a href="#partes"><span class="n">05</span>Partes interessadas</a></li>
+      <li><a href="#produto"><span class="n">06</span>Estrutura do produto</a></li>
+      <li><a href="#dados"><span class="n">07</span>Modelo de dados</a></li>
+      <li><a href="#tecnica"><span class="n">08</span>Abordagem técnica</a></li>
+      <li><a href="#fases"><span class="n">09</span>Fases</a></li>
+      <li><a href="#riscos"><span class="n">10</span>Riscos</a></li>
+      <li><a href="#sucesso"><span class="n">11</span>Critérios de sucesso</a></li>
+      <li><a href="#referencias"><span class="n">12</span>Referências</a></li>
+    </ul>
+  </nav>
+
+  <main class="doc">
+
+    <div class="cover" id="identificacao">
+      <div class="eyebrow">Termo de abertura de projeto</div>
+      <h1>CLJ&nbsp;NSR</h1>
+      <div class="tagline">Plataforma interna de gestão de pessoas do Departamento Cultural — cadastro, escala e calendário num só lugar, no lugar de planilha solta, grupo de WhatsApp disperso e memória do coordenador.</div>
+      <div class="metagrid">
+        <div><div class="k">Paróquia</div><div class="v">Nossa Senhora do Rosário</div></div>
+        <div><div class="k">Departamento</div><div class="v">Cultural (piloto)</div></div>
+        <div><div class="k">Fase atual</div><div class="v">POC · Fase 0</div></div>
+        <div><div class="k">Abertura</div><div class="v">26 de agosto de 2026</div></div>
+        <div><div class="k">Responsável</div><div class="v">Coordenador(a) do Depto. Cultural</div></div>
+        <div><div class="k">Apoio técnico</div><div class="v">Claude Code</div></div>
+      </div>
+    </div>
+
+    <section id="justificativa">
+      <div class="sechead"><span class="num">02</span><h2>Justificativa</h2></div>
+      <p>O Departamento Cultural coordena hoje cerca de dez voluntários, o Terço Diário nas redes, publicações recorrentes e a viabilização do Cinecultural — tudo sustentado por planilha solta, grupo de WhatsApp disperso e a memória do coordenador. Duas pesquisas próprias, conduzidas antes deste projeto, embasam a decisão de abrir o CLJ NSR.</p>
+      <p>A primeira investigou se valeria a pena construir um aplicativo <em>público</em>, para quem acompanha o terço — e concluiu que não: essa necessidade já é atendida, de graça, por WhatsApp Comunidades e por aplicativos católicos prontos (Pocket Terço, Capela, Hallow). A mesma pesquisa, porém, valida explicitamente uma ferramenta <em>interna</em> simples — no nível de uma planilha compartilhada ou um Trello — como um "MVP interno" legítimo para organizar a própria equipe.</p>
+      <p>A segunda mapeou como sustentar essa equipe: cadastro com a motivação de cada voluntário, descrição clara de cada função, um quadro único de escala com rodízio e dupla cobertura, e reuniões com pauta em formato de perguntas e memorando de follow-up.</p>
+      <p>O CLJ NSR nasce nesse espaço validado por ambas: não é o aplicativo público descartado pela primeira pesquisa, é a ferramenta interna recomendada pelas duas — construída como aplicativo próprio, e não como planilha, porque o coordenador quer login individual por participante, visões diferentes por papel e identidade visual própria da CLJ.</p>
+    </section>
+
+    <section id="objetivo">
+      <div class="sechead"><span class="num">03</span><h2>Objetivo</h2></div>
+      <p class="lede">Reunir, num só lugar, a gestão de pessoas do Departamento Cultural: quem são os participantes, o que cada um faz, quando faz, e o que foi decidido nas reuniões. Um "Slack/Monday" enxuto, com o design da CLJ.</p>
+      <ul class="plain">
+        <li>Cadastrar participantes com contato, função e disponibilidade.</li>
+        <li>Organizar a escala de posts, tarefas e eventos com responsável e suplente.</li>
+        <li>Dar a cada participante um calendário pessoal do que é seu.</li>
+        <li>Dar ao coordenador painéis extras para controlar funções, escala e reuniões.</li>
+      </ul>
+    </section>
+
+    <section id="escopo">
+      <div class="sechead"><span class="num">04</span><h2>Escopo</h2></div>
+      <p class="lede">Só o Departamento Cultural, só o lado interno. O modelo de dados já deixa espaço para o resto — mas o resto não é construído agora.</p>
+      <div class="grid2">
+        <div class="card scope-in">
+          <div class="card-title" style="color:var(--gold-deep);">DENTRO DO POC</div>
+          <ul class="plain">
+            <li>Departamento Cultural</li>
+            <li>Cadastro, Escala/Posts/Rodízio, Calendário, Reuniões (leitura)</li>
+            <li>Painel do coordenador, Gestão de Funções/Escala/Reuniões/Participantes</li>
+          </ul>
+        </div>
+        <div class="card scope-out">
+          <div class="card-title">FORA, POR ENQUANTO</div>
+          <ul class="plain">
+            <li>Outros departamentos da paróquia</li>
+            <li>Parte pública do site (Terço Diário para paroquianos)</li>
+            <li>Reconhecimento formal, RACI por projeto, troca de tarefa, notificações, rodízio automático, confirmação/aceite da escala pelo responsável</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="partes">
+      <div class="sechead"><span class="num">05</span><h2>Partes interessadas</h2></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Papel</th><th>Quem</th><th>Interesse</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Coordenador(a)</strong></td><td>1 pessoa</td><td>Patrocinador, gestor do produto e usuário principal do painel de coordenação.</td></tr>
+          <tr><td><strong>Participantes</strong></td><td>~10 voluntários</td><td>Usam Cadastro, Escala e Calendário pessoal no dia a dia.</td></tr>
+          <tr><td><strong>Outros departamentos</strong></td><td>Futuro</td><td>Réplica do mesmo modelo após validação no Cultural.</td></tr>
+          <tr><td><strong>Paroquianos</strong></td><td>Futuro, fora deste POC</td><td>Parte pública do site para acompanhar o Terço Diário.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="produto">
+      <div class="sechead"><span class="num">06</span><h2>Estrutura do produto</h2></div>
+      <p class="lede">Dez telas: quatro do participante, cinco extras do coordenador, mais a entrada. O wireframe de estrutura de cada uma está publicado à parte —
+        <a href="https://claude.ai/code/artifact/14a752be-4f96-4078-9f34-928991f4f24a" target="_blank" rel="noopener">CLJ NSR — Estrutura de Páginas<svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:3px;vertical-align:-1px;"><path d="M8 5h7v7"/><path d="M15 5 6 14"/></svg></a>.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Tela</th><th>Participante</th><th>Coordenador</th></tr></thead>
+        <tbody>
+          <tr><td>Cadastro (perfil)</td><td>vê/edita o próprio</td><td>vê/edita qualquer um</td></tr>
+          <tr><td>Escala / Posts / Rodízio</td><td>vê tudo, com destaque do que é seu</td><td>vê tudo + cria/edita/atribui</td></tr>
+          <tr><td>Calendário pessoal</td><td>o próprio</td><td>o próprio + visão geral</td></tr>
+          <tr><td>Reuniões</td><td>leitura</td><td>leitura + cria pauta + registra decisão</td></tr>
+          <tr><td>Painel do coordenador</td><td>—</td><td>dashboard consolidado</td></tr>
+          <tr><td>Gestão de Funções</td><td>—</td><td>CRUD do catálogo</td></tr>
+          <tr><td>Gestão de Escala</td><td>—</td><td>cria/edita/atribui posts, tarefas e reuniões</td></tr>
+          <tr><td>Gestão de Reuniões</td><td>—</td><td>cria pauta, registra decisão e follow-up</td></tr>
+          <tr><td>Gestão de Participantes</td><td>—</td><td>CRUD de qualquer Pessoa, ativar/inativar</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="dados">
+      <div class="sechead"><span class="num">07</span><h2>Modelo de dados</h2></div>
+      <p class="lede">Seis entidades. <span class="mono">Atividade</span> é a peça central — uma linha por post, tarefa, evento ou reunião — e alimenta tanto a Escala quanto o Calendário.</p>
+      <div class="grid3">
+        <div class="entity"><h3>Pessoa</h3><p>Nome, contato, departamento, papel no sistema, disponibilidade, cadastro completo.</p></div>
+        <div class="entity"><h3>Função</h3><p>Catálogo de papéis do departamento: nome + descrição curta.</p></div>
+        <div class="entity"><h3>Pessoa_Função</h3><p>Junção N:N — uma pessoa pode acumular mais de uma função.</p></div>
+        <div class="entity"><h3>Atividade</h3><p>Post, tarefa, evento ou reunião: data, função, responsável, suplente, status, link de mídia.</p></div>
+        <div class="entity"><h3>Reunião</h3><p>Extensão 1:1 de uma Atividade: pauta, decisões, follow-up.</p></div>
+        <div class="entity"><h3>Reunião_Presentes</h3><p>Junção N:N entre Reunião e Pessoa.</p></div>
+      </div>
+    </section>
+
+    <section id="tecnica">
+      <div class="sechead"><span class="num">08</span><h2>Abordagem técnica</h2></div>
+      <p><strong>Next.js + TypeScript</strong> (front e back num codebase só) · <strong>Supabase</strong> (Postgres + Auth, RLS coordenador-vs-participante) · <strong>Vercel</strong>, conta Team desde o início · <strong>Tailwind</strong> para estilização — identidade visual própria vem numa passada de design separada.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px;">
+        <div class="callout"><div class="callout-title">Supabase pausa após 7 dias sem uso</div><p>Tier grátis some por inatividade, com aviso por e-mail antes. Aceitável no POC; documentado para não assustar ninguém.</p></div>
+        <div class="callout"><div class="callout-title">Limite de e-mail do Supabase Auth</div><p>O envio padrão de convites estoura já ao convidar os ~10 participantes de uma vez. SMTP próprio (Resend) configurado já na Fase 0.</p></div>
+        <div class="callout"><div class="callout-title">Vercel Hobby é de um desenvolvedor só</div><p>Por isso a conta é criada como Team desde o início — evita migração se um segundo voluntário técnico precisar de acesso.</p></div>
+      </div>
+    </section>
+
+    <section id="fases">
+      <div class="sechead"><span class="num">09</span><h2>Fases</h2></div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-phase">FASE 0</div><div class="tl-rail"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><h3>Esqueleto técnico</h3><p>Repo, scaffold, projeto Supabase com SMTP configurado, schema completo com RLS, deploy vazio autenticado.</p></div></div>
+        <div class="tl-item"><div class="tl-phase">FASE A</div><div class="tl-rail"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><h3>Fundação</h3><p>Convite, login, Cadastro, Gestão de Participantes e de Funções.</p></div></div>
+        <div class="tl-item"><div class="tl-phase">FASE B</div><div class="tl-rail"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><h3>Escala + Calendário</h3><p>Atividade completa, board de Escala, Calendário pessoal sobre a mesma fonte de dados.</p></div></div>
+        <div class="tl-item"><div class="tl-phase">FASE D</div><div class="tl-rail"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><h3>Reuniões</h3><p>Pauta, decisões, follow-up e presentes sobre a Atividade tipo "reunião" já existente.</p></div></div>
+        <div class="tl-item"><div class="tl-phase">FASE E</div><div class="tl-rail"><div class="tl-dot"></div></div><div class="tl-body"><h3>Depois do POC</h3><p>Painel com alertas, reconhecimento, RACI, troca de tarefa, notificações, outros departamentos, parte pública.</p></div></div>
+      </div>
+    </section>
+
+    <section id="riscos">
+      <div class="sechead"><span class="num">10</span><h2>Riscos</h2></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Risco</th><th>Severidade</th><th>Mitigação</th></tr></thead>
+        <tbody>
+          <tr><td>Coordenador acumula papéis (gestor + conteúdo + dev) — perfil clássico de burnout de fundador solo</td><td><span class="chip chip-crit">Alta</span></td><td>Escopo do POC restrito; fases pequenas; Claude Code como apoio técnico contínuo.</td></tr>
+          <tr><td>Coordenador como ponto único de falha do sistema</td><td><span class="chip chip-warn">Média</span></td><td><span class="mono">papel_sistema</span> é atribuível a qualquer Pessoa, não fixo por e-mail; buscar 2º voluntário técnico.</td></tr>
+          <tr><td>Mandato do coordenador termina no fim de 2026 — risco de "órfão" técnico</td><td><span class="chip chip-warn">Média</span></td><td>Modelo já preparado para troca de responsável; documentar decisões neste termo.</td></tr>
+          <tr><td>Limite de e-mail do Supabase Auth ao convidar a equipe</td><td><span class="chip chip-warn">Média</span></td><td>SMTP próprio (Resend) configurado já na Fase 0.</td></tr>
+          <tr><td>Projeto Supabase pausa após 7 dias sem uso</td><td><span class="chip chip-info">Baixa</span></td><td>Ping semanal automatizado ou "restore" manual ocasional.</td></tr>
+          <tr><td>Vercel Hobby limita a um desenvolvedor</td><td><span class="chip chip-info">Baixa</span></td><td>Conta criada como Team desde o início.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="sucesso">
+      <div class="sechead"><span class="num">11</span><h2>Critérios de sucesso</h2></div>
+      <p class="lede">Como validar o POC antes de decidir a Fase E.</p>
+      <ol class="checklist">
+        <li>Coordenador convida os ~10 participantes.</li>
+        <li>Cada um entra, cai na tela de Cadastro e completa o perfil.</li>
+        <li>Coordenador cadastra o catálogo de Funções.</li>
+        <li>Coordenador monta a Escala do mês com responsável e suplente.</li>
+        <li>Cada participante vê, no Calendário pessoal, exatamente o que é dele.</li>
+        <li>Teste de reunião: pauta criada, decisão e follow-up registrados depois.</li>
+      </ol>
+      <p style="margin-top:18px;font-size:13.5px;color:var(--ink-soft);">Rodando redondo por 2–3 semanas → sinal para decidir o que entra na Fase E primeiro.</p>
+    </section>
+
+    <section id="referencias">
+      <div class="sechead"><span class="num">12</span><h2>Referências</h2></div>
+      <ul class="reflist">
+        <li>
+          <div><div class="reftitle">Pesquisa — Stories devocionais e validação crítica do app</div><div class="refmeta">Base da decisão de não construir a parte pública agora</div></div>
+          <div class="refpath">compass_artifact_...4b5bb03a....md</div>
+        </li>
+        <li>
+          <div><div class="reftitle">Pesquisa — Gestão do Departamento Cultural</div><div class="refmeta">Base do modelo de escala, cadastro e reuniões</div></div>
+          <div class="refpath">compass_artifact_...b4a43003....md</div>
+        </li>
+        <li>
+          <div><div class="reftitle">Plano de implementação aprovado</div><div class="refmeta">Modelo de dados, arquitetura e fases, em detalhe</div></div>
+          <div class="refpath">~/.claude/plans/logical-purring-clarke.md</div>
+        </li>
+        <li>
+          <div><div class="reftitle"><a href="https://claude.ai/code/artifact/14a752be-4f96-4078-9f34-928991f4f24a" target="_blank" rel="noopener">CLJ NSR — Estrutura de Páginas<svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:3px;vertical-align:-1px;"><path d="M8 5h7v7"/><path d="M15 5 6 14"/></svg></a></div><div class="refmeta">Wireframes das dez telas</div></div>
+          <div class="refpath">claude.ai/code/artifact</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <span>Aberto em 26 de agosto de 2026, pelo(a) Coordenador(a) do Departamento Cultural.</span>
+      <span class="mono">CLJ NSR · v0.1</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+    var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+    function onScroll(){
+      var pos = window.scrollY + 120;
+      var current = 0;
+      for (var i = 0; i < sections.length; i++){
+        if (sections[i] && sections[i].offsetTop <= pos) current = i;
+      }
+      links.forEach(function(a, i){ a.classList.toggle('active', i === current); });
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>

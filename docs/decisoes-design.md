@@ -108,15 +108,27 @@ As três direções de agosto foram rejeitadas por genéricas — construções 
 
 O que vem da paróquia é a **cor**: azul e branco são as cores dela. O azul `#253990` continua sendo o único acento, sobre papel claro (§3).
 
+### O que a identidade tem que fazer
+
+Quatro exigências, fixadas em 2026-09-04 (o briefing está desenhado no artboard `Main` de `design/identidade/`):
+
+1. **A emoção-alvo é alívio, não eficiência.** Quem abre o app está carregando algo; a tela devolve calma, não produtividade.
+2. **Legível a 16px e às 6h da manhã.** Tela pequena, luz baixa, um olho aberto.
+3. **Pertence à igreja sem ser devocional.** O contexto aparece na estrutura e no tom, nunca como imagem santa de textura.
+4. **Outra paróquia não pode usar.** Foi exatamente o erro das três marcas de agosto.
+
+O que está sendo substituído: a identidade atual — papel quente, tinta, azul tímido, serifa discreta — é **competente e anônima**. É a estética segura que todo produto bem-intencionado usa: não erra, e não marca ninguém.
+
 ### A ordem: telas primeiro, identidade depois
 
 Decisão de método, e é a que muda o resultado: **primeiro acertar as telas; a identidade sai delas.**
 
 Uma marca desenhada antes da interface é um símbolo procurando onde morar — foi exatamente assim que nasceram as três de agosto, e é por isso que qualquer paróquia poderia usá-las. Uma marca desenhada depois herda o ritmo, a geometria e a densidade que já provaram funcionar na tela, e não tem como sair genérica: ela vem de algo que só existe aqui.
 
-1. Acertar as telas (ciclo mínimo e o que mais entrar).
-2. Extrair da interface o vocabulário formal que se repete — proporções, cantos, espessura de traço, densidade, ritmo.
-3. Desenhar a marca a partir desse vocabulário.
+1. Acertar as telas (ciclo mínimo e o que mais entrar). **Feito** — 10 quadros em `design/ciclo-minimo/`.
+2. **Escolher a direção visual** entre as quatro em [`../design/identidade/`](../design/identidade/): A Missal · B Vigília · C Vitral · D Quadro de avisos. As quatro mostram a mesma tela com o mesmo conteúdo. ← **estamos aqui**
+3. Aplicar a direção escolhida nos quadros do ciclo mínimo.
+4. Extrair da interface o vocabulário formal que se repete e desenhar a marca a partir dele.
 
 **O conceito "O Fio" (§1) segue de pé, mas deixa de ser premissa.** Se a interface que emergir do passo 1 não pedir o fio, o conceito cai junto — a identidade sai das telas, não o contrário.
 

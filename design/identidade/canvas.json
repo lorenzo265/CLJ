@@ -1,0 +1,17 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "Briefing — o que a identidade tem que fazer" },
+    { "file": "DirecaoA.dc.html", "x": 0, "y": 1240, "w": 390, "h": 844, "title": "A · Missal" },
+    { "file": "DirecaoB.dc.html", "x": 490, "y": 1240, "w": 390, "h": 844, "title": "B · Vigília" },
+    { "file": "DirecaoC.dc.html", "x": 980, "y": 1240, "w": 390, "h": 844, "title": "C · Vitral" },
+    { "file": "DirecaoD.dc.html", "x": 1470, "y": 1240, "w": 390, "h": 844, "title": "D · Quadro de avisos" }
+  ],
+  "annotations": [
+    { "id": "como-ler", "x": 0, "y": 960, "w": 900, "text": "MESMA TELA, MESMO CONTEÚDO, QUATRO IDENTIDADES\nO dia do coordenador no celular — a tela mais usada e a mais emocional. Comparar sem truque: se o conteúdo muda, a comparação é sobre o conteúdo.\nEscolha por qual delas você abriria às 6h da manhã." },
+    { "id": "nota-a", "x": 0, "y": 1100, "w": 400, "text": "A · MISSAL\nO editorial de hoje, mas levado a sério: serifa de verdade em corpo grande, margem larga, fio fino, e o azul como RUBRICA — a marcação vermelha dos livros litúrgicos, aqui em azul.\nEB Garamond + Archivo · papel #FBF8F3\nMais próximo do atual. Ganha em caráter, não em ruptura." },
+    { "id": "nota-b", "x": 490, "y": 1100, "w": 400, "text": "B · VIGÍLIA\nO azul deixa de ser detalhe e vira o ambiente. Tela de quem abre às 6h e às 22h, no escuro, sem levar um flash na cara.\nArchivo · fundo #0D1530, azul-claro #86A0F0\nO mais confortável no uso real. O mais distante do que existe hoje." },
+    { "id": "nota-c", "x": 980, "y": 1100, "w": 400, "text": "C · VITRAL\nA gramática do vitral — campos delimitados, linha de chumbo grossa, luz atravessando a cor — sem uma única imagem devocional. Âmbar como o segundo vidro.\nArchivo Black · azul #1B3FA0, âmbar #C8892B\nO mais memorável. E o mais difícil de manter sóbrio." },
+    { "id": "nota-d", "x": 1470, "y": 1100, "w": 400, "text": "D · QUADRO DE AVISOS\nO app tem uma pergunta só: o que é meu e quando. Número gigante, zero decoração, tudo é sinal. Mono para as horas.\nArchivo + IBM Plex Mono · azul só para o que é seu\nO mais direto. Pode ficar frio para um departamento de igreja." }
+  ],
+  "launch": { "view": "canvas" }
+}

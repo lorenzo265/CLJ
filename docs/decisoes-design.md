@@ -1,6 +1,8 @@
 # Decisões de Design — CLJ NSR
 
 Registro vivo das decisões de identidade visual e UX. Atualizado em **2026-08-26**.
+
+Pressupõe [`00-intuito.md`](00-intuito.md) — o propósito, o prazo e a régua do projeto.
 Fonte expandida: [Briefing de Design](https://claude.ai/code/artifact/00c156b4-8382-460b-96d4-1ac2a8df0f96) · Telas: [Canvas](https://claude.ai/code/artifact/14a752be-4f96-4078-9f34-928991f4f24a)
 
 ## 1. O conceito nomeado: "O Fio"

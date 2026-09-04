@@ -100,23 +100,27 @@ Microcopy em 2ª pessoa, ordem fixa: situação → o que é seu → um próximo
 - **Widget de tela inicial** (dois estados: manchete / "Semana em dia ✓") = check de custo zero. Depende da plataforma técnica (nativo ou PWA) — decidir na etapa mobile do app.
 - Push na janela em que a pessoa costuma responder, não em horário fixo.
 
-## 9. Marca & identidade (reaberta em 2026-09-04)
+## 9. Identidade (redefinida em 2026-09-04)
 
-**As três direções desenhadas em agosto — A Auréola, B Rosa, C Monograma — foram rejeitadas.**
+**A identidade é do app, não da paróquia.**
 
-Motivo, registrado para não repetir o erro: as três são construções geométricas montadas a partir de primitivas (pontos em roda, espiral de um traço, M com cruz) e derivadas do **conceito** "Nossa Senhora do Rosário" — não desta paróquia. Qualquer paróquia mariana do Brasil poderia adotar as três sem trocar uma linha. É exatamente isso que faz uma marca ler como gerada em vez de desenhada.
+As três direções de agosto foram rejeitadas por genéricas — construções geométricas montadas a partir de primitivas e derivadas do *conceito* "Nossa Senhora do Rosário". A primeira reação foi buscar procedência no prédio: rosácea, fachada, azulejo, a imagem do altar. **Essa direção também está descartada.** O app pertence à paróquia, mas não é a paróquia; uma marca desenhada a partir do prédio faria dele mais um material institucional, e o que se quer é um produto com identidade própria.
 
-O briefing de agosto pedia "flat, uma cor, geometria pura". Isso protegia contra o clip-art religioso, mas cobrou o preço de matar a mão: sem variação de traço, sem matéria e sem procedência, sobra desenho de sistema — competente e anônimo.
+O que vem da paróquia é a **cor**: azul e branco são as cores dela. O azul `#253990` continua sendo o único acento, sobre papel claro (§3).
 
-### O que a próxima rodada precisa ter
+### A ordem: telas primeiro, identidade depois
 
-1. **Procedência** — a marca nasce de algo que existe e que a comunidade reconhece: a rosácea, a fachada, o ferro do portão, o azulejo, a imagem de Nossa Senhora do Rosário que está no altar **desta** igreja. Não do símbolo genérico.
-2. **Matéria** — traço com variação, gravura, letra desenhada. A tradição devocional brasileira dá o vocabulário: xilogravura, santinho, azulejaria, cordel.
-3. **Especificidade** — se outra paróquia puder adotar a marca sem prejuízo, ela ainda não está pronta.
+Decisão de método, e é a que muda o resultado: **primeiro acertar as telas; a identidade sai delas.**
 
-Continua valendo de §1 a §8: a régua de reverência, o azul da paróquia como única cor de destaque, e a proibição de skeuomorfismo. Muda a **origem** do desenho, não a sobriedade.
+Uma marca desenhada antes da interface é um símbolo procurando onde morar — foi exatamente assim que nasceram as três de agosto, e é por isso que qualquer paróquia poderia usá-las. Uma marca desenhada depois herda o ritmo, a geometria e a densidade que já provaram funcionar na tela, e não tem como sair genérica: ela vem de algo que só existe aqui.
 
-**Bloqueada por material bruto:** fotos da igreja (fachada, rosácea, portão, azulejo, altar) e da imagem de Nossa Senhora do Rosário da paróquia. Sem esse material, a rodada seguinte reproduz o mesmo genérico.
+1. Acertar as telas (ciclo mínimo e o que mais entrar).
+2. Extrair da interface o vocabulário formal que se repete — proporções, cantos, espessura de traço, densidade, ritmo.
+3. Desenhar a marca a partir desse vocabulário.
+
+**O conceito "O Fio" (§1) segue de pé, mas deixa de ser premissa.** Se a interface que emergir do passo 1 não pedir o fio, o conceito cai junto — a identidade sai das telas, não o contrário.
+
+Continua valendo de §2 a §8: sobriedade, régua de reverência, azul como marca-texto e não tinta de parede, e a proibição de skeuomorfismo.
 
 ## 10. Status do design (2026-08-27)
 
@@ -124,7 +128,7 @@ Continua valendo de §1 a §8: a régua de reverência, o azul da paróquia como
 - ✅ Sidebar-terço e MobileNav como componentes reutilizados
 - ✅ Contas em flat com anel-auréola (v2 — §3b)
 - ✅ GSAP adotado como biblioteca de motion (§5); framer-motion removido do app
-- ❌ Marca: as três direções de agosto foram rejeitadas (§9) — identidade em estudo, bloqueada por fotos da paróquia
+- 🔄 Identidade: reordenada (§9) — as telas vêm primeiro e a marca é extraída delas; nada de marca antes disso
 - 🔄 Escala do participante: as opções A/B/C ficam como referência; a direção sai de uma rodada nova de **mockups simples**, decidida por facilidade de uso, não por estilo
 - ⏳ Validar aplicação do terço com coordenação/pároco
 - ⏳ Aplicar "O Fio" na UI do app web (tokens + sidebar-terço com GSAP)

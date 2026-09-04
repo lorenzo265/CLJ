@@ -23,10 +23,11 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 - A régua do projeto é **ofício**, não velocidade (`00-intuito.md` §1).
 - O **coordenador** é a audiência #1; o participante vem em seguida (`decisoes-produto.md` §4).
 - WhatsApp: **entrega com um toque**, o app nunca manda sozinho no grupo (`decisoes-tecnicas.md` §4).
-- Instagram: **o app não publica**; quem publica é o Meta Business Suite (`decisoes-tecnicas.md` §5).
+- Instagram: **o app não publica**; quem publica é o Meta Business Suite (`decisoes-tecnicas.md` §5). Nada de agente controlando a máquina para postar — 30 a 60x mais risco de suspensão da conta da paróquia (`decisoes-tecnicas.md` §8.2).
 - Backend: **Supabase** (`decisoes-tecnicas.md` §3).
 - Motion: **GSAP**. Framer-motion foi removido — não sugerir de volta.
 - Skeuomorfismo é **proibido** na identidade (`decisoes-design.md` §3b).
+- Identidade: **as telas vêm primeiro, a marca é extraída delas** (`decisoes-design.md` §9). A identidade é do app, não da paróquia — dela vêm só as cores, azul e branco. Não desenhar marca antes das telas.
 
 ## Ao trabalhar no app
 

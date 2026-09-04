@@ -94,3 +94,31 @@ Registradas para **não** inflarem a sensação de escopo. Nenhuma está no cami
 - Dark mode (tokens já derivados por papel de cor, nunca invertidos).
 - Publicação automática no Instagram (fase 2, §5).
 - CI (lint + testes no push).
+
+## 8. Automação de conteúdo (avaliada em 2026-09-04)
+
+Ideia levantada: um pipeline que recebe vídeo bruto, aprende o formato dos Stories que já são publicados, corta e devolve pronto — e um agente que publica **controlando a máquina** do coordenador.
+
+São duas ideias, e recebem vereditos opostos.
+
+### 8.1 Corte de vídeo assistido por IA — **sim, fase 2**
+
+Esta metade resolve trabalho real que ninguém resolve hoje: transformar material bruto em Story pronto, no formato que o Departamento já usa. Não toca em conta de rede social, não viola termo nenhum, e roda offline.
+
+A peça já existe em código aberto e auto-hospedável — [OpenShorts](https://www.openshorts.app/) (MIT, o vídeo nunca sai da máquina, reenquadramento 9:16 com rastreio de rosto) e o [opensource-clipping](https://github.com/NaufalRizqullah/opensource-clipping) (Whisper para transcrição, MediaPipe para rosto). A base técnica é Whisper + ffmpeg + MediaPipe; o "aprender o meu formato" é um template extraído de exemplos, não um modelo treinado.
+
+**Onde encaixa:** a saída do pipeline entra no Meta Business Suite (agendamento nativo) ou na entrega com um toque (§4). O pipeline **prepara**; publicar continua sendo do §5.
+
+**Fica em fase 2**, fora do caminho crítico da v1 — é um segundo produto e não pode competir com o ciclo mínimo pelas 17 semanas do mandato ([`00-intuito.md`](00-intuito.md) §3).
+
+### 8.2 Agente que publica controlando a máquina — **não**
+
+Dois motivos, e o primeiro é numérico.
+
+**Risco.** Dados de 2026: contas que automatizam pela API oficial da Meta têm taxa de suspensão **abaixo de 0,5% ao ano**; contas que automatizam por **browser automation** ficam entre **15% e 30% ao ano** — de 30 a 60 vezes mais risco. Ferramentas que fazem login com usuário e senha e dirigem a interface disparam o *device fingerprinting* da Meta. A conta em risco seria a da paróquia, com todo o histórico do Departamento Cultural dentro.
+
+**Redundância.** O agente substituiria algo que já funciona, é grátis e é oficial: o Meta Business Suite agenda e **auto-publica** Stories sozinho (de 20 minutos a 29 dias de antecedência) — está documentado na própria pesquisa do projeto, em [`pesquisa/stories-diarios-e-escopo-do-app.md`](pesquisa/stories-diarios-e-escopo-do-app.md). Trocar isso por um robô que depende da máquina ligada, logada, sem pop-up e sem mudança de layout é trocar o confiável pelo frágil.
+
+Se um dia a necessidade for real e o Business Suite não der conta, o caminho legítimo é a **API oficial** (§5), com seu app review — não a automação de navegador.
+
+Fontes: [PostEngage — Instagram Automation Ban Risk](https://postengage.ai/blog/instagram-automation-ban-risk-truth) · [Mixpost — Automate Instagram Posts Safely](https://mixpost.app/blog/automate-instagram-posts-safely) · [CreatorFlow — Is Instagram Automation Safe in 2026](https://creatorflow.so/blog/is-instagram-automation-safe-2026/)

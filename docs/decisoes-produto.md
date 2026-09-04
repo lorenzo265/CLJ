@@ -78,8 +78,8 @@ Uma fatia só, do login ao WhatsApp, com dados reais no Supabase e no ar. Todo o
 
 | # | Decisão | O que trava |
 |---|---|---|
-| 1 | **Escala A/B/C** (agenda por prazo · faixa de dias · linha do tempo) | a tela principal do participante |
-| 2 | **Marca A/B/C** (auréola · monograma · rosa) | favicon, sidebar, login, avatar do WhatsApp |
+| 1 | **Escala do participante** — decidir por mockup simples, não pelas opções A/B/C de agosto | a tela principal do participante |
+| 2 | **Marca** — as três direções foram rejeitadas por genéricas (`decisoes-design.md` §9); identidade em estudo | favicon, sidebar, login, avatar do WhatsApp |
 | 3 | Como o participante confirma que publicou | o fechamento do ciclo de cobrança |
 | 4 | Tom das mensagens automáticas (aniversário e cobrança) | a voz do produto fora da tela |
 

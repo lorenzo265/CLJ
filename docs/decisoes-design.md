@@ -100,15 +100,23 @@ Microcopy em 2ª pessoa, ordem fixa: situação → o que é seu → um próximo
 - **Widget de tela inicial** (dois estados: manchete / "Semana em dia ✓") = check de custo zero. Depende da plataforma técnica (nativo ou PWA) — decidir na etapa mobile do app.
 - Push na janela em que a pessoa costuma responder, não em horário fixo.
 
-## 9. Marca & branding (em decisão)
+## 9. Marca & identidade (reaberta em 2026-09-04)
 
-Três direções desenhadas no canvas (fileira "Marca"), todas ancoradas em Nossa Senhora do Rosário, flat, uma cor:
+**As três direções desenhadas em agosto — A Auréola, B Rosa, C Monograma — foram rejeitadas.**
 
-- **A — Auréola:** nove contas + a cruz fechando a dezena em círculo; lê como auréola/coroa de Nossa Senhora e vira sistema (as contas da marca acendem com o progresso). Custo: favicon precisa de variante simplificada.
-- **B — Rosa:** a rosa em espiral num traço só (Rosário = coroa de rosas); o fio florescendo; abre-se desenhando (GSAP). Custo: menos literal ao produto.
-- **C — Monograma:** M de Maria com a cruz nascendo do centro (Medalha Milagrosa geometrizada); força de selo, o mais robusto em 16px. Custo: lê mais "instituição" que "ferramenta".
+Motivo, registrado para não repetir o erro: as três são construções geométricas montadas a partir de primitivas (pontos em roda, espiral de um traço, M com cruz) e derivadas do **conceito** "Nossa Senhora do Rosário" — não desta paróquia. Qualquer paróquia mariana do Brasil poderia adotar as três sem trocar uma linha. É exatamente isso que faz uma marca ler como gerada em vez de desenhada.
 
-**Decisão pendente do time.** A marca escolhida substitui a cruz interina do sidebar/login e define favicon + avatar do WhatsApp.
+O briefing de agosto pedia "flat, uma cor, geometria pura". Isso protegia contra o clip-art religioso, mas cobrou o preço de matar a mão: sem variação de traço, sem matéria e sem procedência, sobra desenho de sistema — competente e anônimo.
+
+### O que a próxima rodada precisa ter
+
+1. **Procedência** — a marca nasce de algo que existe e que a comunidade reconhece: a rosácea, a fachada, o ferro do portão, o azulejo, a imagem de Nossa Senhora do Rosário que está no altar **desta** igreja. Não do símbolo genérico.
+2. **Matéria** — traço com variação, gravura, letra desenhada. A tradição devocional brasileira dá o vocabulário: xilogravura, santinho, azulejaria, cordel.
+3. **Especificidade** — se outra paróquia puder adotar a marca sem prejuízo, ela ainda não está pronta.
+
+Continua valendo de §1 a §8: a régua de reverência, o azul da paróquia como única cor de destaque, e a proibição de skeuomorfismo. Muda a **origem** do desenho, não a sobriedade.
+
+**Bloqueada por material bruto:** fotos da igreja (fachada, rosácea, portão, azulejo, altar) e da imagem de Nossa Senhora do Rosário da paróquia. Sem esse material, a rodada seguinte reproduz o mesmo genérico.
 
 ## 10. Status do design (2026-08-27)
 
@@ -116,8 +124,8 @@ Três direções desenhadas no canvas (fileira "Marca"), todas ancoradas em Noss
 - ✅ Sidebar-terço e MobileNav como componentes reutilizados
 - ✅ Contas em flat com anel-auréola (v2 — §3b)
 - ✅ GSAP adotado como biblioteca de motion (§5); framer-motion removido do app
-- ⏳ Escolher a direção da marca (A/B/C — §9)
-- ⏳ Escolher a direção da tela Escala do participante (Opções A/B/C no canvas)
+- ❌ Marca: as três direções de agosto foram rejeitadas (§9) — identidade em estudo, bloqueada por fotos da paróquia
+- 🔄 Escala do participante: as opções A/B/C ficam como referência; a direção sai de uma rodada nova de **mockups simples**, decidida por facilidade de uso, não por estilo
 - ⏳ Validar aplicação do terço com coordenação/pároco
 - ⏳ Aplicar "O Fio" na UI do app web (tokens + sidebar-terço com GSAP)
 - ⏳ Dark mode das telas (derivado, não invertido)

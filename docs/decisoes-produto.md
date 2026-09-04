@@ -32,7 +32,7 @@ Duas premissas anteriores foram revogadas nesta data — estão registradas para
 
 ## 4. Audiências, em ordem
 
-1. **Coordenador** — desktop para sessões longas de montagem; celular para o disparo do dia. Densidade bem-vinda, poder de edição.
+1. **Coordenador** — **as duas telas, e o celular é primeira classe.** Computador para as sessões longas (montar o mês, produzir em lote, biblioteca); celular para o dia (o que sai, quem está devendo, o disparo) e para fechar lacunas da escala. Nada do dia a dia pode exigir estar sentado.
 2. **Participante no celular** — jovem, entra por 10 segundos. Se a tela dele falhar, o app não cumpre o propósito.
 3. **Nunca:** "usuário avançado de software". Nenhuma tela pode exigir treinamento.
 
@@ -40,24 +40,26 @@ O coordenador vê **tudo que o participante vê, mais** as telas de gestão.
 
 ## 5. Telas
 
-| Tela | Papel | Estado |
-|---|---|---|
-| Login (convite do coordenador → definir senha) | entrada | desenhada · **na fatia vertical** |
-| Painel do coordenador (stats + alertas + atalhos) | coordenador | desenhada |
-| Gestão de Escala (atividades, responsável/suplente, mídia, status) | coordenador | desenhada · **na fatia vertical** |
-| Gestão de Funções (catálogo de papéis) | coordenador | desenhada |
-| Gestão de Participantes (convites, cadastros) | coordenador | desenhada |
-| Gestão de Reuniões (pauta, decisões, follow-up) | coordenador | desenhada |
-| **Produção de conteúdo** (texto do post + mídia, em lote) | coordenador | **a desenhar** |
-| **Disparo do dia** (conteúdo pronto → um toque para o grupo) | coordenador | **a desenhar** |
-| **Cobranças e aniversários** (o que o app vai mandar, e quando) | coordenador | **a desenhar** |
-| Cadastro (dados, funções, disponibilidade, **data de nascimento**) | participante | desenhada · precisa do campo de aniversário |
-| Escala (leitura, "Meus/Todos") | participante | 3 opções em avaliação (A: agenda por prazo · B: faixa de dias + destaque · C: linha do tempo) — **decisão pendente** |
-| Calendário (mês, "Meus/Departamento") | participante | desenhada |
-| Reuniões (leitura) | participante | desenhada |
-| Mobile: Hoje / Escala / Calendário + bottom nav | participante | desenhadas |
+Marcadas por fase ([`00-intuito.md`](00-intuito.md) §5): **A** = só você · **B** = o departamento entra.
 
-Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** (bottom nav, mobile).
+| Tela | Fase | Papel | Estado |
+|---|---|---|---|
+| Montar o mês — computador | A | coordenador | **desenhada** (ciclo mínimo) |
+| Montar o mês — celular | A | coordenador | **desenhada** |
+| Produzir em lote | A | coordenador | **desenhada** |
+| Biblioteca de mídia | A | coordenador | **desenhada** |
+| O dia — computador | A | coordenador | **desenhada** |
+| O dia — celular | A | coordenador | **desenhada** |
+| Sai com um toque | A | responsável | **desenhada** |
+| A voz do app (texto das mensagens) | A | — | **desenhada** |
+| Login por convite | B | entrada | desenhada em agosto, sem quadro no ciclo |
+| Participante — Hoje / Escala | B | participante | **desenhada** |
+| Trocar dia | B | participante | **desenhada** |
+| Painel do coordenador | — | coordenador | desenhada em agosto — rever contra "O dia" |
+| Gestão de Funções · Participantes · Reuniões | — | coordenador | desenhadas em agosto, fora do ciclo |
+| Calendário · Reuniões (leitura) · Cadastro | — | participante | desenhadas em agosto, fora do ciclo |
+
+Os quadros do ciclo mínimo estão em [`../design/ciclo-minimo/`](../design/ciclo-minimo/) e especificados em [`sdd-ciclo-minimo.md`](sdd-ciclo-minimo.md). As telas de agosto seguem no canvas antigo e **serão reavaliadas depois** — várias foram desenhadas quando o participante era a audiência #1.
 
 ## 6. Domínio
 
@@ -70,16 +72,16 @@ Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** 
 
 ## 7. A fatia vertical (o que atravessa tudo primeiro)
 
-**Convite → escala real → cobrança automática → um toque para o grupo.**
+**Fase A inteira, para um usuário: montar → produzir → o dia → um toque.**
 
-Uma fatia só, do login ao WhatsApp, com dados reais no Supabase e no ar. Todo o resto continua em mock até essa atravessar. Critério de pronto e data de go/no-go em [`00-intuito.md`](00-intuito.md) §5 e §6.
+Sem convite, sem login de terceiros, sem permissões — essas coisas são a Fase B. Dados reais no Supabase e no ar, celular e computador. Todo o resto continua em mock até essa atravessar. Critério de pronto e data de go/no-go em [`00-intuito.md`](00-intuito.md) §5 e §6.
 
 ## 8. Decisões ainda abertas
 
 | # | Decisão | O que trava |
 |---|---|---|
-| 1 | **Escala do participante** — decidir por mockup simples, não pelas opções A/B/C de agosto | a tela principal do participante |
-| 2 | **Marca** — as três direções foram rejeitadas por genéricas (`decisoes-design.md` §9); identidade em estudo | favicon, sidebar, login, avatar do WhatsApp |
+| 1 | **Identidade** — sai das telas depois que elas fecharem (`decisoes-design.md` §9). Nada de marca antes disso | favicon, sidebar, login, avatar do WhatsApp |
+| 2 | **As telas de agosto** — quais sobrevivem à virada para a mesa do coordenador | o canvas antigo inteiro |
 | 3 | Como o participante confirma que publicou | o fechamento do ciclo de cobrança |
 | 4 | Tom das mensagens automáticas (aniversário e cobrança) | a voz do produto fora da tela |
 

@@ -47,24 +47,33 @@ O projeto parecia difícil de organizar porque quatro coisas com réguas diferen
 
 Os trilhos 3 e 4 têm data. Os trilhos 1 e 2 não morrem em janeiro — e não devem ser corrompidos por um prazo que não é deles.
 
-## 5. Definição de pronto (v1)
+## 5. Definição de pronto — duas fases
 
-A v1 está pronta quando, **com dados reais e no ar**:
+Decidido em 2026-09-04: **o app serve uma pessoa antes de servir o departamento.** Não é timidez, é o que torna a v1 entregável — a Fase A não depende de ninguém adotar nada, não precisa de convite, login de terceiros nem permissões, e já vale a pena com um único usuário.
 
-1. O coordenador entra por convite e monta a escala do mês.
-2. O app **cobra as postagens sozinho** — sem ninguém lembrar de lembrar.
-3. As **mensagens de aniversário** saem sozinhas.
-4. O conteúdo do dia vai para o grupo do WhatsApp **com um toque**.
-5. O participante abre no celular e entende o que é dele sem treinamento.
-6. Pelo menos uma pessoa além de mim usou de verdade.
+### Fase A — só você (é o que precisa estar de pé no go/no-go)
 
-Tudo que não estiver nessa lista é v2, e está fora do caminho crítico.
+1. Você monta o mês, do celular ou do computador.
+2. Você produz os posts **em lote**, numa sentada, com a mídia à mão.
+3. Todo dia o app te diz o que sai, quem está devendo e de quem é o aniversário.
+4. Cada mensagem — conteúdo, lembrete, aniversário — sai **com um toque**, do seu telefone.
+5. Acabou a escala em planilha e acabou o lembrete de cabeça.
+
+Um usuário: você. Sem convite, sem push, sem RLS.
+
+### Fase B — o departamento entra
+
+6. Participantes entram por convite e veem só o que é deles.
+7. Os lembretes passam a ir direto para eles, em vez de passar por você.
+8. Duas pessoas trocam de dia entre si, e fica registrado.
+
+Tudo que não estiver nessas duas listas é fase 2 e está fora do caminho crítico.
 
 ## 6. Go/no-go e Plano B
 
 A operação do departamento depende do app — decisão tomada, com o risco aceito de forma consciente. O seguro contra esse risco:
 
-**Data de go/no-go: 2026-11-01.** Se nessa data a fatia vertical (convite → escala real → cobrança automática → um toque para o grupo) não estiver de pé com dados reais, novembro e dezembro vão no Plano B, e o app segue sem pressa no trilho 1.
+**Data de go/no-go: 2026-11-01.** Se nessa data a **Fase A** (§5) não estiver de pé com dados reais, novembro e dezembro vão no Plano B, e o app segue sem pressa no trilho 1.
 
 **Plano B, em uma linha:** lote mensal de conteúdo + Stories agendados no Meta Business Suite + escala numa planilha com responsável e suplente — exatamente o que a pesquisa de gestão de voluntários recomenda.
 

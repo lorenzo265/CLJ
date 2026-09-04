@@ -1,17 +1,26 @@
 {
+  "pages": [
+    { "id": "fase-a", "name": "Fase A · só você" },
+    { "id": "fase-b", "name": "Fase B · o departamento" }
+  ],
   "artboards": [
-    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1180, "h": 760, "title": "1 · Coordenador monta o mês" },
-    { "file": "ParticipanteHoje.dc.html", "x": 1280, "y": 0, "w": 390, "h": 844, "title": "2 · Participante vê o que é dele" },
-    { "file": "CoordenadorHoje.dc.html", "x": 1770, "y": 0, "w": 1180, "h": 760, "title": "3 · O app cobra" },
-    { "file": "Disparo.dc.html", "x": 3050, "y": 0, "w": 390, "h": 844, "title": "4 · Sai com um toque" },
-    { "file": "Mensagens.dc.html", "x": 3540, "y": 0, "w": 1180, "h": 760, "title": "5 · A voz do app" }
+    { "file": "Main.dc.html", "page": "fase-a", "x": 0, "y": 0, "w": 1180, "h": 760, "title": "Montar o mês · computador" },
+    { "file": "EscalaCelular.dc.html", "page": "fase-a", "x": 1280, "y": 0, "w": 390, "h": 844, "title": "Montar o mês · celular" },
+    { "file": "ProducaoLote.dc.html", "page": "fase-a", "x": 1770, "y": 0, "w": 1180, "h": 760, "title": "Produzir em lote" },
+    { "file": "Biblioteca.dc.html", "page": "fase-a", "x": 3050, "y": 0, "w": 1180, "h": 760, "title": "Biblioteca de mídia" },
+    { "file": "CoordenadorHoje.dc.html", "page": "fase-a", "x": 0, "y": 1060, "w": 1180, "h": 760, "title": "O dia · computador" },
+    { "file": "CoordenadorCelular.dc.html", "page": "fase-a", "x": 1280, "y": 1060, "w": 390, "h": 844, "title": "O dia · celular" },
+    { "file": "Disparo.dc.html", "page": "fase-a", "x": 1770, "y": 1060, "w": 390, "h": 844, "title": "Sai com um toque" },
+    { "file": "Mensagens.dc.html", "page": "fase-a", "x": 2260, "y": 1060, "w": 1180, "h": 760, "title": "A voz do app" },
+    { "file": "ParticipanteHoje.dc.html", "page": "fase-b", "x": 0, "y": 0, "w": 390, "h": 844, "title": "Participante · Hoje" },
+    { "file": "Troca.dc.html", "page": "fase-b", "x": 490, "y": 0, "w": 390, "h": 844, "title": "Trocar dia" }
   ],
   "annotations": [
-    { "id": "passo-1", "x": 0, "y": -186, "w": 420, "text": "1 · O coordenador monta o mês\nAtribui responsável e suplente. Publicar é o gatilho de todo o resto.\nSDD §4.1" },
-    { "id": "passo-2", "x": 1280, "y": -186, "w": 380, "text": "2 · O participante vê o que é dele\nUma coisa por vez, em dez segundos.\nSDD §4.2" },
-    { "id": "passo-3", "x": 1770, "y": -186, "w": 420, "text": "3 · O app cobra\nQuem lembra é o sistema. O coordenador só acompanha.\nSDD §4.3" },
-    { "id": "passo-4", "x": 3050, "y": -186, "w": 380, "text": "4 · Sai com um toque\nO WhatsApp abre com o texto já escrito.\nSDD §4.4" },
-    { "id": "passo-5", "x": 3540, "y": -186, "w": 420, "text": "5 · A voz do app\nO texto exato de cada mensagem automática.\nSDD §5" }
+    { "id": "fase-a-nota", "page": "fase-a", "x": 0, "y": -212, "w": 620, "text": "FASE A · só você\nO app é útil com um único usuário: sem convite, sem login de terceiros, sem push. Você monta, produz e dispara — o app decide o quê, quando e para quem.\nÉ o que precisa estar de pé no go/no-go de 01/11.\nSDD §2 · 00-intuito §5" },
+    { "id": "produzir-nota", "page": "fase-a", "x": 1770, "y": -212, "w": 420, "text": "A sentada mensal\nBatching: uma sessão resolve o mês. É a maior alavanca de constância da pesquisa de voluntários.\nSDD §4.5" },
+    { "id": "midia-nota", "page": "fase-a", "x": 3050, "y": -212, "w": 420, "text": "Onde a mídia mora\nE onde os cortes do pipeline de vídeo (fase 2) vão cair.\nSDD §4.6" },
+    { "id": "dia-nota", "page": "fase-a", "x": 0, "y": 872, "w": 620, "text": "O dia\nO app não te deixa lembrar de nada: ele diz o que sai, quem está devendo, e prepara cada mensagem. Você só toca em Enviar.\nSDD §4.3 e §4.4" },
+    { "id": "fase-b-nota", "page": "fase-b", "x": 0, "y": -212, "w": 620, "text": "FASE B · o departamento entra\nParticipantes entram por convite, veem só o que é deles, passam a receber os lembretes direto — e trocam de dia entre si sem pedir permissão.\nSDD §2 · 00-intuito §5" }
   ],
-  "launch": { "view": "canvas" }
+  "launch": { "view": "canvas", "page": "fase-a" }
 }

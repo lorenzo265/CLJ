@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;flex-shrink:0;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:700;background:var(--accent-ink);color:#fff;}
+.btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);}
+.btn-s{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:700;background:var(--accent-ink);color:#fff;flex-shrink:0;}
+.btn-s2{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);flex-shrink:0;}
+.hour{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:12.5px;font-weight:600;color:var(--text-muted);width:46px;flex-shrink:0;}
+.chip{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:600;background:var(--bg);border:1px solid var(--border);}
+.chip-empty{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border:1px dashed #6C7CC9;}
+.navitem{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;font-size:10.5px;font-weight:600;color:var(--text-faint);}
+</style>
+</helmet>
+
+<div style="width:1180px;height:760px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="serif" style="font-size:26px;font-weight:700;">Produzir setembro</div>
+      <div style="font-size:14px;color:var(--text-muted);">12 de 20 com conte&#250;do pronto</div>
+    </div>
+    <div class="btn2">Enviar m&#237;dia</div>
+  </div>
+
+  <div style="flex:1;display:flex;gap:20px;min-height:0;">
+
+    <div style="width:330px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;min-height:0;">
+      <div class="klabel">Faltam 8</div>
+      <div class="card" style="flex:1;padding:6px;display:flex;flex-direction:column;gap:2px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:10px;background:var(--accent-soft);min-height:56px;">
+          <div class="mono" style="font-size:12px;font-weight:700;color:var(--accent-ink);width:50px;flex-shrink:0;">QUI 04</div>
+          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:var(--accent-ink);">Ter&#231;o Di&#225;rio</div></div>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 13px;min-height:56px;">
+          <div class="mono" style="font-size:12px;font-weight:600;color:var(--text-muted);width:50px;flex-shrink:0;">SEX 05</div>
+          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:600;">Post da tarde</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 13px;min-height:56px;">
+          <div class="mono" style="font-size:12px;font-weight:600;color:var(--text-muted);width:50px;flex-shrink:0;">SEG 08</div>
+          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:600;">Ter&#231;o Di&#225;rio</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 13px;min-height:56px;">
+          <div class="mono" style="font-size:12px;font-weight:600;color:var(--text-muted);width:50px;flex-shrink:0;">QUA 10</div>
+          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:600;">Cinecultural</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 13px;min-height:56px;opacity:0.5;">
+          <div class="mono" style="font-size:12px;font-weight:600;color:var(--text-muted);width:50px;flex-shrink:0;">TER 01</div>
+          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:600;">Ter&#231;o Di&#225;rio</div></div>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5C7A52" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="flex:1;padding:22px 24px;display:flex;flex-direction:column;gap:16px;min-width:0;">
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <div class="serif" style="font-size:20px;font-weight:700;">Ter&#231;o Di&#225;rio</div>
+        <div style="font-size:13px;color:var(--text-muted);">quinta, 4 de setembro &#183; 7h &#183; Ana Paula</div>
+      </div>
+
+      <div>
+        <div class="klabel" style="display:block;margin-bottom:8px;">Texto que vai para o grupo</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;min-height:132px;">
+          Bom dia! O Ter&#231;o de hoje j&#225; est&#225; no perfil do Departamento Cultural.<br><br>
+          Quinta-feira &#8212; Mist&#233;rios Luminosos.
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="flex:1;">
+          <div class="klabel" style="display:block;margin-bottom:8px;">M&#237;dia</div>
+          <div style="display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;">
+            <div style="width:48px;height:48px;border-radius:8px;background:var(--accent-soft);flex-shrink:0;"></div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;font-weight:600;">terco-04-set.jpg</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">da biblioteca</div>
+            </div>
+            <div class="btn-s2">Trocar</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;"></div>
+
+      <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--border-soft);">
+        <div class="btn">Salvar e ir para a pr&#243;xima &#8594;</div>
+        <div class="btn2">Pular</div>
+        <div style="flex:1;"></div>
+        <div style="font-size:12.5px;color:var(--text-muted);">Uma sentada por m&#234;s resolve o m&#234;s inteiro.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

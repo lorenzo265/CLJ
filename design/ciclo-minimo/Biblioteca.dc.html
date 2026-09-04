@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;flex-shrink:0;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:700;background:var(--accent-ink);color:#fff;}
+.btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);}
+.btn-s{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:700;background:var(--accent-ink);color:#fff;flex-shrink:0;}
+.btn-s2{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);flex-shrink:0;}
+.hour{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:12.5px;font-weight:600;color:var(--text-muted);width:46px;flex-shrink:0;}
+.chip{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:600;background:var(--bg);border:1px solid var(--border);}
+.chip-empty{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border:1px dashed #6C7CC9;}
+.navitem{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;font-size:10.5px;font-weight:600;color:var(--text-faint);}
+</style>
+</helmet>
+
+<div style="width:1180px;height:760px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="serif" style="font-size:26px;font-weight:700;">M&#237;dia</div>
+      <div style="font-size:14px;color:var(--text-muted);">8 arquivos &#183; 3 ainda n&#227;o usados</div>
+    </div>
+    <div class="btn">Enviar arquivos</div>
+  </div>
+
+  <div style="display:flex;gap:8px;">
+    <div style="display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:700;background:var(--accent);color:#fff;">Tudo</div>
+    <div style="display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;background:var(--panel);color:var(--text-muted);border:1px solid var(--border);">Imagens</div>
+    <div style="display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;background:var(--panel);color:var(--text-muted);border:1px solid var(--border);">V&#237;deos</div>
+    <div style="display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;background:var(--panel);color:var(--text-muted);border:1px solid var(--border);">N&#227;o usadas &#183; 3</div>
+  </div>
+
+  <div style="flex:1;display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:16px;align-content:start;min-height:0;overflow:hidden;">
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">terco-04-set.jpg</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">1,2 MB &#183; 31/08</div>
+          <div><span class="st st-ok">Ter&#231;o 04/09</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">terco-05-set.jpg</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">1,1 MB &#183; 31/08</div>
+          <div><span class="st st-ok">Post 05/09</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">cinecultural-set.mp4</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">18 MB &#183; 01/09</div>
+          <div><span class="st" style="background:var(--bg);color:var(--text-faint);border:1px solid var(--border);">n&#227;o usada</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">aniversarios-set.jpg</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">0,9 MB &#183; 28/08</div>
+          <div><span class="st st-ok">Aniversários</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--info-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">story-bruto-01.mp4</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">64 MB &#183; 03/09</div>
+          <div><span class="st" style="background:var(--bg);color:var(--text-faint);border:1px solid var(--border);">n&#227;o usada</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--info-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">story-bruto-02.mp4</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">51 MB &#183; 03/09</div>
+          <div><span class="st" style="background:var(--bg);color:var(--text-faint);border:1px solid var(--border);">n&#227;o usada</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">curiosidade-fe.jpg</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">0,7 MB &#183; 27/08</div>
+          <div><span class="st st-ok">Curiosidade 03/09</span></div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;display:flex;flex-direction:column;">
+        <div style="height:108px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="padding:12px 13px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">capa-terco.png</div>
+          <div style="font-size:11.5px;color:var(--text-muted);">0,4 MB &#183; 12/08</div>
+          <div><span class="st" style="background:var(--bg);color:var(--text-faint);border:1px solid var(--border);">n&#227;o usada</span></div>
+        </div>
+      </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 18px;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E6862" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><path d="M12 8h.01"/></svg>
+    <div style="font-size:13px;color:var(--text-muted);line-height:1.5;">Quando o corte de v&#237;deo da fase 2 entrar, os Stories prontos caem aqui &#8212; e a produ&#231;&#227;o em lote os encontra sem passo extra.</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

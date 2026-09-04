@@ -1,0 +1,17 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1180, "h": 760, "title": "1 · Coordenador monta o mês" },
+    { "file": "ParticipanteHoje.dc.html", "x": 1280, "y": 0, "w": 390, "h": 844, "title": "2 · Participante vê o que é dele" },
+    { "file": "CoordenadorHoje.dc.html", "x": 1770, "y": 0, "w": 1180, "h": 760, "title": "3 · O app cobra" },
+    { "file": "Disparo.dc.html", "x": 3050, "y": 0, "w": 390, "h": 844, "title": "4 · Sai com um toque" },
+    { "file": "Mensagens.dc.html", "x": 3540, "y": 0, "w": 1180, "h": 760, "title": "5 · A voz do app" }
+  ],
+  "annotations": [
+    { "id": "passo-1", "x": 0, "y": -186, "w": 420, "text": "1 · O coordenador monta o mês\nAtribui responsável e suplente. Publicar é o gatilho de todo o resto.\nSDD §4.1" },
+    { "id": "passo-2", "x": 1280, "y": -186, "w": 380, "text": "2 · O participante vê o que é dele\nUma coisa por vez, em dez segundos.\nSDD §4.2" },
+    { "id": "passo-3", "x": 1770, "y": -186, "w": 420, "text": "3 · O app cobra\nQuem lembra é o sistema. O coordenador só acompanha.\nSDD §4.3" },
+    { "id": "passo-4", "x": 3050, "y": -186, "w": 380, "text": "4 · Sai com um toque\nO WhatsApp abre com o texto já escrito.\nSDD §4.4" },
+    { "id": "passo-5", "x": 3540, "y": -186, "w": 420, "text": "5 · A voz do app\nO texto exato de cada mensagem automática.\nSDD §5" }
+  ],
+  "launch": { "view": "canvas" }
+}

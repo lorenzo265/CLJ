@@ -8,12 +8,15 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 2. [`docs/decisoes-produto.md`](docs/decisoes-produto.md) — o que o app é, para quem, quais telas.
 3. [`docs/decisoes-design.md`](docs/decisoes-design.md) — identidade "O Fio", tokens, motion, princípios.
 4. [`docs/decisoes-tecnicas.md`](docs/decisoes-tecnicas.md) — stack, dados, integrações, infra.
+5. [`docs/sdd-ciclo-minimo.md`](docs/sdd-ciclo-minimo.md) — o desenho detalhado da fatia vertical, quadro a quadro.
 
 `docs/pesquisa/` é evidência de apoio, não decisão. `docs/abertura-clj-nsr.html` é histórico.
 
 ## A regra que sustenta o resto
 
 **Decisão nova entra no documento correspondente no mesmo commit que a implementa.** Sem exceção. Não há segundo desenvolvedor: os documentos são o único revisor que existe.
+
+**Mockup e SDD são um par.** Toda alteração física num artboard de `design/ciclo-minimo/` muda a seção correspondente de `docs/sdd-ciclo-minimo.md`, no mesmo commit — e o contrário também vale. Um botão no mockup que o SDD não define é um bug; uma regra no SDD que nenhum quadro mostra ainda não foi desenhada. A tabela de rastreabilidade está no §1 do SDD.
 
 ## Decisões fechadas — não reabrir sem pedido explícito
 

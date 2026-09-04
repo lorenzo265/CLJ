@@ -28,3 +28,6 @@ desktop.ini
 # Editores
 .idea/
 *.swp
+
+# Canvas montado do Claude Design — gerado a partir dos .dc.html, ~2,5 MB
+design/**/ciclo-minimo-clj-nsr.html

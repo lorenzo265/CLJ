@@ -10,8 +10,8 @@ Para que este projeto existe, quem o sustenta e o que conta como pronto estão e
 
 | Pasta | O que é |
 |---|---|
-| `docs/` | As decisões, em quatro documentos: [00-intuito.md](docs/00-intuito.md) (o topo — propósito, prazo, trilhos, definição de pronto), [decisoes-produto.md](docs/decisoes-produto.md) (o que o app é, para quem, telas), [decisoes-design.md](docs/decisoes-design.md) (identidade, tokens, princípios) e [decisoes-tecnicas.md](docs/decisoes-tecnicas.md) (stack, dados, integrações). `pesquisa/` é evidência de apoio; `abertura-clj-nsr.html` é histórico. |
-| `design/` | Fonte da verdade do design: 18 artboards `.dc.html` + `canvas.json` (layout) + o canvas montado `clj-nsr-estrutura-paginas.html`. Editável no canvas publicado (link abaixo) ou nos arquivos. |
+| `docs/` | As decisões: [00-intuito.md](docs/00-intuito.md) (o topo — propósito, prazo, trilhos, definição de pronto), [decisoes-produto.md](docs/decisoes-produto.md) (o que o app é, para quem, telas), [decisoes-design.md](docs/decisoes-design.md) (identidade, tokens, princípios), [decisoes-tecnicas.md](docs/decisoes-tecnicas.md) (stack, dados, integrações) e [sdd-ciclo-minimo.md](docs/sdd-ciclo-minimo.md) (o desenho detalhado da fatia vertical). `pesquisa/` é evidência de apoio; `abertura-clj-nsr.html` é histórico. |
+| `design/` | Fonte da verdade do design: 18 artboards `.dc.html` + `canvas.json` (layout) + o canvas montado `clj-nsr-estrutura-paginas.html`. Editável no canvas publicado (link abaixo) ou nos arquivos. `ciclo-minimo/` são os 5 quadros do ciclo mínimo, acoplados ao SDD. |
 | `web/` | O app — Next.js 16 (App Router) + TypeScript + Tailwind 4 + GSAP. Todas as rotas e telas já existem com **dados mock** (`lib/mock/`); falta backend, autenticação, as telas de produção/disparo/cobrança e a aplicação da identidade "O Fio" na UI. |
 
 ## Onde o projeto está
@@ -20,6 +20,7 @@ Todas as telas de organização estão desenhadas e mockadas. O que falta para a
 
 ## Links vivos
 
+- **Ciclo mínimo** (os 5 quadros da fatia vertical, par do SDD): https://claude.ai/code/artifact/3177926d-6655-43ca-b515-635248309102
 - **Canvas de design** (todas as telas): https://claude.ai/code/artifact/14a752be-4f96-4078-9f34-928991f4f24a
 - **Briefing de design** (conceito, princípios, pesquisa): https://claude.ai/code/artifact/00c156b4-8382-460b-96d4-1ac2a8df0f96
 - **Documento de abertura**: https://claude.ai/code/artifact/a2733bb6-d7fc-45b1-a749-74b41f2e80bb

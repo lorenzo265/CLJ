@@ -23,16 +23,11 @@ Nada disso tem backend, autenticação, ou a identidade "O Fio" aplicada — o a
 
 Regra: nenhuma página ou componente importa de `lib/mock/` diretamente. Sempre via `lib/data/`.
 
-### Lacunas do modelo (`lib/types.ts`) para o escopo novo
+### Lacunas do modelo (`lib/types.ts`)
 
-| Falta | Onde | Para quê |
-|---|---|---|
-| `dataNascimento` | `Pessoa` | mensagens de aniversário — hoje não existe o campo |
-| `texto` / legenda | `Atividade` | o conteúdo que vai para o grupo com um toque (hoje só há `linkMidia`) |
-| registro de cobrança | novo | saber o que já foi cobrado, para não cobrar duas vezes |
-| confirmação de publicação | `Atividade` | fechar o ciclo: quem confirmou que publicou, e quando |
+Confrontado com os mockups do ciclo mínimo, o modelo atual não sustenta o produto: faltam sete coisas, de `Pessoa.dataNascimento` (sem ela não existe mensagem de aniversário) a `Atividade.horario` (hoje só existe `data`, e todo o disparo depende de hora).
 
-Essas quatro entram junto com a fatia vertical, não antes.
+**A lista completa e autoritativa está em [`sdd-ciclo-minimo.md`](sdd-ciclo-minimo.md) §7** — não duplicada aqui, para não divergir. Os campos entram junto com a fatia vertical, não antes.
 
 ## 3. Backend: Supabase
 

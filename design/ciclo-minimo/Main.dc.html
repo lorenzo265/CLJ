@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;flex-shrink:0;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-info{background:var(--info-soft);color:var(--info);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.trow{display:grid;grid-template-columns:96px 1fr 176px 176px 104px;align-items:center;gap:16px;padding:11px 16px;border-bottom:1px solid var(--border-soft);min-height:52px;}
+.trow:last-child{border-bottom:none;}
+.pill{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:600;background:var(--bg);border:1px solid var(--border);}
+.pill-empty{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border:1px dashed var(--accent-hi,#6C7CC9);}
+.pill-none{font-size:13px;color:var(--text-faint);}
+</style>
+</helmet>
+
+<div style="width:1180px;height:760px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:baseline;gap:16px;">
+      <div class="serif" style="font-size:26px;font-weight:700;">Escala de setembro</div>
+      <div class="mono" style="font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:0.04em;">&#8249; AGO&nbsp;&nbsp;·&nbsp;&nbsp;OUT &#8250;</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);">Repetir de agosto</div>
+      <div style="display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;font-size:13.5px;font-weight:700;background:var(--accent-ink);color:#fff;">Publicar escala</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:12px;background:var(--warn-soft);border-radius:12px;padding:14px 18px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B4682A" stroke-width="2" stroke-linecap="round"><path d="M12 8v5"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+    <div style="font-size:13.5px;font-weight:600;color:var(--warn);">3 atividades ainda sem responsável — a escala não pode ser publicada assim.</div>
+  </div>
+
+  <div style="flex:1;display:flex;gap:20px;min-height:0;">
+
+    <div style="flex:1;background:var(--panel);border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;min-width:0;">
+      <div class="trow" style="border-bottom:1px solid var(--border);background:var(--bg);min-height:38px;padding-top:0;padding-bottom:0;">
+        <div class="klabel">Data</div><div class="klabel">Atividade</div><div class="klabel">Responsável</div><div class="klabel">Suplente</div><div class="klabel">Status</div>
+      </div>
+
+      <div class="klabel" style="padding:14px 16px 6px;">Semana 1 · 1 a 7 de setembro</div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">TER 01</div>
+        <div style="font-size:14px;font-weight:600;">Terço Diário</div>
+        <div><span class="pill">Ana Paula</span></div>
+        <div><span class="pill">João M.</span></div>
+        <div><span class="st st-info">Agendado</span></div>
+      </div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">QUA 02</div>
+        <div style="font-size:14px;font-weight:600;">Terço Diário</div>
+        <div><span class="pill">Marcos S.</span></div>
+        <div><span class="pill-none">— sem suplente</span></div>
+        <div><span class="st st-info">Agendado</span></div>
+      </div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">QUI 03</div>
+        <div style="font-size:14px;font-weight:600;">Curiosidade da fé</div>
+        <div><span class="pill-empty">+ Definir</span></div>
+        <div><span class="pill-none">—</span></div>
+        <div><span class="st st-warn">Sem dono</span></div>
+      </div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">SEX 04</div>
+        <div style="font-size:14px;font-weight:600;">Post da tarde</div>
+        <div><span class="pill">Ana Paula</span></div>
+        <div><span class="pill">Você</span></div>
+        <div><span class="st st-ok">Publicado</span></div>
+      </div>
+
+      <div class="klabel" style="padding:14px 16px 6px;">Semana 2 · 8 a 14 de setembro</div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">SEG 08</div>
+        <div style="font-size:14px;font-weight:600;">Terço Diário</div>
+        <div><span class="pill">João M.</span></div>
+        <div><span class="pill">Marcos S.</span></div>
+        <div><span class="st st-info">Agendado</span></div>
+      </div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">QUA 10</div>
+        <div style="font-size:14px;font-weight:600;">Cinecultural</div>
+        <div><span class="pill-empty">+ Definir</span></div>
+        <div><span class="pill-none">—</span></div>
+        <div><span class="st st-warn">Sem dono</span></div>
+      </div>
+
+      <div class="trow">
+        <div class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-muted);">SEX 12</div>
+        <div style="font-size:14px;font-weight:600;">Aniversários da semana</div>
+        <div><span class="pill">Você</span></div>
+        <div><span class="pill-none">— sem suplente</span></div>
+        <div><span class="st st-info">Agendado</span></div>
+      </div>
+    </div>
+
+    <div style="width:264px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;">
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;">
+        <div class="klabel" style="display:block;margin-bottom:14px;">Quanto cada um pegou</div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:13.5px;font-weight:600;">Ana Paula</span><span class="mono" style="font-size:13px;font-weight:600;">5</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:13.5px;font-weight:600;">João M.</span><span class="mono" style="font-size:13px;font-weight:600;">4</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:13.5px;font-weight:600;">Marcos S.</span><span class="mono" style="font-size:13px;font-weight:600;">4</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:13.5px;font-weight:600;color:var(--text-muted);">Beatriz L.</span><span class="mono" style="font-size:13px;font-weight:600;color:var(--warn);">1</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:11px;border-top:1px solid var(--border-soft);"><span style="font-size:13.5px;font-weight:700;">Você</span><span class="mono" style="font-size:13px;font-weight:700;">7</span></div>
+        </div>
+        <div style="font-size:12.5px;color:var(--text-muted);margin-top:14px;line-height:1.5;">Beatriz pegou 1 e você pegou 7. O rodízio só é justo se aparecer.</div>
+      </div>
+
+      <div style="background:var(--accent-soft);border-radius:14px;padding:18px;">
+        <div class="klabel" style="display:block;margin-bottom:10px;color:var(--accent-ink);opacity:0.75;">Ao publicar</div>
+        <div style="font-size:13px;color:var(--accent-ink);line-height:1.55;">Cada pessoa passa a ver só o que é dela, e o app começa a lembrar sozinho na véspera.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

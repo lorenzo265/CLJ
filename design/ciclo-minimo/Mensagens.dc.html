@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px;}
+.when{display:inline-flex;align-items:center;padding:4px 10px;border-radius:7px;font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:11px;font-weight:600;background:var(--bg);border:1px solid var(--border);color:var(--text-muted);}
+.bubble{background:var(--accent-soft);border-radius:12px;border-top-left-radius:4px;padding:16px 18px;font-size:14px;line-height:1.6;color:var(--accent-ink);}
+.bubble-gold{background:var(--gold-soft);border-radius:12px;border-top-left-radius:4px;padding:16px 18px;font-size:14px;line-height:1.6;color:var(--gold-ink);}
+</style>
+</helmet>
+
+<div style="width:1180px;height:760px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div style="display:flex;align-items:baseline;justify-content:space-between;">
+    <div class="serif" style="font-size:26px;font-weight:700;">O que o app escreve</div>
+    <div style="font-size:13px;color:var(--text-muted);">2ª pessoa · situação &#8594; o que é seu &#8594; um próximo passo · nunca cobrar em público</div>
+  </div>
+
+  <div style="flex:1;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));grid-template-rows:repeat(2, minmax(0, 1fr));gap:18px;min-height:0;">
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="klabel">Véspera</div>
+        <span class="when">18:00 do dia anterior</span>
+        <span class="when">para o responsável</span>
+      </div>
+      <div class="bubble">
+        Amanhã às 7h sai o <strong>Terço Diário</strong> e você é a responsável.<br>
+        O texto e a imagem já estão prontos no app.<br>
+        Se não puder, avise por aqui que o suplente assume.
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-top:auto;">Sai para todo mundo que tem algo no dia seguinte. É o aviso que impede o esquecimento — não é cobrança.</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="klabel">Lembrete do dia</div>
+        <span class="when">4h antes do horário</span>
+        <span class="when">só para quem não confirmou</span>
+      </div>
+      <div class="bubble">
+        O <strong>Post da tarde</strong> sai hoje às 16h e ainda está com você.<br>
+        Está tudo pronto — é só abrir e enviar.<br>
+        Se precisar passar para o João, dá para fazer em um toque.
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-top:auto;">Quem já confirmou não recebe. O app nunca manda duas vezes a mesma coisa no mesmo dia.</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="klabel">Não saiu</div>
+        <span class="when">2h depois do horário</span>
+        <span class="when">no privado, nunca no grupo</span>
+      </div>
+      <div class="bubble">
+        A <strong>Curiosidade da fé</strong> de ontem não foi marcada como publicada.<br>
+        Se você publicou, é só marcar no app.<br>
+        Se não deu, sem problema — me avise que a gente passa para o suplente.
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-top:auto;">O coordenador vê no painel dele. A pessoa nunca é exposta no grupo — é a razão de o app existir.</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="klabel">Aniversário</div>
+        <span class="when">07:00</span>
+        <span class="when">texto pronto para o grupo</span>
+      </div>
+      <div class="bubble-gold">
+        Hoje é aniversário do <strong>João</strong>!<br>
+        Que Nossa Senhora do Rosário interceda por você e por esse ano que começa.<br>
+        Feliz aniversário, do Departamento Cultural.
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-top:auto;">Único uso do dourado: celebração. O app prepara e avisa o coordenador; o envio ao grupo continua sendo um toque.</div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

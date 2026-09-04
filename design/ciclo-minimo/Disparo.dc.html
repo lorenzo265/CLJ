@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;}
+.st-info{background:var(--info-soft);color:var(--info);}
+.btn-wide{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:12px;font-size:15px;font-weight:700;background:var(--accent-ink);color:#fff;}
+.btn-ghost{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;font-size:13.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);}
+</style>
+</helmet>
+
+<div style="width:390px;height:844px;background:var(--bg);display:flex;flex-direction:column;">
+
+  <div style="display:flex;align-items:center;gap:14px;padding:22px 20px 16px;">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262320" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <div class="serif" style="font-size:20px;font-weight:700;">Terço Diário</div>
+    <div style="flex:1;"></div>
+    <span class="st st-info">Agendado</span>
+  </div>
+
+  <div style="flex:1;overflow:hidden;padding:0 20px 16px;display:flex;flex-direction:column;gap:20px;">
+
+    <div style="font-size:14px;color:var(--text-muted);line-height:1.5;">Hoje às 7h · você é a responsável.</div>
+
+    <div>
+      <div class="klabel" style="display:block;margin-bottom:10px;">Texto pronto</div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:18px;font-size:14.5px;line-height:1.6;color:var(--text);">
+        Bom dia! O Terço de hoje já está no perfil do Departamento Cultural.<br><br>
+        Quinta-feira — Mistérios Luminosos.<br><br>
+        <span style="color:var(--accent-ink);font-weight:600;">instagram.com/paroquiansr</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="klabel" style="display:block;margin-bottom:10px;">Imagem do dia</div>
+      <div style="display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;">
+        <div style="width:56px;height:56px;border-radius:9px;background:var(--accent-soft);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A2A6C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13.5px;font-weight:600;">terco-04-set.jpg</div>
+          <div style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">enviada por você em 31/08</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="btn-wide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-4.9A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        Enviar no WhatsApp
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);text-align:center;line-height:1.5;padding:0 8px;">
+        O WhatsApp abre com este texto já escrito.<br>Você escolhe o grupo e envia.
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px;">
+        <div class="btn-ghost">Copiar texto</div>
+        <div class="btn-ghost">Editar</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;font-size:13.5px;font-weight:600;color:var(--ok);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        Já publiquei
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

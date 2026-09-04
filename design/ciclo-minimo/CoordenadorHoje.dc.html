@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --panel:#FFFFFF; --border:#E4DDD0; --border-soft:#EFEAE1;
+  --text:#262320; --text-muted:#6E6862; --text-faint:#A9A199;
+  --accent:#253990; --accent-ink:#1A2A6C; --accent-soft:#E4E7F7;
+  --gold:#A9812F; --gold-ink:#7A5D22; --gold-soft:#F3E9D2;
+  --ok:#5C7A52; --ok-soft:#E7EEE3; --warn:#B4682A; --warn-soft:#F5E5D3; --info:#5B7A96; --info-soft:#E4ECF1;
+}
+*{box-sizing:border-box}
+.serif{font-family:"Source Serif 4",Georgia,serif;letter-spacing:-0.01em;}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);}
+a{color:var(--accent-ink)} a:hover{color:var(--accent)}
+.klabel{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);}
+.st{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:700;flex-shrink:0;}
+.st-ok{background:var(--ok-soft);color:var(--ok);} .st-warn{background:var(--warn-soft);color:var(--warn);}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;}
+.btn-s{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:700;background:var(--accent-ink);color:#fff;}
+.btn-s2{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:9px;font-size:12.5px;font-weight:600;background:var(--panel);color:var(--text);border:1px solid var(--border);}
+.hour{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;font-size:12.5px;font-weight:600;color:var(--text-muted);width:46px;flex-shrink:0;}
+</style>
+</helmet>
+
+<div style="width:1180px;height:760px;background:var(--bg);padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+  <div style="display:flex;align-items:baseline;justify-content:space-between;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="serif" style="font-size:26px;font-weight:700;">Hoje</div>
+      <div style="font-size:14px;color:var(--text-muted);">quinta, 4 de setembro</div>
+    </div>
+    <div style="font-size:13.5px;font-weight:600;color:var(--accent-ink);">Ver escala do mês &#8250;</div>
+  </div>
+
+  <div style="flex:1;display:flex;gap:20px;min-height:0;">
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px;min-width:0;">
+
+      <div class="card" style="padding:18px 20px;">
+        <div class="klabel" style="display:block;margin-bottom:14px;">Precisa sair hoje</div>
+
+        <div style="display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--border-soft);">
+          <div class="hour">07:00</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14.5px;font-weight:700;">Terço Diário</div>
+            <div style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">Ana Paula · confirmou ontem às 18h40</div>
+          </div>
+          <span class="st st-ok">Confirmado</span>
+          <div class="btn-s2">Ver conteúdo</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:14px;padding-top:14px;">
+          <div class="hour">16:00</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14.5px;font-weight:700;">Post da tarde</div>
+            <div style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">Beatriz L. · ainda não confirmou · o app lembra às 12h</div>
+          </div>
+          <span class="st st-warn">Sem confirmação</span>
+          <div class="btn-s">Cobrar agora</div>
+        </div>
+      </div>
+
+      <div style="background:var(--warn-soft);border-radius:14px;padding:18px 20px;">
+        <div class="klabel" style="display:block;margin-bottom:12px;color:var(--warn);opacity:0.85;">Não saiu ontem</div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14.5px;font-weight:700;color:var(--warn);">Curiosidade da fé · qua 03/09</div>
+            <div style="font-size:12.5px;color:var(--warn);opacity:0.9;margin-top:3px;">Marcos S. · o app lembrou 2 vezes e não houve resposta</div>
+          </div>
+          <div class="btn-s2">Passar para o suplente</div>
+          <div class="btn-s2">Já publiquei</div>
+        </div>
+      </div>
+
+      <div style="flex:1;"></div>
+    </div>
+
+    <div style="width:392px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;">
+      <div class="card" style="padding:18px 20px;flex:1;">
+        <div class="klabel" style="display:block;margin-bottom:16px;">O app manda hoje, sozinho</div>
+
+        <div style="display:flex;flex-direction:column;gap:15px;">
+          <div style="display:flex;gap:12px;">
+            <div class="hour">07:00</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:700;">Aniversário de João M.</div>
+              <div style="font-size:12.5px;color:var(--text-muted);line-height:1.45;margin-top:3px;">Mensagem pronta para o grupo</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;padding-top:15px;border-top:1px solid var(--border-soft);">
+            <div class="hour">12:00</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:700;">Lembrete para Beatriz L.</div>
+              <div style="font-size:12.5px;color:var(--text-muted);line-height:1.45;margin-top:3px;">Post da tarde, hoje às 16h</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;padding-top:15px;border-top:1px solid var(--border-soft);">
+            <div class="hour">18:00</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:700;">Véspera para 2 pessoas</div>
+              <div style="font-size:12.5px;color:var(--text-muted);line-height:1.45;margin-top:3px;">Quem tem algo amanhã: Ana Paula e você</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);line-height:1.55;">
+          Você não precisa fazer nada aqui. Isto é o que o app já vai mandar — a lista existe para você <strong style="color:var(--text);">saber</strong>, não para você <strong style="color:var(--text);">executar</strong>.
+        </div>
+        <div style="margin-top:14px;"><span class="btn-s2">Ver os textos</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

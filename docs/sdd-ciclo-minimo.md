@@ -77,6 +77,7 @@ O coordenador é frequentemente também responsável. As telas não mudam por ca
 - **Depois de hoje** — no máximo 3 itens, com a distinção visual entre ser responsável (disco cheio) e ser suplente (anel).
 - **Fecho sereno** — quando não há nada atrasado, a tela diz isso em uma linha. Nunca um contador vazio, nunca punição.
 - **A barra do dia não aparece aqui.** Ela mostraria a mesma coisa que a manchete. Aparece nas demais telas, onde o que precisa sair não está à vista.
+- **Tocar na barra do dia abre uma folha** com as mensagens do dia, cada uma com o seu próprio envio. **Não existe "enviar todas":** cada mensagem vai para um destino diferente, e escolher o destino é do coordenador.
 - Sem manchete (nada hoje), a tela abre em "Depois de hoje" e o fecho vira a manchete.
 
 ### 4.3 O app cobra
@@ -127,6 +128,7 @@ O coordenador é frequentemente também responsável. As telas não mudam por ca
 - Mostra a atividade que a pessoa quer passar, e **quem tem disponibilidade** — com quantas atividades cada um já tem no mês, para a troca não recair sempre no mesmo.
 - Quem já tem compromisso naquele dia aparece como **ocupado**, sem botão.
 - **Oferecer para o departamento** é a saída quando ninguém específico serve.
+- **A regra fica escrita na própria tela**, não só neste documento: a troca vale quando a outra pessoa aceita; o coordenador é avisado e não aprova.
 - **Regra que decide o desenho: a troca vale quando a outra pessoa aceita. O coordenador é avisado e não aprova.** Exigir aprovação transformaria troca em pedido de permissão — que é exatamente o atrito que a pesquisa aponta como causa de desistência.
 - A troca fica registrada e substitui o responsável para efeito de §6.
 

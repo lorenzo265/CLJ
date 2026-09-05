@@ -1,0 +1,72 @@
+{
+  "pages": [
+    {
+      "id": "fase-a",
+      "name": "Fase A · só você"
+    },
+    {
+      "id": "fase-b",
+      "name": "Fase B · o departamento"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "page": "fase-a",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Montar o mês · celular"
+    },
+    {
+      "file": "DiaExpandida.dc.html",
+      "page": "fase-a",
+      "x": 490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Barra do dia · expandida"
+    },
+    {
+      "file": "ParticipanteHoje.dc.html",
+      "page": "fase-b",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Participante · Hoje"
+    },
+    {
+      "file": "TrocarDia.dc.html",
+      "page": "fase-b",
+      "x": 490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Trocar dia"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-a",
+      "page": "fase-a",
+      "x": 0,
+      "y": -220,
+      "w": 880,
+      "text": "FASE A — as duas que faltavam\n\nMontar o mês no celular abre já filtrado em \"só o que falta\": no telefone a tarefa é fechar as três lacunas, não revisar o mês.\n\nA folha expandida é o que a barra do dia faz ao ser tocada — as três mensagens, cada uma com o seu envio. Nenhuma ação em massa: cada mensagem vai para um grupo diferente, e essa escolha é sua.\n\nMesma gramática do Figma: rubrica com régua, capitular em serifa, nenhuma caixa, hairlines no verde a 14%, ação em texto azul."
+    },
+    {
+      "id": "nota-b",
+      "page": "fase-b",
+      "x": 0,
+      "y": -220,
+      "w": 880,
+      "text": "FASE B — quando o departamento entra\n\nO participante vê a mesma gramática do coordenador, com o conteúdo dele. Duas ações lado a lado: \"Abrir e enviar\" e \"Não vou conseguir\" — a segunda existe com o mesmo peso da primeira, de propósito.\n\nTrocar dia mostra quantas atividades cada pessoa já tem no mês, para a troca não recair sempre no mesmo. E a regra fica escrita na tela: vale quando a outra pessoa aceita, o coordenador é avisado e não aprova."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "fase-a"
+  }
+}

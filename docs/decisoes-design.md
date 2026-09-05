@@ -242,6 +242,19 @@ Todas carregam a mesma gramática: rubrica do tempo com régua, capitular onde h
 
 **Regra descoberta ao montar:** a barra do dia **não aparece na tela Hoje** — ela mostraria a mesma coisa que a manchete. Ela existe nas outras telas, onde o que precisa sair não está à vista.
 
+### As telas restantes ficaram no canvas (05 set)
+
+O Figma bateu o **limite de chamadas de ferramenta do plano Starter** no meio do trabalho. As quatro telas que faltavam foram para [`../design/telas/`](../design/telas/) e o canvas https://claude.ai/code/artifact/6a25ca80-9ef4-462c-a8d3-02b659deaee6, com a mesma gramática — replicam para o Figma em minutos quando o limite liberar.
+
+| Tela | Fase | O que fixa |
+|---|---|---|
+| Montar o mês · celular | A | abre filtrado em **"só o que falta"**: no telefone a tarefa é fechar lacunas, não revisar o mês |
+| Barra do dia · expandida | A | a folha com as três mensagens, **cada uma com o seu envio**. Sem ação em massa: cada mensagem vai para um grupo diferente, e essa escolha é do coordenador |
+| Participante · Hoje | B | mesma gramática, conteúdo dele. **"Não vou conseguir" tem o mesmo peso visual de "Abrir e enviar"** — de propósito |
+| Trocar dia | B | mostra quantas atividades cada um já tem no mês, para a troca não recair sempre no mesmo. A regra fica escrita na tela |
+
+**Duas superfícies de desenho ao mesmo tempo é dívida, não escolha.** Quando o Figma liberar, estas quatro sobem para lá e o canvas volta a ser histórico.
+
 Os glifos do arquivo são provisórios. No app são **SF Symbols** de verdade — o Expo SDK 57 traz native tabs com SF Symbols e Liquid Glass, com a variante preenchida no estado selecionado ([`decisoes-tecnicas.md`](decisoes-tecnicas.md) §1).
 
 ## 10. Status do design (2026-08-27)

@@ -1,22 +1,151 @@
 {
   "pages": [
-    { "id": "v2", "name": "V2 · Apple + Notion" },
-    { "id": "briefing", "name": "Briefing" },
-    { "id": "rejeitadas", "name": "Rejeitadas (04 set)" }
+    {
+      "id": "v3",
+      "name": "V3 · O tempo litúrgico"
+    },
+    {
+      "id": "v2",
+      "name": "V2 · Apple + Notion"
+    },
+    {
+      "id": "briefing",
+      "name": "Briefing"
+    },
+    {
+      "id": "rejeitadas",
+      "name": "Rejeitadas (04 set)"
+    }
   ],
   "artboards": [
-    { "file": "V2Dia.dc.html", "page": "v2", "x": 0, "y": 0, "w": 390, "h": 844, "title": "O dia · celular" },
-    { "file": "V2Disparo.dc.html", "page": "v2", "x": 490, "y": 0, "w": 390, "h": 844, "title": "Disparo · celular" },
-    { "file": "V2Mes.dc.html", "page": "v2", "x": 980, "y": 0, "w": 1180, "h": 760, "title": "Montar o mês · computador" },
-    { "file": "Main.dc.html", "page": "briefing", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "Briefing de identidade" },
-    { "file": "DirecaoA.dc.html", "page": "rejeitadas", "x": 0, "y": 0, "w": 390, "h": 844, "title": "A · Missal" },
-    { "file": "DirecaoB.dc.html", "page": "rejeitadas", "x": 490, "y": 0, "w": 390, "h": 844, "title": "B · Vigília" },
-    { "file": "DirecaoC.dc.html", "page": "rejeitadas", "x": 980, "y": 0, "w": 390, "h": 844, "title": "C · Vitral" },
-    { "file": "DirecaoD.dc.html", "page": "rejeitadas", "x": 1470, "y": 0, "w": 390, "h": 844, "title": "D · Quadro de avisos" }
+    {
+      "file": "V3TempoComum.dc.html",
+      "page": "v3",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Tempo Comum · verde"
+    },
+    {
+      "file": "V3Advento.dc.html",
+      "page": "v3",
+      "x": 490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Advento · roxo"
+    },
+    {
+      "file": "V3Festa.dc.html",
+      "page": "v3",
+      "x": 980,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "N. S. do Rosário · ouro"
+    },
+    {
+      "file": "V2Dia.dc.html",
+      "page": "v2",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "O dia · celular"
+    },
+    {
+      "file": "V2Disparo.dc.html",
+      "page": "v2",
+      "x": 490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Disparo · celular"
+    },
+    {
+      "file": "V2Mes.dc.html",
+      "page": "v2",
+      "x": 980,
+      "y": 0,
+      "w": 1180,
+      "h": 760,
+      "title": "Montar o mês · computador"
+    },
+    {
+      "file": "Main.dc.html",
+      "page": "briefing",
+      "x": 0,
+      "y": 0,
+      "w": 1180,
+      "h": 860,
+      "title": "Briefing de identidade"
+    },
+    {
+      "file": "DirecaoA.dc.html",
+      "page": "rejeitadas",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "A · Missal"
+    },
+    {
+      "file": "DirecaoB.dc.html",
+      "page": "rejeitadas",
+      "x": 490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "B · Vigília"
+    },
+    {
+      "file": "DirecaoC.dc.html",
+      "page": "rejeitadas",
+      "x": 980,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "C · Vitral"
+    },
+    {
+      "file": "DirecaoD.dc.html",
+      "page": "rejeitadas",
+      "x": 1470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "D · Quadro de avisos"
+    }
   ],
   "annotations": [
-    { "id": "v2-nota", "page": "v2", "x": 0, "y": -300, "w": 900, "text": "V2 · A GRAMÁTICA DE APPLE + NOTION\nAs seis regras que as quatro anteriores violavam:\n\n1. Nenhuma caixa. Zero borda, zero card com contorno, zero alerta colorido. Hierarquia por espaço, peso e tamanho.\n2. Fonte do SISTEMA, não do Google. Em Mac e iPhone isto é SF Pro de verdade — a escala de corpo é a do iOS (34 / 22 / 17 / 15 / 13).\n3. A mídia é protagonista. O post aparece como ele vai sair, não como um ícone de anexo.\n4. Ação principal é TEXTO azul, não pílula preenchida. Pílula só para o disparo, que é o compromisso final.\n5. Cinza domina; o azul só aparece no que é tocável ou no que é seu.\n6. Aviso é frase, não caixa amarela: \"3 ainda sem responsável · ver só essas\"." },
-    { "id": "rej-nota", "page": "rejeitadas", "x": 0, "y": -190, "w": 800, "text": "REJEITADAS EM 04/09 — guardadas como registro\nQuatro pinturas sobre o mesmo esqueleto: card com número grande, lista com pílula à direita, caixa de alerta no rodapé. Variei superfície e não estrutura — é por isso que as quatro cheiram igual, e cheiram a gerado." }
+    {
+      "id": "v3-nota",
+      "page": "v3",
+      "x": 0,
+      "y": -286,
+      "w": 940,
+      "text": "V3 · A MESMA TELA EM TRÊS TEMPOS\nA gramática da Apple dá a disciplina; a Igreja dá a riqueza.\n\nPapel neutro constante. O tempo litúrgico aparece nos detalhes: a rubrica do topo, a régua sob ela, a CAPITULAR do dia (o numeral em serifa, como a inicial iluminada de um livro de horas), as hairlines da lista e o fundo do post.\n\nO azul da paróquia (#253990) nunca muda — é a cor da AÇÃO. A regra: o tempo é da Igreja, a ação é sua.\n\nTipografia nativa: SF Pro para a interface, New York (a serifa do sistema Apple) para a capitular e as rubricas. Nenhuma fonte importada.\n\nConsequência que só apareceu ao desenhar: se o tempo veste o app, ele veste também o POST. O conteúdo que sai no Instagram respira o ano junto com a ferramenta."
+    },
+    {
+      "id": "v2-nota",
+      "page": "v2",
+      "x": 0,
+      "y": -300,
+      "w": 900,
+      "text": "V2 · A GRAMÁTICA DE APPLE + NOTION\nAs seis regras que as quatro anteriores violavam:\n\n1. Nenhuma caixa. Zero borda, zero card com contorno, zero alerta colorido. Hierarquia por espaço, peso e tamanho.\n2. Fonte do SISTEMA, não do Google. Em Mac e iPhone isto é SF Pro de verdade — a escala de corpo é a do iOS (34 / 22 / 17 / 15 / 13).\n3. A mídia é protagonista. O post aparece como ele vai sair, não como um ícone de anexo.\n4. Ação principal é TEXTO azul, não pílula preenchida. Pílula só para o disparo, que é o compromisso final.\n5. Cinza domina; o azul só aparece no que é tocável ou no que é seu.\n6. Aviso é frase, não caixa amarela: \"3 ainda sem responsável · ver só essas\"."
+    },
+    {
+      "id": "rej-nota",
+      "page": "rejeitadas",
+      "x": 0,
+      "y": -190,
+      "w": 800,
+      "text": "REJEITADAS EM 04/09 — guardadas como registro\nQuatro pinturas sobre o mesmo esqueleto: card com número grande, lista com pílula à direita, caixa de alerta no rodapé. Variei superfície e não estrutura — é por isso que as quatro cheiram igual, e cheiram a gerado."
+    }
   ],
-  "launch": { "view": "canvas", "page": "v2" }
+  "launch": {
+    "view": "canvas",
+    "page": "v3"
+  }
 }

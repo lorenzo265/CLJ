@@ -28,7 +28,10 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 - Plataforma: **Expo / React Native** (`mobile/`), decidido em 2026-09-05 — reverte "app nativo fora de escopo" e a stack Next.js. O domínio inteiro foi portado sem edição para `mobile/src/lib/`; `web/` fica como referência.
 - Motion: **Reanimated** (vem com o Expo). GSAP e framer-motion saíram junto com o app web.
 - Skeuomorfismo é **proibido** na identidade (`decisoes-design.md` §3b).
-- Identidade: **as telas vêm primeiro, a marca é extraída delas** (`decisoes-design.md` §9). A identidade é do app, não da paróquia — dela vêm só as cores, azul e branco. Não desenhar marca antes das telas.
+- Identidade: **o app veste o tempo litúrgico** (`decisoes-design.md` §9c). Papel neutro; o tempo aparece na rubrica, na régua, na capitular do dia, nas hairlines e no fundo do post. O azul `#253990` nunca muda — é a cor da ação. **O tempo é da Igreja, a ação é sua.**
+- Gramática: Apple + Notion (`decisoes-design.md` §9b) — nenhuma caixa, fonte do sistema (SF Pro + New York, nada importado), mídia protagonista, ação como texto azul.
+- Distinção que vale: **esta paróquia** está fora da identidade (só as cores); **a Igreja** como tradição visual está dentro.
+- A marca ainda é o último passo, extraída da interface depois que ela fechar.
 
 ## Ao trabalhar no app
 

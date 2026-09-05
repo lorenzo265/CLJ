@@ -157,6 +157,57 @@ Registrada para nunca mais: hero card com número gigante · lista de linhas id�
 
 Telas em [`../design/identidade/`](../design/identidade/), página **V2**; as rejeitadas ficam guardadas na página **Rejeitadas**.
 
+## 9c. O tempo litúrgico (V3 — 05 set 2026)
+
+A V2 tinha disciplina e não tinha alma. Falta**va** a matéria — e ela estava numa distinção que eu tinha fechado cedo demais:
+
+- **Esta paróquia** (o prédio, a rosácea, a imagem do altar) continua fora. Dali vem só a cor.
+- **A Igreja** — dois mil anos de cultura visual — está dentro, e é o repertório mais rico disponível.
+
+### A decisão central: o app veste o tempo litúrgico
+
+**Papel neutro constante; o tempo aparece nos detalhes** — decidido em 2026-09-05.
+
+| Detalhe | Como |
+|---|---|
+| **Rubrica do topo** | o tempo nomeado, em serifa, na cor do tempo ("TEMPO COMUM · 23ª SEMANA") |
+| **Régua sob a rubrica** | 1,5px na cor do tempo |
+| **Capitular do dia** | o numeral em serifa a 82px, na cor do tempo — a inicial iluminada do livro de horas |
+| **Hairlines das listas** | a cor do tempo a 16% |
+| **Fundo do post** | a cor do tempo |
+
+**O azul da paróquia (`#253990`) nunca muda: é a cor da ação.** A regra que organiza tudo: **o tempo é da Igreja, a ação é sua.**
+
+### As cores
+
+| Tempo | Cor | Token |
+|---|---|---|
+| Tempo Comum | verde | `#24694E` |
+| Advento · Quaresma | roxo | `#4C3A7A` |
+| Natal · Páscoa · festas | ouro sobre tinta | `#A9812F` |
+| Pentecostes · mártires · Ramos | vermelho | `#9E2B25` |
+| Gaudete · Laetare | rosa | `#B8697F` |
+
+Calendário: **Romano geral + próprio do Brasil** (inclui Nossa Senhora Aparecida em 12/10). A Páscoa é calculável e define quase todo o resto.
+
+### Tipografia nativa
+
+SF Pro (`-apple-system`) para a interface e **New York** (`ui-serif` — a serifa que a Apple já embarca) para a capitular e as rubricas. **Nenhuma fonte importada.** Em iOS isso não imita a Apple: é o material real, e a serifa do sistema dá o registro litúrgico de graça.
+
+### Por que isto resolve o que as versões anteriores não resolviam
+
+1. **Riqueza e personalidade** — a identidade muda cinco vezes por ano em vez de ser uma paleta fixa.
+2. **Pertence à igreja sem uma única imagem devocional** — a exigência nº 3 do briefing, resolvida pela cor em vez do clip-art.
+3. **Não cheira a gerado** — é conhecimento de domínio, não padrão de UI.
+4. **Manutenção zero** — o calendário é calculado, não curado.
+5. **É fosso de produto e identidade na mesma decisão.** Nenhuma ferramenta genérica sabe que começou o Advento.
+
+### A consequência que apareceu ao desenhar
+
+Se o tempo veste o app, **ele veste também o post**. O conteúdo publicado no Instagram passa a respirar o ano junto com a ferramenta — o mesmo verde, o mesmo roxo, o mesmo ouro na festa da padroeira.
+
+Telas em [`../design/identidade/`](../design/identidade/), página **V3**.
+
 ## 10. Status do design (2026-08-27)
 
 - ✅ Identidade aplicada nos 21 artboards do canvas (desktop + mobile + componentes + marcas)

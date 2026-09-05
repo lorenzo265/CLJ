@@ -134,6 +134,29 @@ Uma marca desenhada antes da interface é um símbolo procurando onde morar — 
 
 Continua valendo de §2 a §8: sobriedade, régua de reverência, azul como marca-texto e não tinta de parede, e a proibição de skeuomorfismo.
 
+## 9b. A gramática (V2 — 05 set 2026)
+
+As quatro direções de 04/09 foram todas rejeitadas: *"cheiram a IA"*. O diagnóstico é preciso e vale como regra permanente — **eram quatro pinturas sobre o mesmo esqueleto**: card com número grande no topo, lista de linhas com pílula à direita, caixa de alerta colorida no rodapé. Variou-se superfície (cor, fonte, raio) e não **estrutura**.
+
+### Referências declaradas
+
+**Apple** (apple.com, Apple Music, Apple Maps) e **Notion**. Elas têm uma coisa em comum que as quatro rejeitadas violavam: **quase nunca desenham uma caixa.** A hierarquia vem de espaço, peso e tamanho de texto, não de bordas e contornos.
+
+### As seis regras
+
+1. **Nenhuma caixa.** Zero borda, zero card com contorno, zero alerta colorido. Separação por espaço e por hairline fina quando a lista realmente pedir.
+2. **Fonte do sistema, não do Google.** `-apple-system, BlinkMacSystemFont, "SF Pro Text"` — em Mac e iPhone isso é SF Pro de verdade. A escala de corpo é a do iOS: 34 / 22 / 17 / 15 / 13, com tracking negativo nos títulos.
+3. **A mídia é protagonista.** O post aparece como ele vai sair, não como um ícone de anexo. O app é sobre conteúdo visual e nenhuma das quatro rejeitadas mostrava uma única imagem — por isso pareciam painel de banco.
+4. **Ação principal é texto azul**, não pílula preenchida. Pílula fica reservada ao disparo, que é o compromisso final.
+5. **Cinza domina.** O azul só aparece no que é tocável ou no que é seu.
+6. **Aviso é frase, não caixa amarela.** "3 ainda sem responsável · ver só essas".
+
+### A lista do que denuncia UI gerada
+
+Registrada para nunca mais: hero card com número gigante · lista de linhas idênticas com pílula à direita · caixa de alerta com borda esquerda grossa · raio de canto uniforme em tudo · acento aplicado como tint suave da mesma matiz · Google Font segura mais uma serifa "editorial" · label em maiúscula com letter-spacing como única hierarquia · espaçamento uniforme sem densidade · ícones stroke 2px todos do mesmo peso · nenhuma assimetria e nenhuma decisão arriscada.
+
+Telas em [`../design/identidade/`](../design/identidade/), página **V2**; as rejeitadas ficam guardadas na página **Rejeitadas**.
+
 ## 10. Status do design (2026-08-27)
 
 - ✅ Identidade aplicada nos 21 artboards do canvas (desktop + mobile + componentes + marcas)

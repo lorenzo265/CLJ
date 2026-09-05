@@ -9,6 +9,7 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 3. [`docs/decisoes-design.md`](docs/decisoes-design.md) — identidade "O Fio", tokens, motion, princípios.
 4. [`docs/decisoes-tecnicas.md`](docs/decisoes-tecnicas.md) — stack, dados, integrações, infra.
 5. [`docs/sdd-ciclo-minimo.md`](docs/sdd-ciclo-minimo.md) — o desenho detalhado da fatia vertical, quadro a quadro.
+6. [`docs/sdd-implementacao.md`](docs/sdd-implementacao.md) — **o caminho para construir**: ordem das etapas, tokens, o calendário litúrgico, o schema, o motor de disparo e o PWA.
 
 `docs/pesquisa/` é evidência de apoio, não decisão. `docs/abertura-clj-nsr.html` é histórico.
 
@@ -26,6 +27,7 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 - Instagram: **o app não publica**; quem publica é o Meta Business Suite (`decisoes-tecnicas.md` §5). Nada de agente controlando a máquina para postar — 30 a 60x mais risco de suspensão da conta da paróquia (`decisoes-tecnicas.md` §8.2).
 - Backend: **Supabase** (`decisoes-tecnicas.md` §3).
 - Plataforma: **Next.js instalado como PWA** (`web/`) — decidido em 2026-09-05, depois de uma ida e volta ao Expo. Custo total zero: Vercel e Supabase no plano gratuito, ícone na tela de início pelo Safari, push do iOS 16.4+. Nada de loja, nada de conta paga da Apple (`decisoes-tecnicas.md` §1).
+- Motion: **CSS puro** (`transition` e Web Animations), sempre atrás de `prefers-reduced-motion`. GSAP e framer-motion saíram — não sugerir de volta.
 - Skeuomorfismo é **proibido** na identidade (`decisoes-design.md` §3b).
 - Identidade: **o app veste o tempo litúrgico** (`decisoes-design.md` §9c). Papel neutro; o tempo aparece na rubrica, na régua, na capitular do dia, nas hairlines e no fundo do post. O azul `#253990` nunca muda — é a cor da ação. **O tempo é da Igreja, a ação é sua.**
 - Gramática: Apple + Notion (`decisoes-design.md` §9b) — nenhuma caixa, fonte do sistema (SF Pro + New York, nada importado), mídia protagonista, ação como texto azul.

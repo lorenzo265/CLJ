@@ -8,6 +8,8 @@ Stack, dados, integrações e infra. Pressupõe [`00-intuito.md`](00-intuito.md)
 
 - **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**.
 - Tipografia: `-apple-system` na interface e `ui-serif` na capitular e nas rubricas. **Nenhuma fonte importada** — no Safari do iPhone isso é **SF Pro e New York de verdade**, que é exatamente o que a identidade pede (§9b/§9c de `decisoes-design.md`).
+- **Motion: CSS puro** — `transition` e Web Animations, sempre atrás de `prefers-reduced-motion`. Decidido em 2026-09-05: a gramática de §9b pede contenção, e uma biblioteca de motion é peso morto para um desenvolvedor sozinho. `gsap` e `@gsap/react` saem do `package.json`.
+- **De `components/ui/` fica só o que carrega comportamento** (diálogo, popover, select, sheet, tooltip, input…). O que só carrega aparência — badge, card, alert, separator, avatar, table, button — é apagado: contradiz a gramática. Ver `sdd-implementacao.md` §4.3.
 - Testes com **vitest** sobre o domínio em `lib/`.
 
 ### Por que o site, e não o app nativo

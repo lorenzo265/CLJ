@@ -86,6 +86,5 @@ Decidir o Plano B em novembro, com calma, é ofício. Descobrir em dezembro que 
 - **Agente que publica controlando a máquina** — 30 a 60x mais risco de suspensão, para substituir algo que o Meta Business Suite já faz de graça. Ver `decisoes-tecnicas.md` §8.2.
 - Rede social: feed, curtidas, comentários.
 - Substituir o WhatsApp como lugar de **conversa** (o app o alimenta, não o substitui).
-- App nativo / publicação em loja.
 - Multi-departamento ou multi-paróquia.
 - "Usuário avançado de software" como público. Nenhuma tela pode exigir treinamento.

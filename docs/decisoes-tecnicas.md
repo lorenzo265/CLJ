@@ -2,20 +2,28 @@
 
 Stack, dados, integrações e infra. Pressupõe [`00-intuito.md`](00-intuito.md) e [`decisoes-produto.md`](decisoes-produto.md). Atualizado em **2026-09-04**.
 
-## 1. Stack do app (`web/`)
+## 1. Stack do app (`mobile/`)
 
-- **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**
-- **GSAP** (`gsap` + `@gsap/react`) para motion — assinatura "passar a conta". Substituiu framer-motion em 2026-08-27.
-- **shadcn** como base de componentes, **sempre** re-estilizado com nossos tokens — nunca o look default.
-- **lucide-react** (ícones), **sonner** (toasts), **react-day-picker** + **date-fns** (calendário), **next-themes** (dark mode futuro).
-- Testes com **vitest**. Hoje só `lib/escala/agenda.test.ts` — a lógica de cobrança e aniversário nasce com teste.
-- Tokens de design entram como CSS custom properties + `theme` do Tailwind. Componentes referenciam token por nome, **nunca hex solto**.
+**Migrado para Expo em 2026-09-05**, revertendo duas decisões que estavam fechadas: a stack Next.js e "app nativo fora de escopo". O custo foi levantado antes (as telas longas de computador ficam piores no celular) e a decisão foi mantida.
+
+- **Expo SDK 57** + **React Native 0.86** + **Expo Router** (rotas por arquivo, como o App Router) + TypeScript.
+- **Reanimated** para motion. GSAP e framer-motion saíram com o app web.
+- `expo-symbols` (SF Symbols), `expo-glass-effect` e `@expo/ui` vêm no template — são exatamente as peças nativas da gramática Apple de `decisoes-design.md` §9b. Em iOS, `fontFamily: "System"` **é** SF Pro: a identidade deixa de imitar a Apple e passa a usar o material real.
+- Testes com **vitest** (o domínio é TypeScript puro, não precisa de runner nativo).
+
+### O que a migração custou de verdade
+
+Menos do que parecia. O alias `@/*` do Expo aponta para `./src/*` — exatamente o que `@/lib/...` significava no Next. **Os 15 arquivos do domínio foram para `mobile/src/lib/` sem uma única edição** (ver `mobile/NOTAS-PORT.md`): modelo de dados, camada `lib/data/` já assíncrona, mocks, a regra da agenda com seu teste, a grade do mês e a formatação pt-BR.
+
+O que morreu foi a camada de apresentação — 11 rotas e os componentes shadcn. **E ela ia ser reescrita de qualquer jeito**, porque a identidade mudou por completo (`decisoes-design.md` §9b rejeita o look default do shadcn). Migrar agora custa menos do que migrar depois.
+
+`web/` fica no repositório como referência até as telas do Expo cobrirem o mesmo terreno.
 
 ## 1b. Estado atual do código
 
-Todas as rotas existem: `app/(app)/` (escala, calendário, cadastro, reuniões) e `app/(app)/coordenador/` (painel, escala, funções, participantes, reuniões), com `app/login/` fora do shell. Componentes por domínio em `components/` (shell, escala, calendario, cadastro, gestao) sobre a base `components/ui/` (shadcn). Tudo lê de `lib/mock/` através de `lib/data/`.
+`mobile/` tem o domínio portado e o esqueleto do Expo Router; **nenhuma tela do produto foi escrita ainda** — esperam a identidade fechar (`decisoes-design.md` §9b e o que vier do brainstorm de 05/09).
 
-Nada disso tem backend, autenticação, ou a identidade "O Fio" aplicada — o app está no look default do shadcn.
+`web/` mantém as 11 rotas antigas com dados mock, como referência de conteúdo e de fluxo.
 
 ## 2. Camada de dados
 

@@ -38,7 +38,7 @@ const GERENCIAR: { href: string; titulo: string; descricao: string; icone: Lucid
   },
 ];
 
-/** No máximo quatro furos listados: a faixa é um aviso, a escala é a lista. */
+/** No máximo quatro furos listados na faixa: ela é o aviso, a escala é a lista. */
 const FUROS_LISTADOS = 4;
 
 /**
@@ -50,6 +50,7 @@ export default async function PainelPage() {
   const eu = await exigirCoordenador();
   const resumo = await getResumoPainel(eu.departamentoId);
 
+  // A faixa lê como agenda: o furo mais próximo primeiro, sem depender da ordem do banco.
   const emFuro = [...resumo.atividadesEmFuro].sort((a, b) => a.data.localeCompare(b.data));
   const temFuro = resumo.furosEstaSemana > 0;
 
@@ -64,9 +65,7 @@ export default async function PainelPage() {
           <Numero rotulo="Sem responsável" valor={resumo.semResponsavel} />
           <Numero
             rotulo="Próxima reunião"
-            valor={
-              resumo.proximaReuniaoData ? formatarDataCurta(resumo.proximaReuniaoData) : "—"
-            }
+            valor={resumo.proximaReuniaoData ? formatarDataCurta(resumo.proximaReuniaoData) : "—"}
           />
           {/* O único número que muda de cor: é o que pede ação nesta semana. */}
           <Numero rotulo="Furos essa semana" valor={resumo.furosEstaSemana} alerta={temFuro} />
@@ -144,7 +143,10 @@ export default async function PainelPage() {
   );
 }
 
-/** O número em serifada: no canvas o Painel é a única tela onde o dado é a manchete. */
+/**
+ * O número em serifada — no canvas o Painel é a única tela onde o dado é a manchete.
+ * `tabular-nums` para os quatro alinharem em coluna, como toda data do app.
+ */
 function Numero({
   rotulo,
   valor,

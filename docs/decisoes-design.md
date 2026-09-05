@@ -234,6 +234,14 @@ A **barra do dia** é o padrão do mini-player do Apple Music aplicado ao produt
 
 O selo de contagem usa o **azul da ação**, não o vermelho de sistema: vermelho é cor litúrgica (mártires e Pentecostes) e não pode virar cor de alerta de interface.
 
+### As cinco telas da Fase A (página *Telas*)
+
+`O dia · celular` · `Disparo · celular` · `Montar o mês · computador` · `Produzir em lote · computador` · `Biblioteca · computador`.
+
+Todas carregam a mesma gramática: rubrica do tempo com régua, capitular onde há data, nenhuma caixa, hairlines no verde a 14%, status como palavra colorida e nunca como pílula, ação principal em texto azul. Nas de computador a sidebar marca a aba corrente.
+
+**Regra descoberta ao montar:** a barra do dia **não aparece na tela Hoje** — ela mostraria a mesma coisa que a manchete. Ela existe nas outras telas, onde o que precisa sair não está à vista.
+
 Os glifos do arquivo são provisórios. No app são **SF Symbols** de verdade — o Expo SDK 57 traz native tabs com SF Symbols e Liquid Glass, com a variante preenchida no estado selecionado ([`decisoes-tecnicas.md`](decisoes-tecnicas.md) §1).
 
 ## 10. Status do design (2026-08-27)

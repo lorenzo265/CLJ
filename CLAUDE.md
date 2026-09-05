@@ -36,22 +36,23 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 ## Ao trabalhar no app
 
 ```bash
-cd web && npm install && npm run dev   # http://localhost:3000
-npm test        # vitest
-npm run lint
+cd mobile && npm install
+npm run ios      # ou: npm run android · npm run web
+npm test         # vitest, sobre o domínio em src/lib/
 ```
 
-- Nenhuma página importa de `lib/mock/` direto — sempre via `lib/data/`.
-- Componente referencia **token de design por nome**, nunca hex solto.
-- shadcn é base, sempre re-estilizado com nossos tokens — nunca o look default.
-- Regra de negócio (quando cobrar, quando é aniversário) nasce em `lib/` com teste, isolada de data real.
+- Nenhuma tela importa de `src/lib/mock/` direto — sempre via `src/lib/data/`.
+- Componente referencia **variável de cor por nome**, nunca hex solto.
+- Regra de negócio (quando cobrar, quando é aniversário) nasce em `src/lib/` com teste, isolada de data real.
+- Navegação: **native tabs** do Expo Router com SF Symbols e Liquid Glass — não recriar barra em JS.
+- `web/` é referência histórica. Não desenvolver lá.
 
 ## Design
 
-**Figma:** [CLJ NSR — Sistema](https://www.figma.com/design/CaCmCwkjD34BoLjEfoRxLP) — peças de interface e variáveis. Atenção: a tipografia de lá é substituta (Inter/Newsreader); no código vale a fonte do sistema. Ver `decisoes-design.md` §9d.
+**Figma:** [CLJ NSR — Sistema](https://www.figma.com/design/CaCmCwkjD34BoLjEfoRxLP) — três páginas: *Fundações* (variáveis e a legenda), *Barras* (navegação) e *Telas* (as cinco telas da Fase A). É a superfície de desenho corrente. Atenção: a tipografia de lá é substituta (Inter/Newsreader); no código vale a fonte do sistema. Ver `decisoes-design.md` §9d.
 
 `design/` é a cópia versionada do canvas publicado (18 artboards `.dc.html` + `canvas.json`). Edita-se preferencialmente no canvas (o botão Save publica para todos); depois sincroniza-se `design/` no repositório para manter o histórico.
 
 ## Fora de escopo
 
-Ver `00-intuito.md` §7. Em resumo: nada de rede social, de app nativo, de multi-paróquia, e nenhuma tela que exija treinamento.
+Ver `00-intuito.md` §7. Em resumo: nada de rede social, de multi-paróquia, de publicação automática em Instagram ou grupo, e nenhuma tela que exija treinamento.

@@ -76,6 +76,7 @@ O coordenador é frequentemente também responsável. As telas não mudam por ca
 - **Manchete** — uma coisa só: o que é seu hoje, a que horas, e se o conteúdo já está pronto. Ação primária **Abrir e enviar**; ação secundária **Não vou conseguir** (aciona §6.4).
 - **Depois de hoje** — no máximo 3 itens, com a distinção visual entre ser responsável (disco cheio) e ser suplente (anel).
 - **Fecho sereno** — quando não há nada atrasado, a tela diz isso em uma linha. Nunca um contador vazio, nunca punição.
+- **A barra do dia não aparece aqui.** Ela mostraria a mesma coisa que a manchete. Aparece nas demais telas, onde o que precisa sair não está à vista.
 - Sem manchete (nada hoje), a tela abre em "Depois de hoje" e o fecho vira a manchete.
 
 ### 4.3 O app cobra

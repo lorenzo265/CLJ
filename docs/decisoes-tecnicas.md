@@ -2,28 +2,41 @@
 
 Stack, dados, integrações e infra. Pressupõe [`00-intuito.md`](00-intuito.md) e [`decisoes-produto.md`](decisoes-produto.md). Atualizado em **2026-09-04**.
 
-## 1. Stack do app (`mobile/`)
+## 1. Stack do app (`web/`) — site instalado como app
 
-**Migrado para Expo em 2026-09-05**, revertendo duas decisões que estavam fechadas: a stack Next.js e "app nativo fora de escopo". O custo foi levantado antes (as telas longas de computador ficam piores no celular) e a decisão foi mantida.
+**Decidido em 2026-09-05**, depois de uma ida e volta ao Expo no mesmo dia. O app é um **Next.js instalado na tela de início do iPhone** — não um app de loja.
 
-- **Expo SDK 57** + **React Native 0.86** + **Expo Router** (rotas por arquivo, como o App Router) + TypeScript.
-- **Reanimated** para motion. GSAP e framer-motion saíram com o app web.
-- `expo-symbols` (SF Symbols), `expo-glass-effect` e `@expo/ui` vêm no template — são exatamente as peças nativas da gramática Apple de `decisoes-design.md` §9b. Em iOS, `fontFamily: "System"` **é** SF Pro: a identidade deixa de imitar a Apple e passa a usar o material real.
-- Testes com **vitest** (o domínio é TypeScript puro, não precisa de runner nativo).
+- **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**.
+- Tipografia: `-apple-system` na interface e `ui-serif` na capitular e nas rubricas. **Nenhuma fonte importada** — no Safari do iPhone isso é **SF Pro e New York de verdade**, que é exatamente o que a identidade pede (§9b/§9c de `decisoes-design.md`).
+- Testes com **vitest** sobre o domínio em `lib/`.
 
-### O que a migração custou de verdade
+### Por que o site, e não o app nativo
 
-Menos do que parecia. O alias `@/*` do Expo aponta para `./src/*` — exatamente o que `@/lib/...` significava no Next. **Os 15 arquivos do domínio foram para `mobile/src/lib/` sem uma única edição** (ver `mobile/NOTAS-PORT.md`): modelo de dados, camada `lib/data/` já assíncrona, mocks, a regra da agenda com seu teste, a grade do mês e a formatação pt-BR.
+| | Site instalado (PWA) | Expo / nativo |
+|---|---|---|
+| Custo | **zero** — Vercel e Supabase no plano gratuito | US$ 99/ano de conta Apple para instalar no iPhone |
+| Instalação | Safari → Compartilhar → **Adicionar à Tela de Início** | App Store, TestFlight ou build assinado |
+| Ícone e tela cheia | sim | sim |
+| **Push** | **sim, iOS 16.4+** — exige estar instalado na tela de início, e a permissão pedida a partir de um toque. Indisponível na União Europeia; no Brasil funciona | sim, nativo |
+| Telas longas de computador | **boas** — HTML denso é o terreno natural delas | piores em React Native |
+| SF Symbols e Liquid Glass nativos | aproximados (glifos desenhados, `backdrop-filter`) | reais |
 
-O que morreu foi a camada de apresentação — 11 rotas e os componentes shadcn. **E ela ia ser reescrita de qualquer jeito**, porque a identidade mudou por completo (`decisoes-design.md` §9b rejeita o look default do shadcn). Migrar agora custa menos do que migrar depois.
+**Não existe atalho para o iPhone.** `.exe` é formato do Windows, e o iOS não instala aplicativo a partir de arquivo baixado — só App Store, TestFlight ou build assinado com perfil da Apple. Isso é fechado por desenho.
 
-`web/` fica no repositório como referência até as telas do Expo cobrirem o mesmo terreno.
+### O que a ida e volta ao Expo custou
 
-## 1b. Estado atual do código
+Quase nada, e vale registrar por quê. `web/` nunca foi tocado: as 11 rotas continuam lá. O `mobile/` recebeu uma **cópia** do domínio e **nenhuma tela de produto** — só o esqueleto do template. Removido no mesmo commit desta decisão; está no histórico do Git se um dia voltar a fazer sentido.
 
-`mobile/` tem o domínio portado e o esqueleto do Expo Router; **nenhuma tela do produto foi escrita ainda** — esperam a identidade fechar (`decisoes-design.md` §9b e o que vier do brainstorm de 05/09).
+O que ficou de proveito: a gramática de `decisoes-design.md` §9b foi escrita para a tipografia do sistema, e o desenho das telas nasceu em HTML. **A identidade volta para casa sem perder nada.**
 
-`web/` mantém as 11 rotas antigas com dados mock, como referência de conteúdo e de fluxo.
+### O que falta configurar
+
+- `manifest.json` com `display: "standalone"`, ícone e cor de tema.
+- Service worker (o mínimo para instalar e para receber push).
+- Hospedagem na **Vercel** (plano gratuito).
+- Push: só na Fase B. Na Fase A há um usuário e ele abre o app.
+
+> Projeto Supabase no plano gratuito **pausa após 7 dias sem uso**. Com uso diário isso não acontece, mas é bom saber antes de estranhar.
 
 ## 2. Camada de dados
 
@@ -52,7 +65,7 @@ Por que, contra as alternativas consideradas:
 
 As duas exigências do escopo novo — **convite** e **cron** — vêm prontas, e é isso que decide para quem trabalha sozinho ([`00-intuito.md`](00-intuito.md) §2). O custo aceito é aprender **Row Level Security** direito; isso é ofício, não desvio.
 
-**Pendente:** hospedagem do app (Vercel é o caminho óbvio para Next.js, ainda não decidido) e ambiente de staging.
+**Hospedagem:** Vercel, plano gratuito (§1).
 
 ## 4. WhatsApp: entrega com um toque
 
@@ -88,7 +101,7 @@ Fontes: [Postproxy — Post to Instagram via API (2026)](https://postproxy.dev/b
 
 A parte de maior valor e menor custo do escopo novo, porque **não depende de terceiros**:
 
-- **Agendador:** `pg_cron` no Supabase dispara a rotina diária.
+- **Agendador:** `pg_cron` no Supabase dispara a rotina diária. Não depende do app estar aberto — é o servidor que acorda.
 - **O que a rotina faz:** varre aniversários do dia, atividades de amanhã sem confirmação, e atividades de hoje que passaram do horário sem publicação.
 - **Como chega:** o painel do coordenador mostra o que precisa sair; a entrega ao grupo é o toque do §4. Notificação para o participante fica pendente até a decisão de push/PWA.
 - **Teste:** toda regra de "quando cobrar" nasce com teste unitário em `lib/`, isolada de data real — a mesma disciplina de `lib/escala/agenda.test.ts`.
@@ -97,8 +110,8 @@ A parte de maior valor e menor custo do escopo novo, porque **não depende de te
 
 Registradas para **não** inflarem a sensação de escopo. Nenhuma está no caminho crítico da v1:
 
-- Hospedagem e staging.
-- Push para o participante: PWA vs. nativo.
+- Ambiente de staging.
+- Push para o participante (Fase B): Web Push, com a exigência de o app estar instalado na tela de início (§1).
 - Dark mode (tokens já derivados por papel de cor, nunca invertidos).
 - Publicação automática no Instagram (fase 2, §5).
 - CI (lint + testes no push).

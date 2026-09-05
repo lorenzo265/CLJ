@@ -25,8 +25,7 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 - WhatsApp: **entrega com um toque**, o app nunca manda sozinho no grupo (`decisoes-tecnicas.md` §4).
 - Instagram: **o app não publica**; quem publica é o Meta Business Suite (`decisoes-tecnicas.md` §5). Nada de agente controlando a máquina para postar — 30 a 60x mais risco de suspensão da conta da paróquia (`decisoes-tecnicas.md` §8.2).
 - Backend: **Supabase** (`decisoes-tecnicas.md` §3).
-- Plataforma: **Expo / React Native** (`mobile/`), decidido em 2026-09-05 — reverte "app nativo fora de escopo" e a stack Next.js. O domínio inteiro foi portado sem edição para `mobile/src/lib/`; `web/` fica como referência.
-- Motion: **Reanimated** (vem com o Expo). GSAP e framer-motion saíram junto com o app web.
+- Plataforma: **Next.js instalado como PWA** (`web/`) — decidido em 2026-09-05, depois de uma ida e volta ao Expo. Custo total zero: Vercel e Supabase no plano gratuito, ícone na tela de início pelo Safari, push do iOS 16.4+. Nada de loja, nada de conta paga da Apple (`decisoes-tecnicas.md` §1).
 - Skeuomorfismo é **proibido** na identidade (`decisoes-design.md` §3b).
 - Identidade: **o app veste o tempo litúrgico** (`decisoes-design.md` §9c). Papel neutro; o tempo aparece na rubrica, na régua, na capitular do dia, nas hairlines e no fundo do post. O azul `#253990` nunca muda — é a cor da ação. **O tempo é da Igreja, a ação é sua.**
 - Gramática: Apple + Notion (`decisoes-design.md` §9b) — nenhuma caixa, fonte do sistema (SF Pro + New York, nada importado), mídia protagonista, ação como texto azul.
@@ -36,16 +35,15 @@ Plataforma do Departamento Cultural da Paróquia Nossa Senhora do Rosário. Dese
 ## Ao trabalhar no app
 
 ```bash
-cd mobile && npm install
-npm run ios      # ou: npm run android · npm run web
-npm test         # vitest, sobre o domínio em src/lib/
+cd web && npm install && npm run dev   # http://localhost:3000
+npm test        # vitest, sobre o domínio em lib/
+npm run lint
 ```
 
-- Nenhuma tela importa de `src/lib/mock/` direto — sempre via `src/lib/data/`.
-- Componente referencia **variável de cor por nome**, nunca hex solto.
-- Regra de negócio (quando cobrar, quando é aniversário) nasce em `src/lib/` com teste, isolada de data real.
-- Navegação: **native tabs** do Expo Router com SF Symbols e Liquid Glass — não recriar barra em JS.
-- `web/` é referência histórica. Não desenvolver lá.
+- Nenhuma página importa de `lib/mock/` direto — sempre via `lib/data/`.
+- Componente referencia **token de cor por nome**, nunca hex solto.
+- Regra de negócio (quando cobrar, quando é aniversário) nasce em `lib/` com teste, isolada de data real.
+- Tipografia: `-apple-system` e `ui-serif`. **Nenhuma fonte importada** — no iPhone isso é SF Pro e New York de verdade.
 
 ## Design
 

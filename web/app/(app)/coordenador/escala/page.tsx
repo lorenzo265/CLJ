@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { exigirCoordenador } from "@/lib/auth/sessao";
 import { formatarMesAno, formatarReferenciaMes, parseReferenciaMes } from "@/lib/calendario/mes";
-import { getAtividades } from "@/lib/data/atividades";
+import { getAtividades, getTrocasDoDepartamento } from "@/lib/data/atividades";
 import { getFuncoes } from "@/lib/data/funcoes";
 import { getPessoas } from "@/lib/data/pessoas";
 import { comPapel, ordenarCronologico } from "@/lib/escala/agenda";
@@ -34,10 +34,11 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
   const texto = (valor: string | string[] | undefined) =>
     typeof valor === "string" ? valor : undefined;
 
-  const [atividades, pessoas, funcoes] = await Promise.all([
+  const [atividades, pessoas, funcoes, trocas] = await Promise.all([
     getAtividades(eu.departamentoId),
     getPessoas(eu.departamentoId),
     getFuncoes(eu.departamentoId),
+    getTrocasDoDepartamento(eu.departamentoId),
   ]);
 
   const agora = new Date();
@@ -172,6 +173,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
           atividades={emOrdem}
           pessoas={pessoas}
           funcoes={funcoes}
+          trocas={trocas}
           dataPadrao={dataPadrao}
           mensagemVazia={
             soFuros

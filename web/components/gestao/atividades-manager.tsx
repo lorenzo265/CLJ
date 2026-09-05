@@ -29,7 +29,7 @@ import { formatarDataCurta, formatarHora, nomeCurto } from "@/lib/format";
 import { STATUS_ATIVIDADE, TIPOS_ATIVIDADE } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import type { EstadoForm } from "@/lib/actions/auth";
-import type { Atividade, Funcao, Pessoa } from "@/lib/types";
+import type { Atividade, Funcao, Pessoa, Troca } from "@/lib/types";
 
 /*
   A escala do lado de quem monta. Duas densidades, uma identidade (decisoes-design.md §7.3):
@@ -300,11 +300,14 @@ function FormTroca({
   atividade,
   pessoas,
   papelInicial,
+  historico,
   aoConcluir,
 }: {
   atividade: Atividade;
   pessoas: Pessoa[];
   papelInicial: PapelTroca;
+  /** O que já foi trocado nesta atividade, do mais recente ao mais antigo. */
+  historico: Troca[];
   aoConcluir: () => void;
 }) {
   const [estado, acao, pendente] = useActionState(trocarResponsavel, INICIAL);
@@ -341,7 +344,7 @@ function FormTroca({
         htmlFor={`${id}-pessoa`}
         dica={
           atual
-            ? `Hoje quem responde é ${nomeCurto(atual.nome)}.`
+            ? `Hoje quem responde é ${nomeCurto(atual.nome)}`
             : `Ninguém está como ${ROTULO_PAPEL[papel]} nesta atividade.`
         }
       >
@@ -367,6 +370,8 @@ function FormTroca({
 
       <Erro mensagem={estado.erro} />
 
+      <Historico trocas={historico} pessoas={pessoas} />
+
       <DialogFooter>
         <DialogClose render={<Button type="button" variant="outline" />}>Cancelar</DialogClose>
         <Button type="submit" disabled={pendente}>
@@ -374,6 +379,37 @@ function FormTroca({
         </Button>
       </DialogFooter>
     </form>
+  );
+}
+
+/**
+ * O registro que a plataforma existe para guardar (decisoes-estrutura.md §5): sem isto, a
+ * troca fica gravada num banco que ninguém abre, e a memória volta pra conversa privada.
+ */
+function Historico({ trocas, pessoas }: { trocas: Troca[]; pessoas: Pessoa[] }) {
+  if (trocas.length === 0) return null;
+
+  const nome = (id: string | null) => {
+    if (!id) return "ninguém";
+    const p = pessoas.find((x) => x.id === id);
+    return p ? nomeCurto(p.nome) : "alguém que saiu";
+  };
+
+  return (
+    <div className="rounded-lg border border-border-soft bg-background p-3">
+      <p className="kicker mb-2">O que já mudou aqui</p>
+      <ul className="flex flex-col gap-1.5">
+        {trocas.map((t) => (
+          <li key={t.id} className="text-[12.5px] leading-snug text-muted-foreground">
+            <span className="font-semibold text-foreground">
+              {ROTULO_PAPEL[t.papel]}: {nome(t.dePessoaId)} → {nome(t.paraPessoaId)}
+            </span>{" "}
+            · <span className="font-mono">{formatarDataCurta(t.criadoEm.slice(0, 10))}</span>
+            {t.motivo && <> · “{t.motivo}”</>}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -631,12 +667,15 @@ export function AtividadesManager({
   atividades,
   pessoas,
   funcoes,
+  trocas,
   dataPadrao,
   mensagemVazia,
 }: {
   atividades: Atividade[];
   pessoas: Pessoa[];
   funcoes: Funcao[];
+  /** Histórico por atividade — o que já foi trocado, para o diálogo de troca mostrar. */
+  trocas: Record<string, Troca[]>;
   /** "Hoje" calculado no servidor: o fuso de quem lê não decide a data sugerida. */
   dataPadrao: string;
   /** A frase do vazio muda com o filtro, então quem filtra é quem a escreve. */
@@ -846,7 +885,7 @@ export function AtividadesManager({
           {foco?.modo === "trocar" && (
             <>
               <DialogHeader>
-                <DialogTitle>Trocar responsável</DialogTitle>
+                <DialogTitle>Trocar {ROTULO_PAPEL[foco.papel].toLowerCase()}</DialogTitle>
                 <DialogDescription>
                   {rotuloTipo(foco.atividade.tipo)} — {foco.atividade.titulo} ·{" "}
                   {formatarDataCurta(foco.atividade.data)}
@@ -854,6 +893,7 @@ export function AtividadesManager({
               </DialogHeader>
               <FormTroca
                 key={`${foco.atividade.id}-${foco.papel}`}
+                historico={trocas[foco.atividade.id] ?? []}
                 atividade={foco.atividade}
                 pessoas={pessoas}
                 papelInicial={foco.papel}

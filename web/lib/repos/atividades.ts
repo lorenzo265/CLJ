@@ -149,6 +149,7 @@ function inserirTroca(
     .run(novoId(), atividadeId, papel, de, para, contexto.motivo ?? "", contexto.feitaPor, agoraISO());
 }
 
+
 interface LinhaTroca {
   id: string;
   atividade_id: string;
@@ -160,19 +161,37 @@ interface LinhaTroca {
   criado_em: string;
 }
 
+/** Todo o histórico do departamento num SELECT — a tela de escala mostra o de cada linha. */
+export function trocasDoDepartamento(departamentoId: string): Record<string, Troca[]> {
+  const linhas = getDb()
+    .prepare(
+      `SELECT t.* FROM trocas t
+         JOIN atividades a ON a.id = t.atividade_id
+        WHERE a.departamento_id = ?
+        ORDER BY t.criado_em DESC`,
+    )
+    .all(departamentoId) as LinhaTroca[];
+
+  const porAtividade: Record<string, Troca[]> = {};
+  for (const l of linhas) (porAtividade[l.atividade_id] ??= []).push(paraTroca(l));
+  return porAtividade;
+}
+
 export function listarTrocas(atividadeId: string): Troca[] {
   return (
     getDb()
       .prepare("SELECT * FROM trocas WHERE atividade_id = ? ORDER BY criado_em DESC")
       .all(atividadeId) as LinhaTroca[]
-  ).map((l) => ({
-    id: l.id,
-    atividadeId: l.atividade_id,
-    papel: l.papel,
-    dePessoaId: l.de_pessoa_id,
-    paraPessoaId: l.para_pessoa_id,
-    motivo: l.motivo,
-    feitaPor: l.feita_por,
-    criadoEm: l.criado_em,
-  }));
+  ).map(paraTroca);
 }
+
+const paraTroca = (l: LinhaTroca): Troca => ({
+  id: l.id,
+  atividadeId: l.atividade_id,
+  papel: l.papel,
+  dePessoaId: l.de_pessoa_id,
+  paraPessoaId: l.para_pessoa_id,
+  motivo: l.motivo,
+  feitaPor: l.feita_por,
+  criadoEm: l.criado_em,
+});

@@ -14,3 +14,10 @@ export async function getAtividade(id: string): Promise<Atividade | undefined> {
 export async function getTrocas(atividadeId: string): Promise<Troca[]> {
   return repo.listarTrocas(atividadeId);
 }
+
+/** O histórico de todas as atividades do departamento, agrupado por atividade. */
+export async function getTrocasDoDepartamento(
+  departamentoId: string,
+): Promise<Record<string, Troca[]>> {
+  return repo.trocasDoDepartamento(departamentoId);
+}

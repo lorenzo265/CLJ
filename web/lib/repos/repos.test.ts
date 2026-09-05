@@ -178,6 +178,24 @@ describe("atividades e o registro de trocas", () => {
     expect(atividades.listarTrocas("a5")[0]).toMatchObject({ paraPessoaId: null });
   });
 
+  it("o histórico do departamento sai agrupado por atividade, do mais novo ao mais velho", () => {
+    atividades.atualizarAtividade(
+      "a6",
+      { ...dadosDe("a6"), responsavelId: "p3" },
+      { feitaPor: "p1", motivo: "primeira" },
+    );
+    atividades.atualizarAtividade(
+      "a6",
+      { ...dadosDe("a6"), responsavelId: "p2" },
+      { feitaPor: "p1", motivo: "segunda" },
+    );
+
+    const porAtividade = atividades.trocasDoDepartamento(DEPARTAMENTO_CULTURAL);
+    expect(porAtividade.a6.map((t) => t.motivo)).toEqual(["segunda", "primeira"]);
+    // Atividade sem troca não aparece: a tela pergunta por id e recebe lista vazia.
+    expect(porAtividade.a7).toBeUndefined();
+  });
+
   it("o banco de demonstração tem furos — o painel precisa deles", () => {
     const semResponsavel = atividades
       .listarAtividades(DEPARTAMENTO_CULTURAL)

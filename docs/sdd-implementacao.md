@@ -257,7 +257,40 @@ a troca aparece no histórico da atividade.
 - **Acessibilidade:** foco visível, alvo ≥44px no mobile, contraste AA, `prefers-reduced-motion`
   respeitado, formulário navegável por teclado.
 
-## 6. Fora de escopo desta rodada
+## 6. Onde a rodada terminou
+
+Todas as sete fases fechadas: `npm run lint`, `npm test` (100 testes) e `npm run build`
+(16 rotas) limpos, e o app percorrido num navegador de verdade — 16 checagens nos dois
+papéis, incluindo escrita que sobrevive ao reload e participante barrado na coordenação.
+
+**Três defeitos só apareceram com o app no ar**, e vale registrar o padrão: `tsc`, `eslint`,
+os testes e o `build` passaram por todos os três.
+
+| O que era | Por que escapou |
+|---|---|
+| `/voce` respondia 500 | função de módulo `"use client"` chamada por Server Component — o tipo casa, o runtime não |
+| a manchete lia "Post — Post — Terço Diário" | o tipo estava no título do seed *e* era prefixado na tela |
+| o fio pendurava no vazio | o cordão morava no `<nav>`, que estica até o rodapé |
+
+**A revisão adversarial** (nove agentes, um por tela) achou o que o navegador não mostra:
+`cancelarConvite` sem checagem de departamento, seis tokens de cor reprovando AA nas
+combinações em que o app os usa, o alerta de furo abrindo a escala num mês que podia não
+conter nenhum furo, e o registro de trocas gravado mas nunca exibido — o oposto do que
+`decisoes-estrutura.md` §5 pede.
+
+### O que ficou sabido e não feito
+
+- **Frescor de formulário aberto:** se a coordenação mexe nas suas funções enquanto você
+  está com `/voce` aberto, a tela só reflete no próximo carregamento. Os formulários grandes
+  de gestão têm a mesma característica.
+- **"Convite pendente" é um estado inalcançável** na tela de participantes: `aceitarConvite`
+  cria a pessoa e define a senha na mesma transação, então ninguém aparece sem senha.
+- **`getUsoDaFuncao` é uma consulta por função** na tela de Funções; com o catálogo real
+  (cinco linhas) não pesa, mas o certo é um `GROUP BY`.
+- **Dark mode não foi olhado tela a tela** — os tokens estão derivados e testados, a
+  varredura visual não foi feita.
+
+## 7. Fora de escopo desta rodada
 
 Push e widget de tela inicial (dependem da decisão nativo vs PWA); upload de foto;
 multi-departamento; app nativo; integração com WhatsApp; e-mail transacional de verdade — o

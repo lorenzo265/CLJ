@@ -56,7 +56,11 @@ export function formatarHora(hora: string | null): string {
   return m === "00" ? `${hh}h` : `${hh}h${m}`;
 }
 
-/** "Ana Paula Ribeiro" -> "Ana P." — como o departamento se chama entre si. */
+/**
+ * "Ana Paula Ribeiro" -> "Ana P." — como o departamento se chama entre si.
+ * O resultado já termina em ponto quando abrevia: quem monta frase com ele não acrescenta
+ * outro, senão sai "Ana P..".
+ */
 export function nomeCurto(nome: string): string {
   const partes = nome.trim().split(/\s+/);
   if (partes.length === 1) return partes[0];

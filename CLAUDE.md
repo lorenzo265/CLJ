@@ -48,6 +48,8 @@ npm run lint
 
 ## Design
 
+**Figma:** [CLJ NSR — Sistema](https://www.figma.com/design/CaCmCwkjD34BoLjEfoRxLP) — peças de interface e variáveis. Atenção: a tipografia de lá é substituta (Inter/Newsreader); no código vale a fonte do sistema. Ver `decisoes-design.md` §9d.
+
 `design/` é a cópia versionada do canvas publicado (18 artboards `.dc.html` + `canvas.json`). Edita-se preferencialmente no canvas (o botão Save publica para todos); depois sincroniza-se `design/` no repositório para manter o histórico.
 
 ## Fora de escopo

@@ -208,6 +208,34 @@ Se o tempo veste o app, **ele veste também o post**. O conteúdo publicado no I
 
 Telas em [`../design/identidade/`](../design/identidade/), página **V3**.
 
+## 9d. O arquivo do Figma (05 set 2026)
+
+**[CLJ NSR — Sistema](https://www.figma.com/design/CaCmCwkjD34BoLjEfoRxLP)** — onde as peças de interface passam a ser trabalhadas. Três páginas: *Fundações* (variáveis e a legenda), *Barras* (navegação) e *Selecionáveis*.
+
+### Armadilha registrada
+
+**A tipografia do arquivo não é a do produto.** SF Pro aparece na lista de fontes do Figma mas devolve largura zero — não renderiza neste ambiente; New York não existe. No arquivo elas estão substituídas por **Inter** e **Newsreader**. No código continua valendo a fonte do sistema (§9b). A legenda está escrita na página *Fundações* para quem abrir o arquivo.
+
+### Limites do plano Starter
+
+- **3 páginas** no máximo.
+- **1 modo por coleção de variáveis.** No Professional, os cinco tempos litúrgicos virariam modos e o ano inteiro trocaria num clique — é o encaixe natural de §9c. Por ora cada tempo é uma variável nomeada.
+
+### A navegação: uma peça, duas apresentações
+
+| | Celular | Computador |
+|---|---|---|
+| **Navegação** | cápsula flutuante em vidro, destacada das bordas | sidebar de 264px sobre `superficie` |
+| **Selecionado** | glifo preenchido + rótulo, ambos no azul da ação | linha em chip branco elevado, glifo tingido, texto em `tinta` |
+| **Contagem** | selo azul sobre o glifo de Hoje | selo azul à direita da linha |
+| **Barra do dia** | mini-player de vidro logo acima da barra de abas | acoplada ao rodapé da sidebar |
+
+A **barra do dia** é o padrão do mini-player do Apple Music aplicado ao produto: persistente, mostra a próxima coisa a sair, e o envio está a um toque sem sair da tela. No Mac o mini-player mora no rodapé da sidebar — e é exatamente onde ela ficou.
+
+O selo de contagem usa o **azul da ação**, não o vermelho de sistema: vermelho é cor litúrgica (mártires e Pentecostes) e não pode virar cor de alerta de interface.
+
+Os glifos do arquivo são provisórios. No app são **SF Symbols** de verdade — o Expo SDK 57 traz native tabs com SF Symbols e Liquid Glass, com a variante preenchida no estado selecionado ([`decisoes-tecnicas.md`](decisoes-tecnicas.md) §1).
+
 ## 10. Status do design (2026-08-27)
 
 - ✅ Identidade aplicada nos 21 artboards do canvas (desktop + mobile + componentes + marcas)

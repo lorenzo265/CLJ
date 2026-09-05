@@ -9,6 +9,7 @@ import type { EstadoForm } from "@/lib/actions/auth";
 function revalidar(): void {
   revalidatePath("/coordenador/funcoes");
   revalidatePath("/coordenador/escala");
+  revalidatePath("/coordenador/participantes");
   revalidatePath("/voce");
 }
 

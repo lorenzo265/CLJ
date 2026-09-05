@@ -218,7 +218,7 @@ export function FuncoesManager({ funcoes }: { funcoes: FuncaoNaGestao[] }) {
         </>
       )}
 
-      <Dialog open={formAberto} onOpenChange={setFormAberto}>
+      <Dialog disablePointerDismissal open={formAberto} onOpenChange={setFormAberto}>
         <DialogContent>
           <FormularioFuncao
             key={form.n}
@@ -228,7 +228,7 @@ export function FuncoesManager({ funcoes }: { funcoes: FuncaoNaGestao[] }) {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={exclusaoAberta} onOpenChange={setExclusaoAberta}>
+      <Dialog disablePointerDismissal open={exclusaoAberta} onOpenChange={setExclusaoAberta}>
         <DialogContent>
           {exclusao.alvo && (
             <ConfirmarExclusao

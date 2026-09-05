@@ -84,7 +84,7 @@ export function NovaReuniaoBotao({ className }: { className?: string }) {
         Nova reunião
       </Button>
 
-      <Dialog open={aberto} onOpenChange={setAberto}>
+      <Dialog disablePointerDismissal open={aberto} onOpenChange={setAberto}>
         <DialogContent>
           <FormularioReuniao key={n} aoFechar={() => setAberto(false)} />
         </DialogContent>
@@ -147,7 +147,7 @@ export function EditorReuniao({
 
       <Presenca reuniao={reuniao} pessoas={pessoas} realizada={realizada} />
 
-      <Dialog open={aberto} onOpenChange={setAberto}>
+      <Dialog disablePointerDismissal open={aberto} onOpenChange={setAberto}>
         <DialogContent>
           <FormularioReuniao
             key={n}
@@ -185,7 +185,7 @@ function FormularioReuniao({
   useEffect(() => {
     if (estado === tratado.current || !estado.ok) return;
     tratado.current = estado;
-    toast.success(editando ? "Reunião atualizada." : "Reunião marcada.");
+    toast.success(editando ? "Data e hora atualizadas." : "Reunião marcada.");
     aoFechar();
   }, [estado, editando, aoFechar]);
 
@@ -281,7 +281,7 @@ function FormularioReuniao({
           Cancelar
         </Button>
         <Button type="submit" disabled={pendente}>
-          {pendente ? "Salvando…" : editando ? "Salvar reunião" : "Marcar reunião"}
+          {pendente ? "Salvando…" : editando ? "Salvar dados" : "Marcar reunião"}
         </Button>
       </DialogFooter>
     </form>
@@ -315,7 +315,7 @@ function FormularioDaAta({ reuniao, pessoas }: { reuniao: ReuniaoCompleta; pesso
   useEffect(() => {
     if (estado === tratado.current || !estado.ok) return;
     tratado.current = estado;
-    toast.success("Reunião salva.");
+    toast.success("Ata salva.");
   }, [estado]);
 
   // Quem já carrega um encaminhamento continua na lista mesmo depois de inativado —
@@ -511,7 +511,7 @@ function FormularioDaAta({ reuniao, pessoas }: { reuniao: ReuniaoCompleta; pesso
 
       <div className="flex justify-end border-t border-border-soft pt-4">
         <Button type="submit" disabled={pendente} className="w-full sm:w-auto">
-          {pendente ? "Salvando…" : "Salvar reunião"}
+          {pendente ? "Salvando…" : "Salvar ata"}
         </Button>
       </div>
     </form>
@@ -619,7 +619,7 @@ function AlternadorPresenca({
           disabled={pendente}
           aria-label={
             presente
-              ? `Tirar ${pessoa.nome} da presença`
+              ? `Presente ✓ — tirar ${pessoa.nome} da presença`
               : `Marcar presença de ${pessoa.nome}`
           }
           className="min-h-11 shrink-0 lg:min-h-8"
@@ -658,7 +658,7 @@ function BotaoAdicionar({ children, onClick }: { children: ReactNode; onClick: (
       variant="outline"
       size="sm"
       onClick={onClick}
-      className="mt-2.5 border-dashed text-muted-foreground"
+      className="mt-2.5 min-h-11 border-dashed text-muted-foreground lg:min-h-8"
     >
       <Plus aria-hidden />
       {children}

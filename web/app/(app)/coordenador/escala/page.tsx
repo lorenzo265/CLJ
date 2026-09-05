@@ -20,6 +20,8 @@ export const metadata: Metadata = { title: "Gestão de Escala · CLJ NSR" };
 
 const TODAS = "todas";
 const TODOS = "todos";
+/** O recorte que o alerta de furo do painel abre: só o que ainda não tem quem faça. */
+const SEM_RESPONSAVEL = "sem";
 
 /**
  * A tela onde a escala é montada. Os três filtros moram na querystring e são aplicados no
@@ -50,11 +52,14 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
     ? (statusParam as StatusAtividade)
     : TODOS;
 
+  const soFuros = texto(params.responsavel) === SEM_RESPONSAVEL;
+
   const noRecorte = atividades.filter(
     (a) =>
       a.data.startsWith(mesAtual) &&
       (funcaoAtual === TODAS || a.funcaoId === funcaoAtual) &&
-      (statusAtual === TODOS || a.status === statusAtual),
+      (statusAtual === TODOS || a.status === statusAtual) &&
+      (!soFuros || !a.responsavelId),
   );
 
   // A ordem cronológica é a mesma de toda tela de escala — vem do domínio, não daqui.
@@ -73,7 +78,8 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
   const hojeISO = format(agora, "yyyy-MM-dd");
   // Criando enquanto se folheia outro mês, a data sugerida é o dia 1 dele — não hoje.
   const dataPadrao = hojeISO.startsWith(mesAtual) ? hojeISO : `${mesAtual}-01`;
-  const filtrado = funcaoAtual !== TODAS || statusAtual !== TODOS || mesAtual !== hojeISO.slice(0, 7);
+  const filtrado =
+    soFuros || funcaoAtual !== TODAS || statusAtual !== TODOS || mesAtual !== hojeISO.slice(0, 7);
 
   return (
     <>
@@ -117,6 +123,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
               ...STATUS_ATIVIDADE.map((s) => ({ valor: s, rotulo: rotuloStatus(s) })),
             ]}
           />
+          {soFuros && <input type="hidden" name="responsavel" value={SEM_RESPONSAVEL} />}
           <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
             <button
               type="submit"
@@ -142,12 +149,21 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
         <p className="text-[12.5px] text-muted-foreground">
           {emOrdem.length} {emOrdem.length === 1 ? "atividade" : "atividades"} em{" "}
           {formatarMesAno(referencia).toLowerCase()}
-          {semResponsavel > 0 && (
+          {semResponsavel > 0 && !soFuros && (
             <>
               {" · "}
-              <span className="font-semibold text-warn">
+              <Link
+                href={`/coordenador/escala?${new URLSearchParams({ mes: mesAtual, funcao: funcaoAtual, status: statusAtual, responsavel: SEM_RESPONSAVEL })}`}
+                className="font-semibold text-warn underline underline-offset-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 {semResponsavel} ainda sem responsável
-              </span>
+              </Link>
+            </>
+          )}
+          {soFuros && (
+            <>
+              {" · "}
+              <span className="font-semibold text-warn">só as que estão sem responsável</span>
             </>
           )}
         </p>
@@ -158,7 +174,9 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
           funcoes={funcoes}
           dataPadrao={dataPadrao}
           mensagemVazia={
-            funcaoAtual === TODAS && statusAtual === TODOS
+            soFuros
+              ? "Nenhuma atividade sem responsável neste mês — está tudo com dono."
+              : funcaoAtual === TODAS && statusAtual === TODOS
               ? `Nada marcado em ${formatarMesAno(referencia).toLowerCase()} por enquanto.`
               : "Nada neste recorte. Tente outro mês, função ou status."
           }

@@ -21,6 +21,8 @@ export default async function VocePage() {
     getIdsDeFuncoesDaPessoa(eu.id),
   ]);
 
+  const gravado = [eu.nome, eu.contato, ...minhasFuncoes, ...eu.disponibilidade.dias, ...eu.disponibilidade.periodos].join("|");
+
   return (
     <>
       <PageHeader title="Você" subtitle="Seu cadastro no Departamento Cultural" />
@@ -46,7 +48,14 @@ export default async function VocePage() {
           pode.
         </p>
 
+        {/*
+          O formulário é não controlado: os campos nascem do que está gravado e passam a
+          pertencer a quem digita. Quando o servidor revalida com dados novos — o próprio
+          salvamento, ou a coordenação mexendo nas funções — a `key` remonta o formulário
+          para que ele mostre a verdade nova em vez de manter a antiga na tela.
+        */}
         <CadastroForm
+          key={gravado}
           nome={eu.nome}
           contato={eu.contato}
           funcoes={funcoes}

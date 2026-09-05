@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { StatusReuniao } from "@/components/fio/status-pill";
-import { Kicker } from "@/components/fio/tipografia";
 import { BotaoPresenca } from "@/components/reunioes/botao-presenca";
 import { reuniaoRealizada, type ReuniaoCompleta } from "@/lib/data/reunioes";
 import { formatarDataCurta, formatarDataLonga, formatarHora, nomeCurto } from "@/lib/format";
@@ -16,25 +15,36 @@ export function DetalheReuniao({
   reuniao,
   pessoas,
   euId,
+  hojeISO,
   className,
 }: {
   reuniao: ReuniaoCompleta;
   pessoas: Pessoa[];
   euId: string;
+  /** Hoje pelo relógio de quem lê — decide o que ainda é promessa e o que já é registro. */
+  hojeISO: string;
   className?: string;
 }) {
   const { atividade, pauta, decisoes, followUp, presentes } = reuniao;
   const realizada = reuniaoRealizada(atividade);
   const pessoaPorId = new Map(pessoas.map((p) => [p.id, p]));
 
-  // Quem "podia estar lá" é quem está ativo no departamento — inativo não entra na conta.
-  const convocados = pessoas.filter((p) => p.status === "ativo").length;
-  const confirmei = presentes.includes(euId);
+  // A data manda tanto quanto o status: uma reunião de ontem que ninguém marcou como
+  // realizada já passou, e convidar a confirmar presença nela seria pedir o impossível.
+  const jaPassou = realizada || atividade.data < hojeISO;
+
+  // Quem "podia estar lá" é quem está ativo — mais quem já confirmou e foi inativado depois,
+  // senão o numerador passa o denominador ("6 de 5 presentes").
+  const confirmados = new Set(presentes);
+  const convocados = pessoas.filter(
+    (p) => p.status === "ativo" || confirmados.has(p.id),
+  ).length;
+  const confirmei = confirmados.has(euId);
 
   const contexto = [
     formatarDataLonga(atividade.data),
     formatarHora(atividade.hora),
-    fraseDePresenca(presentes.length, convocados, realizada),
+    fraseDePresenca(presentes.length, convocados, jaPassou),
   ]
     .filter(Boolean)
     .join(" · ");
@@ -55,7 +65,7 @@ export function DetalheReuniao({
       </header>
 
       {/* Confirmar presença só faz sentido antes: depois da reunião o registro é histórico. */}
-      {!realizada && (
+      {!jaPassou && (
         <div className="mt-4 border-t border-border-soft pt-4">
           <BotaoPresenca atividadeId={atividade.id} pessoaId={euId} confirmado={confirmei} />
         </div>
@@ -86,7 +96,7 @@ export function DetalheReuniao({
             </ul>
           ) : (
             <Sereno>
-              {realizada
+              {jaPassou
                 ? "Nada foi registrado desta reunião ainda."
                 : "As decisões aparecem aqui depois da reunião."}
             </Sereno>
@@ -138,7 +148,7 @@ export function DetalheReuniao({
             </>
           ) : (
             <Sereno>
-              {realizada
+              {jaPassou
                 ? "Nenhum encaminhamento saiu desta reunião."
                 : "Os encaminhamentos aparecem aqui depois da reunião."}
             </Sereno>
@@ -149,10 +159,14 @@ export function DetalheReuniao({
   );
 }
 
+/**
+ * Cada bloco é uma seção com nome: o rótulo é um <h3> com a aparência de kicker, e não um
+ * <span> solto — assim o leitor de tela navega "Pauta / Decisões / Follow-up" por cabeçalho.
+ */
 function Bloco({ titulo, children }: { titulo: string; children: ReactNode }) {
   return (
     <section>
-      <Kicker className="mb-2.5">{titulo}</Kicker>
+      <h3 className="kicker mb-2.5">{titulo}</h3>
       {children}
     </section>
   );

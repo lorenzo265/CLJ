@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { exigirCoordenadorEmAction } from "@/lib/auth/sessao";
 import { emailValido, lista, texto } from "@/lib/actions/comum";
-import { criarConvite, revogarConvite } from "@/lib/repos/auth";
+import { buscarConvite, criarConvite, revogarConvite } from "@/lib/repos/auth";
 import { listarFuncoes } from "@/lib/repos/funcoes";
 import * as repo from "@/lib/repos/pessoas";
 import type { EstadoForm } from "@/lib/actions/auth";
@@ -45,8 +45,17 @@ export async function convidarParticipante(
 }
 
 export async function cancelarConvite(_estado: EstadoForm, formData: FormData): Promise<EstadoForm> {
-  await exigirCoordenadorEmAction();
-  revogarConvite(texto(formData, "token", 200));
+  const coordenador = await exigirCoordenadorEmAction();
+
+  // O token vem cru do formulário: sem conferir o departamento, uma coordenação poderia
+  // revogar o convite de outro — a mesma checagem que as outras quatro actions fazem.
+  const token = texto(formData, "token", 200);
+  const convite = buscarConvite(token);
+  if (!convite || convite.departamentoId !== coordenador.departamentoId) {
+    return { erro: "Convite não encontrado." };
+  }
+
+  revogarConvite(token);
   revalidar();
   return { ok: true };
 }

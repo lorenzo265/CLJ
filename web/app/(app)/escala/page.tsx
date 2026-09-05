@@ -59,8 +59,13 @@ export default async function EscalaPage({ searchParams }: PageProps<"/escala">)
           tituloHoje={`Hoje · ${formatarDiaEMes(hojeISO)}`}
         />
 
-        {/* A legenda só serve onde os três estados de conta aparecem juntos. */}
-        {atual === "todos" && <LegendaContas className="mt-2" />}
+        {/*
+          A legenda entra quando a lista mistura estados de conta: no "todos" sempre, e no
+          "meus" quando há suplência ao lado de responsabilidade.
+        */}
+        {(atual === "todos" || itens.some((i) => i.papel === "suplente")) && (
+          <LegendaContas className="mt-2" />
+        )}
       </div>
     </>
   );

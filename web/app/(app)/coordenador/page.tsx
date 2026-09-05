@@ -73,7 +73,7 @@ export default async function PainelPage() {
 
         {temFuro && (
           <Link
-            href="/coordenador/escala"
+            href={`/coordenador/escala?mes=${emFuro[0].data.slice(0, 7)}&responsavel=sem`}
             className="block rounded-xl border border-warn/20 bg-warn-soft px-4 py-3.5 outline-none transition-colors hover:border-warn/40 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             <div className="flex items-start gap-3">
@@ -97,7 +97,7 @@ export default async function PainelPage() {
                   {emFuro.slice(0, FUROS_LISTADOS).map((a) => (
                     <li
                       key={a.id}
-                      className="flex items-baseline justify-between gap-3 text-[12.5px] text-warn/85"
+                      className="flex items-baseline justify-between gap-3 text-[12.5px] text-foreground/85"
                     >
                       <span className="truncate font-semibold">{a.titulo}</span>
                       <span className="shrink-0 font-mono text-[11px]">
@@ -106,7 +106,7 @@ export default async function PainelPage() {
                     </li>
                   ))}
                   {emFuro.length > FUROS_LISTADOS && (
-                    <li className="text-[12.5px] text-warn/85">
+                    <li className="text-[12.5px] text-foreground/85">
                       e mais {emFuro.length - FUROS_LISTADOS} na escala
                     </li>
                   )}

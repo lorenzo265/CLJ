@@ -78,14 +78,19 @@
 }
 
 :root {
-  /* Papel e tinta */
+  /*
+    Papel e tinta.
+    Os três níveis de texto passam AA sobre papel e painel (14.6 / 7.0 / 4.8) e continuam
+    distinguíveis entre si — o terciário do canvas (#A9A199) ficava em 2.4, o que reprova
+    qualquer texto. Ver decisoes-design.md §3.
+  */
   --bg: #faf7f2;
   --panel: #ffffff;
   --border-hair: #e4ddd0;
   --border-soft: #efeae1;
   --text: #262320;
-  --text-muted: #6e6862;
-  --text-faint: #a9a199;
+  --text-muted: #5a544e;
+  --text-faint: #756c64;
 
   /* O azul da paróquia — único destaque */
   --azul: #253990;
@@ -98,10 +103,15 @@
   --gold-ink: #7a5d22;
   --gold-soft: #f3e9d2;
 
-  /* Semânticas — status é sempre cor + palavra */
+  /*
+    Semânticas — status é sempre cor + palavra.
+    Os valores são mais escuros que os do canvas porque a régua do próprio
+    decisoes-design.md §3 é AA, e cada um destes é lido COMO TEXTO sobre o próprio wash:
+    o hex original ficava entre 3.4 e 4.0 nessa combinação.
+  */
   --ok: #4d6a44;
   --ok-soft: #e7eee3;
-  --warn: #9b5820;
+  --warn: #8d4e1a;
   --warn-soft: #f5e5d3;
   --info: #4a6885;
   --info-soft: #e4ecf1;
@@ -156,7 +166,7 @@
   --border-soft: #2e2a23;
   --text: #f1ebe0;
   --text-muted: #b7ad9e;
-  --text-faint: #877e73;
+  --text-faint: #948a7e;
 
   --azul: #93a4ea;
   --accent-ink: #bcc6f5;

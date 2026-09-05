@@ -42,8 +42,11 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
   const { mes, filtro } = await searchParams;
 
   const agora = new Date();
-  const atual = filtro === "todos" ? "todos" : "meus";
+  // Ao contrário da Escala, aqui o padrão é "todos": a leitura do calendário É o contraste
+  // entre a conta cheia (sua) e a neutra (do departamento) — abrir filtrado apagaria metade.
+  const atual = filtro === "meus" ? "meus" : "todos";
   const referencia = parseReferenciaMes(typeof mes === "string" ? mes : undefined, agora);
+  const mesAtual = formatarReferenciaMes(referencia);
 
   const [atividades, pessoas] = await Promise.all([
     getAtividades(eu.departamentoId),
@@ -74,7 +77,7 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
           <Link href={hrefMes(mesAnterior(referencia))} aria-label="Mês anterior" className={setaClasse}>
             <ChevronLeft />
           </Link>
-          <span className="w-[104px] text-center sm:w-[132px]">
+          <span aria-live="polite" aria-atomic="true" className="w-[104px] text-center sm:w-[132px]">
             <span className="font-mono text-[12px] font-semibold tabular-nums sm:hidden">
               {formatarMesAnoCurto(referencia)}
             </span>
@@ -95,9 +98,13 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
         */}
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:gap-6">
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            <FiltroMeusTodos base="/calendario" atual={atual} />
+            <FiltroMeusTodos
+              base="/calendario"
+              atual={atual}
+              extraParams={{ mes: mesAtual }}
+            />
             <MonthGrid dias={getGradeDoMes(referencia, agora)} itens={itens} />
-            <LegendaContas />
+            {atual === "todos" && <LegendaContas />}
           </div>
 
           <section className="flex w-full flex-col gap-2.5 xl:w-[250px] xl:shrink-0">
@@ -159,8 +166,6 @@ function CartaoProximo({
         )}
       >
         {formatarDataKicker(atividade.data)} · {rotuloTipo(atividade.tipo)}
-        {papel === "responsavel" && " · é sua vez"}
-        {papel === "suplente" && " · sua suplência"}
       </p>
       <p
         className={cn(

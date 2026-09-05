@@ -41,11 +41,21 @@ Light (padrão). Dark mode existe derivado no doc de abertura — re-derivar por
 
 Regras: um destaque por tela; azul é marca-texto, não tinta de parede; contraste AA mínimo.
 
-**Correção de contraste (2026-09-05, ao aplicar no app):** três semânticas não passavam AA
-como texto sobre o próprio wash e foram escurecidas — `--ok` `#5C7A52`→**`#4D6A44`**,
-`--warn` `#B4682A`→**`#9B5820`**, `--info` `#5B7A96`→**`#4A6885`**. `--crit` ficou como estava.
-A regra do próprio doc ("contraste AA mínimo") decide contra o hex antigo; os artboards do
-canvas ainda mostram os valores anteriores.
+**Correção de contraste (2026-09-05, ao aplicar no app).** A régua do próprio doc é AA, e
+seis valores do canvas reprovavam nas combinações em que o app realmente os usa. Medidos e
+corrigidos:
+
+| Token | Canvas | App | Por quê |
+|---|---|---|---|
+| `--text-muted` | `#6E6862` | **`#5A544E`** | abre espaço para o terciário sem colar nele |
+| `--text-faint` | `#A9A199` | **`#756C64`** | **2.4:1** sobre o papel — reprova qualquer texto, e ele pinta kicker, data e rótulo de coluna |
+| `--ok` | `#5C7A52` | **`#4D6A44`** | 4.0:1 sobre o próprio wash |
+| `--warn` | `#B4682A` | **`#8D4E1A`** | 3.4:1 sobre o próprio wash |
+| `--info` | `#5B7A96` | **`#4A6885`** | 4.1:1 sobre o próprio wash |
+
+Os três níveis de texto ficam em 14.6 / 7.0 / 4.8 sobre o papel — todos AA e ainda
+distinguíveis entre si. `--crit` já passava. **Os artboards do canvas ainda mostram os hex
+antigos**: sincronizar é uma pendência da §10.
 
 ## 3b. Contas — tratamento visual (v2, flat)
 

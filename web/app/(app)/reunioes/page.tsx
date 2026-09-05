@@ -68,6 +68,7 @@ export default async function ReunioesPage({ searchParams }: PageProps<"/reunioe
               reuniao={selecionada}
               pessoas={pessoas}
               euId={eu.id}
+              hojeISO={hojeISO}
               className="flex-1"
             />
           </div>
@@ -126,9 +127,11 @@ function selecionar(
   const escolhida = pedida ? reunioes.find((x) => x.atividadeId === pedida) : undefined;
   if (escolhida) return escolhida;
 
-  const agendadas = reunioes.filter((x) => !reuniaoRealizada(x.atividade));
-  const futuras = agendadas.filter((x) => x.atividade.data >= hojeISO);
+  const futuras = reunioes.filter(
+    (x) => !reuniaoRealizada(x.atividade) && x.atividade.data >= hojeISO,
+  );
 
-  // Na ordem decrescente, a última das futuras é a mais próxima de hoje.
-  return futuras.at(-1) ?? agendadas[0] ?? reunioes[0];
+  // Na ordem decrescente, a última das futuras é a mais próxima de hoje; sem nenhuma pela
+  // frente, `reunioes[0]` é a mais recente que já passou — marcada como realizada ou não.
+  return futuras.at(-1) ?? reunioes[0];
 }

@@ -607,7 +607,7 @@ export function NovaAtividadeBotao({
         Nova atividade
       </Button>
 
-      <Dialog open={aberto} onOpenChange={setAberto}>
+      <Dialog disablePointerDismissal open={aberto} onOpenChange={setAberto}>
         <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Nova atividade</DialogTitle>
@@ -818,7 +818,7 @@ export function AtividadesManager({
         Um diálogo de cada tipo para a tela inteira, guiado pelo foco — e não um por linha.
         O `key` na atividade zera o formulário quando o foco muda de uma linha para outra.
       */}
-      <Dialog open={foco?.modo === "editar"} onOpenChange={(aberto) => !aberto && fechar()}>
+      <Dialog disablePointerDismissal open={foco?.modo === "editar"} onOpenChange={(aberto) => !aberto && fechar()}>
         <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-lg">
           {foco?.modo === "editar" && (
             <>
@@ -841,7 +841,7 @@ export function AtividadesManager({
         </DialogContent>
       </Dialog>
 
-      <Dialog open={foco?.modo === "trocar"} onOpenChange={(aberto) => !aberto && fechar()}>
+      <Dialog disablePointerDismissal open={foco?.modo === "trocar"} onOpenChange={(aberto) => !aberto && fechar()}>
         <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-md">
           {foco?.modo === "trocar" && (
             <>
@@ -864,7 +864,7 @@ export function AtividadesManager({
         </DialogContent>
       </Dialog>
 
-      <Dialog open={foco?.modo === "excluir"} onOpenChange={(aberto) => !aberto && fechar()}>
+      <Dialog disablePointerDismissal open={foco?.modo === "excluir"} onOpenChange={(aberto) => !aberto && fechar()}>
         <DialogContent className="sm:max-w-md">
           {foco?.modo === "excluir" && (
             <>

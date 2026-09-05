@@ -35,7 +35,10 @@ const { DEPARTAMENTO_CULTURAL } = await import("@/lib/departamento");
 const { salvarFuncao, excluirFuncao } = await import("@/lib/actions/funcoes");
 const { trocarResponsavel, salvarAtividade } = await import("@/lib/actions/escala");
 const { alternarPresenca } = await import("@/lib/actions/reunioes");
-const { alternarStatusPessoa, mudarPapel } = await import("@/lib/actions/participantes");
+const { alternarStatusPessoa, cancelarConvite, mudarPapel } = await import(
+  "@/lib/actions/participantes",
+);
+const { criarConvite, buscarConvite } = await import("@/lib/repos/auth");
 const { salvarMeuCadastro } = await import("@/lib/actions/cadastro");
 const { buscarPessoa, funcoesDaPessoa } = await import("@/lib/repos/pessoas");
 
@@ -108,6 +111,21 @@ describe("regras de negócio que a UI não pode contornar", () => {
     const resultado = await mudarPapel({}, form({ id: eu, papel: "participante" }));
     expect(resultado.erro).toMatch(/pelo menos uma pessoa na coordenação/);
     expect(buscarPessoa(eu)?.papelSistema).toBe("coordenador");
+  });
+
+  it("convite de outro departamento não é revogável pelo token", async () => {
+    entrarComo(COORDENADORA);
+    const alheio = criarConvite({
+      email: "de-outra-paroquia@exemplo.org",
+      nome: "",
+      papelSistema: "participante",
+      departamentoId: "outro-departamento",
+      criadoPor: "p1",
+    });
+
+    const resultado = await cancelarConvite({}, form({ token: alheio.token }));
+    expect(resultado.erro).toMatch(/não encontrado/);
+    expect(buscarConvite(alheio.token)).toBeDefined();
   });
 
   it("atividade de outro departamento não é alcançável pelo id", async () => {

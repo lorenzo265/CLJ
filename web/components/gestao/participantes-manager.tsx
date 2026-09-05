@@ -6,6 +6,7 @@ import {
   useId,
   useRef,
   useState,
+  type ComponentProps,
   type ReactNode,
 } from "react";
 import { ChevronDown, Copy, Pencil, Plus } from "lucide-react";
@@ -34,7 +35,7 @@ import {
 import { formatarDataCurta, nomeCurto } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { EstadoForm } from "@/lib/actions/auth";
-import type { Convite, Funcao, Pessoa } from "@/lib/types";
+import type { Convite, Funcao, PapelSistema, Pessoa } from "@/lib/types";
 
 const INICIAL: EstadoForm = {};
 const INICIAL_CONVITE: EstadoConvite = {};
@@ -129,9 +130,13 @@ function Th({ children, className }: { children: ReactNode; className?: string }
 function SelectPapel({
   id,
   defaultValue,
+  value,
+  onChange,
 }: {
   id: string;
-  defaultValue: Pessoa["papelSistema"];
+  defaultValue?: Pessoa["papelSistema"];
+  value?: Pessoa["papelSistema"];
+  onChange?: ComponentProps<"select">["onChange"];
 }) {
   return (
     <span className="relative block">
@@ -139,6 +144,8 @@ function SelectPapel({
         id={id}
         name="papel"
         defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         className="h-11 w-full appearance-none rounded-lg border border-input bg-panel pr-9 pl-3 text-[14px] outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 lg:h-9 lg:text-[13px]"
       >
         <option value="participante">Participante</option>
@@ -328,7 +335,7 @@ export function ParticipantesManager({
         )}
       </section>
 
-      <Dialog open={aberto} onOpenChange={setAberto}>
+      <Dialog disablePointerDismissal open={aberto} onOpenChange={setAberto}>
         <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-md">
           {alvo && (
             <GerenciarPessoa
@@ -637,9 +644,15 @@ function ChipFuncao({ funcao, marcada }: { funcao: Funcao; marcada: boolean }) {
   );
 }
 
+/**
+ * Sair da própria coordenação é irreversível de dentro: a action só recusa quando não
+ * sobraria mais ninguém, então com outra pessoa na coordenação o clique tira o acesso na
+ * hora. Por isso o mesmo pedido de confirmação em duas etapas do FormStatus.
+ */
 function FormPapel({ pessoa, souEu }: { pessoa: PessoaNaGestao; souEu: boolean }) {
   const [estado, acao, pendente] = useActionState(mudarPapel, INICIAL);
   const campo = useId();
+  const [escolhido, setEscolhido] = useState<PapelSistema>(pessoa.papelSistema);
 
   const tratado = useRef<EstadoForm>(INICIAL);
   useEffect(() => {
@@ -648,13 +661,19 @@ function FormPapel({ pessoa, souEu }: { pessoa: PessoaNaGestao; souEu: boolean }
     toast.success("Papel atualizado.");
   }, [estado]);
 
+  const vaiSeRebaixar = souEu && pessoa.papelSistema === "coordenador" && escolhido === "participante";
+
   return (
     <form action={acao} className="flex flex-col gap-3">
       <input type="hidden" name="id" value={pessoa.id} />
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor={`${campo}-papel`}>Papel no app</Label>
-        <SelectPapel id={`${campo}-papel`} defaultValue={pessoa.papelSistema} />
+        <SelectPapel
+          id={`${campo}-papel`}
+          value={escolhido}
+          onChange={(e) => setEscolhido(e.currentTarget.value as PapelSistema)}
+        />
         <p className="text-[12px] text-muted-foreground">
           Quem está na coordenação enxerga a escala inteira, convida gente e edita as
           atividades.
@@ -664,11 +683,36 @@ function FormPapel({ pessoa, souEu }: { pessoa: PessoaNaGestao; souEu: boolean }
 
       {estado.erro && <Erro>{estado.erro}</Erro>}
 
-      <div className="flex justify-end">
-        <Button type="submit" variant="outline" disabled={pendente}>
-          {pendente ? "Salvando…" : "Salvar papel"}
-        </Button>
-      </div>
+      {vaiSeRebaixar ? (
+        <div className="rounded-lg bg-warn-soft px-3 py-2.5">
+          <p className="text-[12.5px] text-warn">
+            Sair da coordenação? Você perde estas telas na hora, e só outra pessoa da
+            coordenação pode te trazer de volta.
+          </p>
+          <div className="mt-2.5 flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setEscolhido(pessoa.papelSistema)}
+            >
+              Continuar na coordenação
+            </Button>
+            <Button type="submit" variant="destructive" disabled={pendente}>
+              {pendente ? "Saindo…" : "Sair da coordenação"}
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={pendente || escolhido === pessoa.papelSistema}
+          >
+            {pendente ? "Salvando…" : "Salvar papel"}
+          </Button>
+        </div>
+      )}
     </form>
   );
 }

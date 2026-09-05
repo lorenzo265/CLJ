@@ -1,12 +1,10 @@
-import { redirect } from "next/navigation";
-import { getPessoa } from "@/lib/data/pessoas";
-import { PESSOA_ATUAL_ID } from "@/lib/mock/current-user";
+import { exigirCoordenador } from "@/lib/auth/sessao";
 
-// Guarda simples baseada no mock de usuário atual — vira guarda de verdade
-// (sessão real) quando o backend existir.
+/**
+ * A guarda de papel. Vale como primeira barreira, não como a única: cada action de
+ * coordenação confere o papel de novo no servidor (docs/sdd-implementacao.md §2, regra 3).
+ */
 export default async function CoordenadorLayout({ children }: LayoutProps<"/coordenador">) {
-  const pessoa = await getPessoa(PESSOA_ATUAL_ID);
-  if (pessoa?.papelSistema !== "coordenador") redirect("/escala");
-
-  return children;
+  await exigirCoordenador();
+  return <>{children}</>;
 }

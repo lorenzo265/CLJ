@@ -1,17 +1,25 @@
-import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/shell/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { getPessoa } from "@/lib/data/pessoas";
-import { PESSOA_ATUAL_ID } from "@/lib/mock/current-user";
+import { MobileNav } from "@/components/shell/mobile-nav";
+import { exigirPessoa } from "@/lib/auth/sessao";
 
+/**
+ * O shell autenticado. Duas densidades da mesma identidade: o fio à esquerda no desktop,
+ * a bottom nav embaixo no celular (docs/decisoes-design.md §7.3).
+ */
 export default async function AppLayout({ children }: LayoutProps<"/">) {
-  const pessoa = await getPessoa(PESSOA_ATUAL_ID);
-  if (!pessoa) redirect("/login");
+  const pessoa = await exigirPessoa();
 
   return (
-    <SidebarProvider>
-      <AppSidebar nome={pessoa.nome} papelSistema={pessoa.papelSistema} />
-      <SidebarInset>{children}</SidebarInset>
-    </SidebarProvider>
+    <div className="flex min-h-svh bg-background">
+      <AppSidebar
+        nome={pessoa.nome}
+        papelSistema={pessoa.papelSistema}
+        className="hidden lg:flex"
+      />
+      <div className="flex min-w-0 flex-1 flex-col pb-[calc(56px+env(safe-area-inset-bottom))] lg:pb-0">
+        {children}
+      </div>
+      <MobileNav className="lg:hidden" />
+    </div>
   );
 }

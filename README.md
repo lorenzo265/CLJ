@@ -8,9 +8,9 @@ Plataforma interna de gestão de pessoas do Departamento Cultural da **Paróquia
 
 | Pasta | O que é |
 |---|---|
-| `design/` | Fonte da verdade do design: 18 artboards `.dc.html` + `canvas.json` (layout) + o canvas montado `clj-nsr-estrutura-paginas.html`. Editável no canvas publicado (link abaixo) ou nos arquivos. |
-| `docs/` | Decisões documentadas: [decisoes-design.md](docs/decisoes-design.md) (identidade, tokens, princípios) e [decisoes-estrutura.md](docs/decisoes-estrutura.md) (produto, papéis, telas). `abertura-clj-nsr.html` é o documento de abertura do projeto. |
-| `web/` | O app — Next.js 16 (App Router) + TypeScript + Tailwind 4 + framer-motion. Todas as rotas e telas já existem com **dados mock** (`lib/mock/`); falta backend, autenticação e a aplicação da identidade "O Fio" na UI. |
+| `design/` | Fonte da verdade do design: 21 artboards `.dc.html` + `canvas.json` (layout) + o canvas montado `clj-nsr-estrutura-paginas.html`. Editável no canvas publicado (link abaixo) ou nos arquivos. |
+| `docs/` | Decisões documentadas: [decisoes-design.md](docs/decisoes-design.md) (identidade, tokens, princípios), [decisoes-estrutura.md](docs/decisoes-estrutura.md) (produto, papéis, telas) e [sdd-implementacao.md](docs/sdd-implementacao.md) (o plano que rege o código). `abertura-clj-nsr.html` é o documento de abertura do projeto. |
+| `web/` | O app — Next.js 16 (App Router) + TypeScript + Tailwind 4 + SQLite + GSAP. Todas as telas existem sobre **dados reais e persistentes**, com login por convite e a identidade "O Fio" aplicada. Como rodar e como está organizado: [web/README.md](web/README.md). |
 
 ## Links vivos
 
@@ -30,10 +30,15 @@ npm install
 npm run dev
 ```
 
-Testes: `npm test` · Lint: `npm run lint`
+O banco local nasce sozinho no primeiro boot, com o departamento de demonstração.
+Entre como coordenação em `maria@clj-nsr.local` / `terco2026`, ou como participante em
+`ana@clj-nsr.local` / `terco2026`.
+
+Testes: `npm test` · Lint: `npm run lint` · Recomeçar o banco: `npm run db:reset`
 
 ## Trabalhando em duas máquinas
 
 1. Clone o repositório e rode `npm install` dentro de `web/` (o `node_modules/` não é versionado).
 2. O design é editado preferencialmente no **canvas publicado** (link acima — botão Save publica para todos); os arquivos em `design/` são a cópia versionada. Depois de uma rodada de edições no canvas, sincronize os arquivos de `design/` no repositório para manter o histórico.
-3. Toda decisão nova de design ou estrutura entra em `docs/` — os dois arquivos de decisões são o contrato entre as máquinas (e entre sessões de trabalho com IA).
+   O banco (`web/data/`) é local de cada máquina e não atravessa o Git — o que atravessa é código e decisão.
+3. Toda decisão nova de design ou estrutura entra em `docs/` — os arquivos de decisões (e o plano de implementação) são o contrato entre as máquinas, e entre sessões de trabalho com IA.

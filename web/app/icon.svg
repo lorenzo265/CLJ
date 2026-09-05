@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <g fill="#253990">
+    <circle cx="60" cy="18" r="11"/>
+    <circle cx="96" cy="42" r="11"/>
+    <circle cx="96" cy="82" r="11"/>
+    <circle cx="24" cy="82" r="11"/>
+    <circle cx="24" cy="42" r="11"/>
+  </g>
+  <g stroke="#253990" stroke-width="11" stroke-linecap="round">
+    <line x1="60" y1="88" x2="60" y2="114"/>
+    <line x1="49" y1="99" x2="71" y2="99"/>
+  </g>
+</svg>

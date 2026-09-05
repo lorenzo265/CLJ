@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
+import { getSessao } from "@/lib/auth/sessao";
 
-export default function RootPage() {
-  redirect("/login");
+/** A porta: quem está logado cai na manchete do dia; quem não está, no login. */
+export default async function RootPage() {
+  const pessoa = await getSessao();
+  redirect(pessoa ? "/hoje" : "/login");
 }

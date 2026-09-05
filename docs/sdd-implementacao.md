@@ -156,15 +156,17 @@ contraste AA nos pares texto/fundo usados; as quatro contas batem com o artboard
 
 **Entrega:** o que foi salvo continua lá depois do reload.
 
-- `lib/db/schema.sql` + `lib/db/index.ts` (singleton com `foreign_keys=ON`, WAL) +
-  `lib/db/migrate.ts` (idempotente, roda no boot) + `lib/db/seed.ts` (lê `lib/mock/` e
-  popula um banco vazio; `npm run db:seed`).
+- `lib/db/schema.sql` + `lib/db/index.ts` (conexão única com `foreign_keys=ON` e WAL,
+  migração idempotente no boot) + `lib/db/seed.ts`, que semeia **só banco vazio**: em
+  desenvolvimento, o departamento de demonstração (os dados que estavam em `lib/mock/`, que
+  deixa de existir); em produção, o catálogo de funções e a coordenação vinda das variáveis
+  `CLJ_COORDENADOR_*` — sem elas, nenhuma conta é criada e o app avisa no log.
 - `lib/repos/*.ts` — SQL cru, síncrono, um arquivo por agregado.
 - `lib/data/*.ts` reescrito sobre os repos, **mesmas assinaturas**.
 - `data/clj.db` no `.gitignore`.
 
-**Aceite:** as páginas não mudam de import; `rm data/clj.db && npm run db:seed` reconstrói o
-estado de demonstração; teste de repositório roda contra um banco `:memory:`.
+**Aceite:** as páginas não mudam de import; `npm run db:reset` seguido de um boot reconstrói
+o estado de demonstração; teste de repositório roda contra um banco `:memory:`.
 
 ### Fase 3 — Autenticação por convite
 

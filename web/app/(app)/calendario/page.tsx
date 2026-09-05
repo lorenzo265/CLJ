@@ -158,7 +158,7 @@ function CartaoProximo({
           meu ? "text-accent-ink" : "text-muted-foreground",
         )}
       >
-        {formatarDataKicker(atividade.data)}
+        {formatarDataKicker(atividade.data)} · {rotuloTipo(atividade.tipo)}
         {papel === "responsavel" && " · é sua vez"}
         {papel === "suplente" && " · sua suplência"}
       </p>
@@ -168,7 +168,7 @@ function CartaoProximo({
           meu ? "font-bold text-accent-ink" : "font-semibold",
         )}
       >
-        {rotuloTipo(atividade.tipo)} — {atividade.titulo}
+        {atividade.titulo}
       </p>
       <p className={cn("mt-1 text-[12.5px]", meu ? "text-accent-ink/85" : "text-muted-foreground")}>
         {meu

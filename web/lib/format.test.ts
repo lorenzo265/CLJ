@@ -5,6 +5,7 @@ import {
   formatarDiaEMes,
   formatarHora,
   formatarQuando,
+  iniciaisDe,
   nomeCurto,
 } from "@/lib/format";
 
@@ -65,5 +66,17 @@ describe("nomeCurto — como o departamento se chama entre si", () => {
 
   it("espaços sobrando não viram inicial vazia", () => {
     expect(nomeCurto("  Maria   Aparecida  ")).toBe("Maria A.");
+  });
+});
+
+describe("iniciaisDe — o avatar do app é tipográfico", () => {
+  it("pega a inicial dos dois primeiros nomes", () => {
+    expect(iniciaisDe("Maria Aparecida")).toBe("MA");
+    expect(iniciaisDe("Ana Paula Ribeiro")).toBe("AP");
+  });
+
+  it("nome único vira uma letra só, e espaço sobrando não vira inicial vazia", () => {
+    expect(iniciaisDe("Pedro")).toBe("P");
+    expect(iniciaisDe("  joão   marcelo ")).toBe("JM");
   });
 });

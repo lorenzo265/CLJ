@@ -61,8 +61,10 @@ export default async function HojePage() {
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 px-5 pb-10 lg:px-8 lg:pt-6">
         {proxima ? (
           <Manchete
-            kicker="Sua próxima conta"
-            titulo={`${rotuloTipo(proxima.atividade.tipo)} — ${proxima.atividade.titulo}`}
+            // O tipo é rótulo, não prefixo do título: colado, ele duplicaria em qualquer
+            // atividade que já se chame "Post da tarde".
+            kicker={`Sua próxima conta · ${rotuloTipo(proxima.atividade.tipo)}`}
+            titulo={proxima.atividade.titulo}
             frase={fraseDaAtividade(proxima.atividade, proxima.papel, elencoDaProxima, agora)}
             acao={
               <Link

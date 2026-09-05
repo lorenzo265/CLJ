@@ -127,17 +127,17 @@ function d(offsetDias: number): string {
 function atividades() {
   return [
     // id, tipo, titulo, funcao, data, hora, responsavel, suplente, status, midia
-    ["a1", "post", "Post — Terço Diário", "f1", d(-2), "07:00", "p4", null, "publicado", "https://canva.com/design/terco-anteontem"],
-    ["a2", "post", "Post — Terço Diário", "f1", d(0), "07:00", "p1", "p2", "agendado", "https://canva.com/design/terco-hoje"],
+    ["a1", "post", "Terço Diário", "f1", d(-2), "07:00", "p4", null, "publicado", "https://canva.com/design/terco-anteontem"],
+    ["a2", "post", "Terço Diário", "f1", d(0), "07:00", "p1", "p2", "agendado", "https://canva.com/design/terco-hoje"],
     ["a3", "reuniao", "Reunião de equipe", null, d(1), "19:30", "p1", null, "agendado", null],
-    ["a4", "post", "Post — Terço Diário", "f1", d(3), "07:00", "p3", "p1", "agendado", null],
+    ["a4", "post", "Terço Diário", "f1", d(3), "07:00", "p3", "p1", "agendado", null],
     ["a5", "tarefa", "Reservar sala e projetor", "f3", d(6), null, "p4", "p3", "rascunho", null],
-    ["a6", "evento", "Evento — Cinecultural", "f3", d(10), "19:00", "p4", null, "rascunho", null],
+    ["a6", "evento", "Cinecultural", "f3", d(10), "19:00", "p4", null, "rascunho", null],
     ["a7", "post", "Curiosidade da fé", "f4", d(20), "17:00", "p5", null, "ideia", null],
     ["a8", "reuniao", "Reunião quinzenal", null, d(-14), "19:30", "p1", null, "concluido", null],
     // Os dois furos que o painel do coordenador precisa mostrar.
     ["a9", "post", "Post da tarde", "f2", d(4), "17:00", null, null, "ideia", null],
-    ["a10", "post", "Post — Terço Diário", "f1", d(5), "07:00", null, null, "ideia", null],
+    ["a10", "post", "Terço Diário", "f1", d(5), "07:00", null, null, "ideia", null],
   ] as const;
 }
 

@@ -62,3 +62,14 @@ export function nomeCurto(nome: string): string {
   if (partes.length === 1) return partes[0];
   return `${partes[0]} ${partes[1][0].toUpperCase()}.`;
 }
+
+/** "Maria Aparecida" -> "MA". O avatar do app é tipográfico, não tem foto. */
+export function iniciaisDe(nome: string): string {
+  return nome
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((parte) => parte[0] ?? "")
+    .join("")
+    .toUpperCase();
+}

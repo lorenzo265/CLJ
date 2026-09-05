@@ -9,7 +9,12 @@ import { useGSAP } from "@gsap/react";
 import { MarcaCompleta } from "@/components/marca/marca-aureola";
 import { AveMarias } from "@/components/fio/conta";
 import { ContaUsuario } from "@/components/shell/conta-usuario";
-import { COORDENACAO, MEU_ESPACO, estaAtivo, type Destino } from "@/components/shell/navegacao";
+import {
+  COORDENACAO,
+  MEU_ESPACO,
+  estaAtivo,
+  type Destino,
+} from "@/components/shell/navegacao";
 import { cn } from "@/lib/utils";
 import type { PapelSistema } from "@/lib/types";
 
@@ -33,7 +38,10 @@ function montarLinhas(papel: PapelSistema): Linha[] {
   for (const destino of MEU_ESPACO) linhas.push({ tipo: "conta", destino });
 
   if (papel === "coordenador") {
-    linhas.push({ tipo: "separador" }, { tipo: "titulo", texto: "Coordenação" });
+    linhas.push(
+      { tipo: "separador" },
+      { tipo: "titulo", texto: "Coordenação" },
+    );
     for (const destino of COORDENACAO) linhas.push({ tipo: "conta", destino });
   }
 
@@ -68,33 +76,48 @@ export function AppSidebar({
    * As contas são encontradas no DOM a partir do link clicado, e não guardadas num array de
    * refs: a ordem no documento já é a ordem no fio, que é exatamente o que o stagger precisa.
    */
-  const passarAsContas = contextSafe((evento: MouseEvent<HTMLAnchorElement>) => {
-    if (reduzido()) return;
+  const passarAsContas = contextSafe(
+    (evento: MouseEvent<HTMLAnchorElement>) => {
+      if (reduzido()) return;
 
-    const nav = evento.currentTarget.closest("nav");
-    const alvos = nav ? Array.from(nav.querySelectorAll<HTMLSpanElement>("[data-conta]")) : [];
-    const indice = alvos.indexOf(evento.currentTarget.querySelector("[data-conta]")!);
-    if (alvos.length === 0 || indice < 0) return;
+      const nav = evento.currentTarget.closest("nav");
+      const alvos = nav
+        ? Array.from(nav.querySelectorAll<HTMLSpanElement>("[data-conta]"))
+        : [];
+      const indice = alvos.indexOf(
+        evento.currentTarget.querySelector("[data-conta]")!,
+      );
+      if (alvos.length === 0 || indice < 0) return;
 
-    gsap
-      .timeline()
-      .to(alvos, {
-        x: 4,
-        duration: 0.1,
-        ease: "power2.out",
-        stagger: { each: 0.035, from: indice },
-      })
-      .to(
-        alvos,
-        { x: 0, duration: 0.24, ease: "power3.out", stagger: { each: 0.035, from: indice } },
-        "<0.06",
+      gsap
+        .timeline()
+        .to(alvos, {
+          x: 4,
+          duration: 0.1,
+          ease: "power2.out",
+          stagger: { each: 0.035, from: indice },
+        })
+        .to(
+          alvos,
+          {
+            x: 0,
+            duration: 0.24,
+            ease: "power3.out",
+            stagger: { each: 0.035, from: indice },
+          },
+          "<0.06",
+        );
+
+      gsap.fromTo(
+        alvos[indice],
+        { scale: 1.4 },
+        { scale: 1, duration: 0.32, ease: "power3.out" },
       );
 
-    gsap.fromTo(alvos[indice], { scale: 1.4 }, { scale: 1, duration: 0.32, ease: "power3.out" });
-
-    // Confirmação tátil no celular — o mesmo gesto de passar a conta na mão.
-    navigator.vibrate?.(8);
-  });
+      // Confirmação tátil no celular — o mesmo gesto de passar a conta na mão.
+      navigator.vibrate?.(8);
+    },
+  );
 
   return (
     <aside
@@ -111,37 +134,52 @@ export function AppSidebar({
         <MarcaCompleta />
       </Link>
 
-      <nav aria-label="Navegação principal" className="fio relative flex min-h-0 flex-1 flex-col">
-        {montarLinhas(papelSistema).map((linha, i) => {
-          if (linha.tipo === "titulo") {
+      {/*
+        O cordão vive num invólucro que abraça o conteúdo, não no <nav>, que estica até o
+        rodapé: o fio termina na última conta, e não pendura no vazio abaixo dela.
+      */}
+      <nav
+        aria-label="Navegação principal"
+        className="flex min-h-0 flex-1 flex-col"
+      >
+        <div className="fio relative flex flex-col">
+          {montarLinhas(papelSistema).map((linha, i) => {
+            if (linha.tipo === "titulo") {
+              return (
+                <span key={`t${i}`} className="kicker mt-1 mb-1.5 ml-7 block">
+                  {linha.texto}
+                </span>
+              );
+            }
+            if (linha.tipo === "separador") return <AveMarias key={`s${i}`} />;
+
+            const { destino } = linha;
+            const ativo = estaAtivo(destino.href, pathname);
+
             return (
-              <span key={`t${i}`} className="kicker mt-1 mb-1.5 ml-7 block">
-                {linha.texto}
-              </span>
+              <Link
+                key={destino.href}
+                href={destino.href}
+                aria-current={ativo ? "page" : undefined}
+                onClick={passarAsContas}
+                className={cn(
+                  "group relative flex items-center gap-3.5 rounded-md py-2 pr-2 text-[13.5px] font-medium",
+                  "outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  ativo
+                    ? "font-bold text-accent-ink"
+                    : "text-foreground hover:text-accent-ink",
+                )}
+              >
+                <span
+                  data-conta
+                  className={cn("conta z-10", ativo && "conta-sua")}
+                  aria-hidden
+                />
+                <span>{destino.label}</span>
+              </Link>
             );
-          }
-          if (linha.tipo === "separador") return <AveMarias key={`s${i}`} />;
-
-          const { destino } = linha;
-          const ativo = estaAtivo(destino.href, pathname);
-
-          return (
-            <Link
-              key={destino.href}
-              href={destino.href}
-              aria-current={ativo ? "page" : undefined}
-              onClick={passarAsContas}
-              className={cn(
-                "group relative flex items-center gap-3.5 rounded-md py-2 pr-2 text-[13.5px] font-medium",
-                "outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                ativo ? "font-bold text-accent-ink" : "text-foreground hover:text-accent-ink",
-              )}
-            >
-              <span data-conta className={cn("conta z-10", ativo && "conta-sua")} aria-hidden />
-              <span>{destino.label}</span>
-            </Link>
-          );
-        })}
+          })}
+        </div>
       </nav>
 
       <ContaUsuario nome={nome} papelSistema={papelSistema} />

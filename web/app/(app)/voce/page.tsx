@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/shell/page-header";
 import { CadastroForm } from "@/components/cadastro/cadastro-form";
-import { iniciaisDe } from "@/components/shell/conta-usuario";
 import { getFuncoes } from "@/lib/data/funcoes";
 import { getIdsDeFuncoesDaPessoa } from "@/lib/data/pessoas";
 import { exigirPessoa } from "@/lib/auth/sessao";
+import { iniciaisDe } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Você · CLJ NSR" };
 

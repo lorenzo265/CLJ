@@ -2,18 +2,9 @@
 
 import { LogOut } from "lucide-react";
 import { sair } from "@/lib/actions/auth";
+import { iniciaisDe } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { PapelSistema } from "@/lib/types";
-
-export function iniciaisDe(nome: string): string {
-  return nome
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((parte) => parte[0] ?? "")
-    .join("")
-    .toUpperCase();
-}
 
 /** O rodapé do fio: quem você é e a porta de saída. */
 export function ContaUsuario({

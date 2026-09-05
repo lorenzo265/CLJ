@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarcaAureola } from "@/components/marca/marca-aureola";
 import { ConviteForm } from "@/components/auth/convite-form";
-import { buscarConvite, conviteValido } from "@/lib/repos/auth";
+import { getConviteValido } from "@/lib/data/convites";
 
 export const metadata: Metadata = { title: "Seu convite · CLJ NSR" };
 
 /** O convite do coordenador é a única porta de entrada — não há autocadastro. */
 export default async function ConvitePage({ params }: PageProps<"/convite/[token]">) {
   const { token } = await params;
-  const convite = buscarConvite(token);
+  const convite = await getConviteValido(token);
 
   return (
     <main className="flex min-h-svh items-center justify-center bg-background px-5 py-10">
@@ -21,7 +21,7 @@ export default async function ConvitePage({ params }: PageProps<"/convite/[token
         </div>
 
         <div className="rounded-2xl border border-border bg-panel p-6 sm:p-7">
-          {conviteValido(convite) ? (
+          {convite ? (
             <>
               <p className="mb-4 text-[13.5px] leading-relaxed text-muted-foreground">
                 Você foi convidado para o Departamento Cultural como{" "}

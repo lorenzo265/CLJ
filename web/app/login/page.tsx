@@ -1,52 +1,42 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { MarcaAureola } from "@/components/marca/marca-aureola";
+import { LoginForm } from "@/components/auth/login-form";
+import { getSessao } from "@/lib/auth/sessao";
 
-export default function LoginPage() {
+export const metadata: Metadata = { title: "Entrar · CLJ NSR" };
+
+export default async function LoginPage() {
+  if (await getSessao()) redirect("/hoje");
+
   return (
-    <div className="flex min-h-svh items-center justify-center bg-background px-4">
-      <div className="w-full max-w-sm space-y-6">
-        <div className="text-center">
-          <h1 className="font-serif text-2xl font-semibold">CLJ NSR</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">
+    <main className="flex min-h-svh items-center justify-center bg-background px-5 py-10">
+      <div className="flex w-full max-w-[380px] flex-col gap-6">
+        <div className="flex flex-col items-center text-center">
+          <MarcaAureola className="size-14" />
+          <h1 className="mt-3 font-serif text-2xl font-bold">CLJ NSR</h1>
+          <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
             Departamento Cultural
             <br />
             Paróquia Nossa Senhora do Rosário
           </p>
         </div>
 
-        <Card>
-          <CardHeader className="sr-only">
-            <CardTitle>Entrar</CardTitle>
-            <CardDescription>Acesse com seu e-mail e senha</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="email">E-mail</Label>
-              <Input id="email" type="email" placeholder="voce@email.com" />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="senha">Senha</Label>
-              <Input id="senha" type="password" placeholder="••••••••" />
-            </div>
-            <Button render={<Link href="/escala" />} nativeButton={false} className="w-full" size="lg">
-              Entrar
-            </Button>
-          </CardContent>
-          <CardFooter className="flex-col gap-4">
-            <Separator />
-            <p className="text-center text-sm text-muted-foreground">
-              Recebeu um convite do coordenador?{" "}
-              <Link href="/cadastro" className="font-medium text-primary underline-offset-4 hover:underline">
-                Defina sua senha aqui
-              </Link>
-            </p>
-          </CardFooter>
-        </Card>
+        <div className="rounded-2xl border border-border bg-panel p-6 sm:p-7">
+          <LoginForm />
+
+          <div className="my-4 flex items-center gap-2.5">
+            <span className="h-px flex-1 bg-border-soft" />
+            <span className="text-[11.5px] text-faint">ou</span>
+            <span className="h-px flex-1 bg-border-soft" />
+          </div>
+
+          <p className="text-center text-[12.5px] leading-relaxed text-muted-foreground">
+            Recebeu um convite do coordenador? Abra o link que ele te mandou para definir
+            sua senha.
+          </p>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,126 +1,137 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { format } from "date-fns";
+import { StatusReuniao } from "@/components/fio/status-pill";
+import { Vazio } from "@/components/fio/tipografia";
+import { DetalheReuniao } from "@/components/reunioes/detalhe-reuniao";
 import { PageHeader } from "@/components/shell/page-header";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { formatarDataLonga } from "@/lib/format";
-import { getReunioes } from "@/lib/data/reunioes";
+import { exigirPessoa } from "@/lib/auth/sessao";
 import { getPessoas } from "@/lib/data/pessoas";
-import { DEPARTAMENTO_CULTURAL } from "@/lib/mock/pessoas";
+import { getReunioes, reuniaoRealizada, type ReuniaoCompleta } from "@/lib/data/reunioes";
+import { formatarDataKicker } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
+export const metadata: Metadata = { title: "Reuniões · CLJ NSR" };
+
+/**
+ * Mestre-detalhe: a lista das reuniões e, ao lado, a que está aberta.
+ *
+ * A reunião aberta mora na querystring (`?r=`) — voltar, recarregar e mandar o link pra
+ * alguém continuam funcionando, e a tela segue Server Component (nenhum "use client"
+ * atravessa pra cima por causa de uma seleção).
+ */
 export default async function ReunioesPage({ searchParams }: PageProps<"/reunioes">) {
-  const { reuniao } = await searchParams;
+  const eu = await exigirPessoa();
+  const { r } = await searchParams;
+
+  // Data local, não UTC: perto da meia-noite o "hoje" de Greenwich não é o de quem lê.
+  const hojeISO = format(new Date(), "yyyy-MM-dd");
 
   const [reunioes, pessoas] = await Promise.all([
-    getReunioes(DEPARTAMENTO_CULTURAL),
-    getPessoas(DEPARTAMENTO_CULTURAL),
+    getReunioes(eu.departamentoId),
+    getPessoas(eu.departamentoId),
   ]);
-  const pessoaPorId = new Map(pessoas.map((p) => [p.id, p]));
 
-  const selecionada =
-    reunioes.find((r) => r.atividadeId === reuniao) ?? reunioes[0];
+  const selecionada = selecionar(reunioes, typeof r === "string" ? r : undefined, hojeISO);
 
   return (
     <>
       <PageHeader title="Reuniões" subtitle="Pauta, decisões e follow-up" />
-      <div className="grid gap-4 p-4 sm:p-6 lg:grid-cols-[260px_1fr]">
-        <div className="space-y-2">
-          {reunioes.map((r) => {
-            const realizada = r.atividade.status === "concluido";
-            const ativa = r.atividadeId === selecionada?.atividadeId;
-            return (
-              <Link
-                key={r.atividadeId}
-                href={`/reunioes?reuniao=${r.atividadeId}`}
-                className={cn(
-                  "block rounded-lg border p-3 transition-colors",
-                  ativa ? "border-primary bg-accent" : "hover:bg-muted/50"
-                )}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span className={cn("text-xs", ativa ? "text-accent-foreground" : "text-muted-foreground")}>
-                    {formatarDataLonga(r.atividade.data)}
-                  </span>
-                  <Badge variant={realizada ? "ok" : "info"} className="text-[10px]">
-                    {realizada ? "Realizada" : "Agendada"}
-                  </Badge>
-                </div>
-                <p className={cn("mt-1 text-sm font-semibold", ativa && "text-accent-foreground")}>
-                  {r.atividade.titulo}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
 
-        <div className="min-w-0 rounded-xl border bg-card p-5">
-          {!selecionada ? (
-            <p className="text-sm text-muted-foreground">Nenhuma reunião registrada ainda.</p>
-          ) : (
-            <>
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <h2 className="font-serif text-lg font-semibold">{selecionada.atividade.titulo}</h2>
-                  <p className="mt-0.5 text-sm text-muted-foreground">
-                    {formatarDataLonga(selecionada.atividade.data)}
-                    {selecionada.presentes.length > 0 &&
-                      ` · ${selecionada.presentes.length} presentes`}
-                  </p>
-                </div>
-                <Badge variant={selecionada.atividade.status === "concluido" ? "ok" : "info"}>
-                  {selecionada.atividade.status === "concluido" ? "Realizada" : "Agendada"}
-                </Badge>
-              </div>
-
-              <div className="mt-5 space-y-1.5">
-                <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Pauta</h3>
-                <ol className="space-y-1.5">
-                  {selecionada.pauta.map((pergunta, i) => (
-                    <li key={i} className="flex gap-2 text-sm">
-                      <span className="font-mono text-primary">{i + 1}.</span>
-                      {pergunta}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              {selecionada.decisoes.length > 0 && (
-                <div className="mt-5 space-y-1.5">
-                  <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Decisões</h3>
-                  <ul className="space-y-1 text-sm">
-                    {selecionada.decisoes.map((d, i) => (
-                      <li key={i}>— {d}</li>
-                    ))}
-                  </ul>
-                </div>
+      <div className="mx-auto w-full max-w-5xl px-5 pb-10 lg:px-8 lg:pt-6">
+        {!selecionada ? (
+          <Vazio>Nenhuma reunião marcada por enquanto.</Vazio>
+        ) : (
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-5">
+            {/*
+              Em 390px a lista vira uma faixa rolável horizontal em vez de um seletor:
+              o detalhe começa na primeira dobra (é o que a pessoa veio ler) e as outras
+              datas continuam visíveis e a um toque, sem esconder nada atrás de um menu.
+            */}
+            <nav
+              aria-label="Reuniões do departamento"
+              className={cn(
+                "-mx-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-1",
+                "lg:mx-0 lg:w-[270px] lg:shrink-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0",
               )}
+            >
+              {reunioes.map((reuniao) => (
+                <CartaoReuniao
+                  key={reuniao.atividadeId}
+                  reuniao={reuniao}
+                  aberta={reuniao.atividadeId === selecionada.atividadeId}
+                />
+              ))}
+            </nav>
 
-              {selecionada.followUp.length > 0 && (
-                <div className="mt-5 space-y-2">
-                  <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Follow-up</h3>
-                  <div className="overflow-x-auto rounded-lg border">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
-                          <th className="p-2 font-medium">Ação</th>
-                          <th className="p-2 font-medium">Responsável</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {selecionada.followUp.map((f, i) => (
-                          <tr key={i} className="border-b last:border-0">
-                            <td className="p-2">{f.acao}</td>
-                            <td className="p-2">{pessoaPorId.get(f.responsavelId)?.nome ?? "—"}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+            <DetalheReuniao
+              reuniao={selecionada}
+              pessoas={pessoas}
+              euId={eu.id}
+              hojeISO={hojeISO}
+              className="flex-1"
+            />
+          </div>
+        )}
       </div>
     </>
   );
+}
+
+function CartaoReuniao({ reuniao, aberta }: { reuniao: ReuniaoCompleta; aberta: boolean }) {
+  const { atividade } = reuniao;
+
+  return (
+    <Link
+      href={`/reunioes?r=${atividade.id}`}
+      aria-current={aberta ? "page" : undefined}
+      className={cn(
+        "block w-[220px] shrink-0 snap-start rounded-xl border px-3.5 py-3 lg:w-auto",
+        "transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        aberta
+          ? "border-accent-soft bg-accent-soft text-accent-ink"
+          : "border-border bg-panel hover:border-accent-hi",
+      )}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <span
+          className={cn(
+            "font-mono text-[11px] font-semibold",
+            aberta ? "text-accent-ink" : "text-muted-foreground",
+          )}
+        >
+          {formatarDataKicker(atividade.data)}
+        </span>
+        <StatusReuniao realizada={reuniaoRealizada(atividade)} />
+      </div>
+      <p className={cn("mt-1 text-[13.5px] leading-snug", aberta ? "font-bold" : "font-semibold")}>
+        {atividade.titulo}
+      </p>
+    </Link>
+  );
+}
+
+/**
+ * Sem `?r=`, a tela abre onde a pessoa precisa agir: a próxima reunião marcada — é lá que
+ * ela confirma presença e lê a pauta. Não havendo nenhuma pela frente, abre a última que
+ * aconteceu, que é o que se procura fora de uma convocação (o que ficou decidido).
+ *
+ * `getReunioes` devolve da mais recente para a mais antiga, e as duas escolhas caem
+ * naturalmente dessa ordem.
+ */
+function selecionar(
+  reunioes: ReuniaoCompleta[],
+  pedida: string | undefined,
+  hojeISO: string,
+): ReuniaoCompleta | undefined {
+  const escolhida = pedida ? reunioes.find((x) => x.atividadeId === pedida) : undefined;
+  if (escolhida) return escolhida;
+
+  const futuras = reunioes.filter(
+    (x) => !reuniaoRealizada(x.atividade) && x.atividade.data >= hojeISO,
+  );
+
+  // Na ordem decrescente, a última das futuras é a mais próxima de hoje; sem nenhuma pela
+  // frente, `reunioes[0]` é a mais recente que já passou — marcada como realizada ou não.
+  return futuras.at(-1) ?? reunioes[0];
 }

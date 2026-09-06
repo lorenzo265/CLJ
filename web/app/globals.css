@@ -4,6 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  CLJ NSR — "O Fio".
+  Fonte canônica dos valores: docs/decisoes-design.md §3 (cor), §4 (tipografia), §5 (motion).
+  Nenhum hex fora deste arquivo: componente referencia token por nome, sempre.
+
+  A ponte com o shadcn é deliberada e vale registrar:
+  - `primary`  = o azul da paróquia (#253990) — a tinta de ação.
+  - `accent`   = o wash azul (#E4E7F7) + `accent-foreground` (#1A2A6C). No vocabulário do
+                 shadcn "accent" é superfície de hover/seleção, não cor de marca; casar o wash
+                 com esse papel faz item selecionado nascer azul-claro em todo componente.
+  - `gold`     não entra em nenhum papel do shadcn de propósito: é reservado à celebração.
+*/
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -35,9 +48,26 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Identidade — os nomes de docs/decisoes-design.md §3 */
+  --color-panel: var(--panel);
+  --color-border-soft: var(--border-soft);
+  --color-faint: var(--text-faint);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-hi: var(--accent-hi);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
   --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
   --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
   --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-crit: var(--crit);
+  --color-crit-soft: var(--crit-soft);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -47,70 +77,118 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* CLJ NSR — identidade quente + acento dourado (docs/abertura-clj-nsr.html é a fonte canônica) */
 :root {
-  --background: #faf7f2;
-  --foreground: #262320;
-  --card: #ffffff;
-  --card-foreground: #262320;
-  --popover: #ffffff;
-  --popover-foreground: #262320;
-  --primary: #a9812f;
+  /*
+    Papel e tinta.
+    Os três níveis de texto passam AA sobre papel e painel (14.6 / 7.0 / 4.8) e continuam
+    distinguíveis entre si — o terciário do canvas (#A9A199) ficava em 2.4, o que reprova
+    qualquer texto. Ver decisoes-design.md §3.
+  */
+  --bg: #faf7f2;
+  --panel: #ffffff;
+  --border-hair: #e4ddd0;
+  --border-soft: #efeae1;
+  --text: #262320;
+  --text-muted: #5a544e;
+  --text-faint: #756c64;
+
+  /* O azul da paróquia — único destaque */
+  --azul: #253990;
+  --accent-ink: #1a2a6c;
+  --accent-soft: #e4e7f7;
+  --accent-hi: #6c7cc9;
+
+  /* Dourado — só celebração (carimbo "Publicado", dezena completa, festa) */
+  --gold: #a9812f;
+  --gold-ink: #7a5d22;
+  --gold-soft: #f3e9d2;
+
+  /*
+    Semânticas — status é sempre cor + palavra.
+    Os valores são mais escuros que os do canvas porque a régua do próprio
+    decisoes-design.md §3 é AA, e cada um destes é lido COMO TEXTO sobre o próprio wash:
+    o hex original ficava entre 3.4 e 4.0 nessa combinação.
+  */
+  --ok: #4d6a44;
+  --ok-soft: #e7eee3;
+  --warn: #8d4e1a;
+  --warn-soft: #f5e5d3;
+  --info: #4a6885;
+  --info-soft: #e4ecf1;
+  --crit: #a6473c;
+  --crit-soft: #f6e2df;
+
+  /* Motion — docs/decisoes-design.md §5 */
+  --dur-micro: 140ms;
+  --dur-base: 240ms;
+  --dur-entrance: 420ms;
+  --ease-casa: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Ponte com o vocabulário do shadcn */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--panel);
+  --card-foreground: var(--text);
+  --popover: var(--panel);
+  --popover-foreground: var(--text);
+  --primary: var(--azul);
   --primary-foreground: #ffffff;
   --secondary: #f2ece1;
-  --secondary-foreground: #262320;
+  --secondary-foreground: var(--text);
   --muted: #f2ece1;
-  --muted-foreground: #6e6862;
-  --accent: #f3e9d2;
-  --accent-foreground: #7a5d22;
-  --destructive: #a6473c;
-  --border: #e4ddd0;
-  --input: #e4ddd0;
-  --ring: #a9812f;
-  --radius: 0.5rem;
-  --ok: #5c7a52;
-  --warn: #b4682a;
-  --info: #5b7a96;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #262320;
-  --sidebar-primary: #a9812f;
+  --muted-foreground: var(--text-muted);
+  --accent: var(--accent-soft);
+  --accent-foreground: var(--accent-ink);
+  --destructive: var(--crit);
+  --border: var(--border-hair);
+  --input: var(--border-hair);
+  --ring: var(--azul);
+  --radius: 0.625rem;
+  --sidebar: var(--panel);
+  --sidebar-foreground: var(--text);
+  --sidebar-primary: var(--azul);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f3e9d2;
-  --sidebar-accent-foreground: #7a5d22;
-  --sidebar-border: #e4ddd0;
-  --sidebar-ring: #a9812f;
+  --sidebar-accent: var(--accent-soft);
+  --sidebar-accent-foreground: var(--accent-ink);
+  --sidebar-border: var(--border-hair);
+  --sidebar-ring: var(--azul);
 }
 
+/*
+  Escuro re-derivado por papel de cor, nunca invertido (decisoes-design.md §3):
+  o papel continua quente, o azul sobe de luminosidade pra continuar legível como tinta,
+  e os washes viram fundos escuros da mesma família — não versões "acinzentadas" do claro.
+*/
 .dark {
-  --background: #1e1b17;
-  --foreground: #f1ebe0;
-  --card: #262220;
-  --card-foreground: #f1ebe0;
-  --popover: #262220;
-  --popover-foreground: #f1ebe0;
-  --primary: #d9ac5c;
-  --primary-foreground: #1e1b17;
-  --secondary: #18160f;
-  --secondary-foreground: #f1ebe0;
-  --muted: #18160f;
-  --muted-foreground: #b7ad9e;
-  --accent: #362b18;
-  --accent-foreground: #efc97e;
-  --destructive: #da8478;
-  --border: #3a342b;
-  --input: #3a342b;
-  --ring: #d9ac5c;
-  --ok: #93b584;
-  --warn: #e0985f;
-  --info: #93b7d4;
-  --sidebar: #262220;
-  --sidebar-foreground: #f1ebe0;
-  --sidebar-primary: #d9ac5c;
-  --sidebar-primary-foreground: #1e1b17;
-  --sidebar-accent: #362b18;
-  --sidebar-accent-foreground: #efc97e;
-  --sidebar-border: #3a342b;
-  --sidebar-ring: #d9ac5c;
+  --bg: #1a1815;
+  --panel: #24211d;
+  --border-hair: #3a342b;
+  --border-soft: #2e2a23;
+  --text: #f1ebe0;
+  --text-muted: #b7ad9e;
+  --text-faint: #948a7e;
+
+  --azul: #93a4ea;
+  --accent-ink: #bcc6f5;
+  --accent-soft: #272c48;
+  --accent-hi: #6c7cc9;
+
+  --gold: #d9ac5c;
+  --gold-ink: #efc97e;
+  --gold-soft: #3a2e19;
+
+  --ok: #9cbd8d;
+  --ok-soft: #26301f;
+  --warn: #e5a069;
+  --warn-soft: #3a2a1b;
+  --info: #9cbfdb;
+  --info-soft: #1f2b35;
+  --crit: #e08b7e;
+  --crit-soft: #38211e;
+
+  --primary-foreground: #16140f;
+  --secondary: #302b23;
+  --muted: #302b23;
 }
 
 @layer base {
@@ -119,6 +197,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
   }
   html {
     @apply font-sans;
@@ -127,5 +206,80 @@
   h2,
   h3 {
     @apply font-serif;
+    letter-spacing: -0.01em;
+  }
+  /* Datas e números alinham em coluna — a escala é lida na vertical. */
+  .font-mono,
+  [class*="tabular"] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /*
+    A conta do terço (decisoes-design.md §3b, v2 flat).
+    Lê pela geometria no fio, nunca por renderização 3D — skeuomorfismo é proibido.
+    O anel-auréola do estado ativo é a referência mariana embutida.
+  */
+  .conta {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    background: var(--panel);
+    border: 1.5px solid var(--text-faint);
+    transition:
+      transform var(--dur-base) var(--ease-casa),
+      background var(--dur-base) ease,
+      border-color var(--dur-base) ease,
+      box-shadow var(--dur-base) ease;
+  }
+  .conta-sua {
+    background: var(--azul);
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .conta-suplente {
+    background: var(--panel);
+    border: 2px solid var(--azul);
+    box-shadow: none;
+  }
+  .conta-festa {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-soft);
+  }
+
+  /* O fio — o cordão vertical que atravessa a navegação. Hairline sólida, sem gradiente. */
+  .fio::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: -12px;
+    bottom: 6px;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--border-hair);
+  }
+
+  /* Kicker: micro-rótulo em mono, caixa alta — datas, seções, "sua próxima conta" */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

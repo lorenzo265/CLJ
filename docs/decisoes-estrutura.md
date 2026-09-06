@@ -1,6 +1,6 @@
 # Decisões de Estrutura — CLJ NSR
 
-Registro vivo das decisões de produto e arquitetura de páginas. Atualizado em **2026-08-26**.
+Registro vivo das decisões de produto e arquitetura de páginas. Atualizado em **2026-09-05**.
 
 ## 1. O problema (a régua de todo design)
 
@@ -27,21 +27,29 @@ Em conflito de design, o participante ganha.
 
 O coordenador vê **tudo que o participante vê, mais** as telas de gestão.
 
-| Tela | Papel | Estado |
-|---|---|---|
-| Login (convite do coordenador → definir senha) | entrada | desenhada |
-| Cadastro (dados, funções, disponibilidade) | participante | desenhada |
-| Escala (leitura, "Meus/Todos") | participante | 3 opções em avaliação (A: agenda por prazo · B: faixa de dias + destaque · C: linha do tempo) — **decisão pendente** |
-| Calendário (mês, "Meus/Departamento") | participante | desenhada |
-| Reuniões (pauta, decisões, follow-up — leitura) | participante | desenhada |
-| Painel do coordenador (stats + alertas + atalhos) | coordenador | desenhada |
-| Gestão de Funções (catálogo de papéis) | coordenador | desenhada |
-| Gestão de Escala (atividades, responsável/suplente, mídia, status) | coordenador | desenhada |
-| Gestão de Reuniões (pauta editável, decisões, follow-up) | coordenador | desenhada |
-| Gestão de Participantes (convites, cadastros) | coordenador | desenhada |
-| Mobile: Hoje / Escala / Calendário + bottom nav | participante | desenhadas |
+| Tela | Rota | Papel | Estado |
+|---|---|---|---|
+| Login | `/login` | entrada | construída |
+| Convite → definir senha | `/convite/[token]` | entrada | construída |
+| **Hoje** (manchete + dezena da semana) | `/hoje` | participante | construída |
+| Escala (leitura, "Meus/Todos") | `/escala` | participante | construída — **Opção A**, agenda por prazo |
+| Calendário (mês, "Meus/Departamento") | `/calendario` | participante | construída |
+| Reuniões (pauta, decisões, follow-up) | `/reunioes` | participante | construída |
+| Você (dados, funções, disponibilidade) | `/voce` | participante | construída |
+| Painel do coordenador | `/coordenador` | coordenador | construída |
+| Gestão de Funções | `/coordenador/funcoes` | coordenador | construída |
+| Gestão de Escala | `/coordenador/escala` | coordenador | construída |
+| Gestão de Reuniões | `/coordenador/reunioes` | coordenador | construída |
+| Gestão de Participantes | `/coordenador/participantes` | coordenador | construída |
 
-Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** (bottom nav, mobile).
+Componentes compartilhados: **AppSidebar** (o fio/terço, desktop) e **MobileNav** (bottom nav, mobile).
+
+**Duas mudanças em relação ao canvas** (feitas ao construir, 2026-09-05):
+- **"Hoje" virou rota do desktop também**, não só do celular. O princípio 1 ("a manchete é a
+  sua próxima conta") vale nos dois lugares, e sem `/hoje` no desktop o sidebar não teria onde
+  pousar quem entra.
+- **"Cadastro" virou "Você"** (`/voce`), o nome que a bottom nav já usava. Duas palavras para a
+  mesma tela era um vazamento de vocabulário interno. `/cadastro` redireciona.
 
 ## 5. Domínio
 
@@ -55,16 +63,43 @@ Componentes compartilhados: **Sidebar** (o fio/terço, desktop) e **MobileNav** 
 ## 6. Stack do app (`web/`)
 
 - **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**
-- **GSAP** (`gsap` + `@gsap/react`) para motion e efeitos (assinatura "passar a conta"; framer-motion foi removido em 2026-08-27), **lucide-react** para ícones, **shadcn** como base de componentes (sempre re-estilizados com nossos tokens — nunca o look default), **sonner** para toasts, **react-day-picker**/`date-fns` para calendário, **next-themes** para o futuro dark mode.
-- Testes com **vitest** (`lib/escala/agenda.test.ts`).
-- Tokens de design entram como CSS custom properties + `theme` do Tailwind — componentes referenciam tokens por nome, nunca hex solto.
+- **SQLite** via `better-sqlite3` — o banco é um arquivo (`web/data/clj.db`), sem serviço
+  externo, igual nas duas máquinas. Decidido em 2026-09-05; ver `sdd-implementacao.md` §1.3.
+- **Autenticação própria**: senha com `scrypt` do Node, sessão em tabela + cookie `httpOnly`.
+  Entrada só por **convite do coordenador** — não existe autocadastro.
+- **GSAP** (`gsap` + `@gsap/react`) para motion (assinatura "passar a conta"), **lucide-react**
+  para ícones, **shadcn** sobre `@base-ui/react` como base de componentes (sempre re-estilizado
+  com nossos tokens), **sonner** para toasts, **date-fns** para datas, **next-themes** para o
+  dark mode.
+- Testes com **vitest** — domínio puro, repositórios (contra banco em memória) e regras de
+  sessão/convite.
+- Tokens de design entram como CSS custom properties em `app/globals.css` + `@theme` do
+  Tailwind — componentes referenciam tokens por nome, nunca hex solto.
 
-**Estado atual do app:** todas as rotas existem — `app/(app)/` (escala, calendário, cadastro, reuniões) e `app/(app)/coordenador/` (painel, escala, funções, participantes, reuniões), com `app/login/` fora do shell. Componentes por domínio em `components/` (shell, escala, calendario, cadastro, gestao) sobre a base `components/ui/` (shadcn). Dados vêm de `lib/mock/` através da camada `lib/data/` — trocar essa camada por backend real é o caminho de evolução.
+**Arquitetura em camadas** (a regra que a revisão cobra):
 
-Pendentes: aplicar a identidade "O Fio" na UI do app (hoje está no look default do shadcn — ver decisoes-design.md), banco/backend, autenticação (fluxo por convite), plataforma do widget (nativo vs PWA), estratégia de push.
+```
+página / componente  →  lib/data/ (leitura, async)  →  lib/repos/ (SQL)  →  lib/db/
+                     →  lib/actions/ (escrita, Server Actions)
+```
+
+Página nunca importa `lib/repos/` nem `lib/db/`. Toda escrita é Server Action que confere
+sessão, papel e departamento **no servidor** antes de tocar no banco — esconder o botão não é
+autorização. Domínio puro (`lib/escala/`, `lib/calendario/`, `lib/format.ts`) não conhece React
+nem banco, e é onde ficam os testes.
+
+**Estado atual do app:** todas as telas da tabela acima existem sobre dados reais, com escrita
+persistente. `lib/mock/` deixou de existir.
+
+Pendentes: plataforma do widget (nativo vs PWA), estratégia de push, e-mail transacional
+(hoje o convite é um link que o coordenador copia e manda pelo canal que já usa).
 
 ## 7. Fluxo de trabalho em duas máquinas
 
 - `design/` é a cópia versionada do canvas; o canvas publicado é onde se edita visualmente (Save publica para todos). Após edições no canvas, sincronizar `design/` no repo.
 - Decisões novas entram **neste arquivo** ou em `decisoes-design.md` no mesmo commit que as implementa.
-- `web/` roda com `npm install && npm run dev` em qualquer máquina; nada de `node_modules` ou `.env` no Git.
+- `web/` roda com `npm install && npm run dev` em qualquer máquina; nada de `node_modules`,
+  `.env` ou `data/` no Git.
+- O banco é **local de cada máquina**: cada uma tem o seu `data/clj.db`, semeado com o
+  departamento de demonstração no primeiro boot. Ele não é meio de sincronizar trabalho —
+  o que precisa atravessar máquinas é código e decisão, e esses vão pelo Git.

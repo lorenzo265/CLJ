@@ -60,6 +60,8 @@ export interface Atividade {
   suplenteId: string | null;
   status: StatusAtividade;
   linkMidia: string | null;
+  /** null = atividade avulsa; caso contrário, a série (a regra) que a gerou. */
+  serieId: string | null;
 }
 
 export interface ItemFollowUp {
@@ -98,4 +100,23 @@ export interface Convite {
   criadoEm: string;
   expiraEm: string;
   usadoEm: string | null;
+}
+
+/**
+ * A regra que gerou um conjunto de atividades. A atividade continua sendo a unidade que a
+ * pessoa cumpre — a série é o que a coordenação manipula de uma vez.
+ * Ver docs/sdd-implementacao.md §8.
+ */
+export interface Serie {
+  id: string;
+  departamentoId: string;
+  titulo: string;
+  tipo: TipoAtividade;
+  funcaoId: string | null;
+  hora: string | null;
+  dias: DiaSemana[];
+  inicio: string; // ISO yyyy-mm-dd
+  fim: string; // ISO yyyy-mm-dd, inclusive
+  criadoPor: string;
+  criadoEm: string;
 }

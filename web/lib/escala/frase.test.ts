@@ -16,6 +16,7 @@ const POST: Atividade = {
   suplenteId: null,
   status: "agendado",
   linkMidia: null,
+  serieId: null,
 };
 
 function pessoa(nome: string): Pessoa {

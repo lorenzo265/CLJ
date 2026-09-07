@@ -3,6 +3,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { ChevronDown } from "lucide-react";
 import { AtividadesManager, NovaAtividadeBotao } from "@/components/gestao/atividades-manager";
+import { NovaSerieBotao, SeriesManager } from "@/components/gestao/series-manager";
 import { rotuloStatus } from "@/components/fio/status-pill";
 import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { formatarMesAno, formatarReferenciaMes, parseReferenciaMes } from "@/lib
 import { getAtividades, getTrocasDoDepartamento } from "@/lib/data/atividades";
 import { getFuncoes } from "@/lib/data/funcoes";
 import { getPessoas } from "@/lib/data/pessoas";
+import { getSeries } from "@/lib/data/series";
 import { comPapel, ordenarCronologico } from "@/lib/escala/agenda";
 import { STATUS_ATIVIDADE } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -34,11 +36,12 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
   const texto = (valor: string | string[] | undefined) =>
     typeof valor === "string" ? valor : undefined;
 
-  const [atividades, pessoas, funcoes, trocas] = await Promise.all([
+  const [atividades, pessoas, funcoes, trocas, series] = await Promise.all([
     getAtividades(eu.departamentoId),
     getPessoas(eu.departamentoId),
     getFuncoes(eu.departamentoId),
     getTrocasDoDepartamento(eu.departamentoId),
+    getSeries(eu.departamentoId),
   ]);
 
   const agora = new Date();
@@ -85,6 +88,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
   return (
     <>
       <PageHeader title="Gestão de Escala" subtitle="Posts, tarefas, eventos e reuniões">
+        <NovaSerieBotao pessoas={pessoas} funcoes={funcoes} dataPadrao={dataPadrao} />
         <NovaAtividadeBotao pessoas={pessoas} funcoes={funcoes} dataPadrao={dataPadrao} />
       </PageHeader>
 
@@ -169,11 +173,23 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
           )}
         </p>
 
+        {/*
+          As séries vêm antes da tabela porque são o nível de cima: mexer no conjunto
+          ("o João saiu, redistribui outubro") não deveria custar trinta edições de linha.
+        */}
+        <section aria-labelledby="titulo-series" className="flex flex-col gap-2.5">
+          <h2 id="titulo-series" className="kicker">
+            O que se repete
+          </h2>
+          <SeriesManager series={series} pessoas={pessoas} />
+        </section>
+
         <AtividadesManager
           atividades={emOrdem}
           pessoas={pessoas}
           funcoes={funcoes}
           trocas={trocas}
+          nomesDeSerie={Object.fromEntries(series.map(({ serie }) => [serie.id, serie.titulo]))}
           dataPadrao={dataPadrao}
           mensagemVazia={
             soFuros

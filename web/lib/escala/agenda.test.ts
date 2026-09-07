@@ -23,6 +23,7 @@ function atividade(over: Partial<Atividade> & { id: string; data: string }): Ati
     responsavelId: null,
     suplenteId: null,
     status: "agendado" as StatusAtividade,
+    serieId: null,
     linkMidia: null,
     ...over,
   };

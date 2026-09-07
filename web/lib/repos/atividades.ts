@@ -15,6 +15,7 @@ interface LinhaAtividade {
   suplente_id: string | null;
   status: StatusAtividade;
   link_midia: string | null;
+  serie_id: string | null;
 }
 
 const paraAtividade = (l: LinhaAtividade): Atividade => ({
@@ -29,6 +30,7 @@ const paraAtividade = (l: LinhaAtividade): Atividade => ({
   suplenteId: l.suplente_id,
   status: l.status,
   linkMidia: l.link_midia,
+  serieId: l.serie_id,
 });
 
 export function listarAtividades(departamentoId: string): Atividade[] {
@@ -64,8 +66,8 @@ export function criarAtividade(departamentoId: string, d: DadosAtividade): strin
     .prepare(
       `INSERT INTO atividades
          (id, departamento_id, tipo, titulo, funcao_id, data, hora,
-          responsavel_id, suplente_id, status, link_midia)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          responsavel_id, suplente_id, status, link_midia, serie_id)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)`,
     )
     .run(
       id,

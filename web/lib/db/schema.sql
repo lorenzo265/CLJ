@@ -33,6 +33,25 @@ CREATE TABLE IF NOT EXISTS pessoa_funcoes (
   PRIMARY KEY (pessoa_id, funcao_id)
 );
 
+-- Uma série é a REGRA que gerou um punhado de atividades ("Terço Diário, seg a sex, 7h,
+-- outubro inteiro"). A atividade continua sendo a linha que a pessoa vê e cumpre; a série
+-- existe para dar nome ao conjunto, permitir redistribuir o rodízio de uma vez e desfazer
+-- uma criação errada sem caçar trinta linhas. Ver docs/sdd-implementacao.md §8.
+CREATE TABLE IF NOT EXISTS series (
+  id              TEXT PRIMARY KEY,
+  departamento_id TEXT NOT NULL,
+  titulo          TEXT NOT NULL,
+  tipo            TEXT NOT NULL CHECK (tipo IN ('post', 'tarefa', 'evento', 'reuniao')),
+  funcao_id       TEXT REFERENCES funcoes (id) ON DELETE SET NULL,
+  hora            TEXT,
+  -- Mesmo CSV de dias que `pessoas`: conjunto pequeno e fechado.
+  dias            TEXT NOT NULL,
+  inicio          TEXT NOT NULL,
+  fim             TEXT NOT NULL,
+  criado_por      TEXT NOT NULL,
+  criado_em       TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS atividades (
   id              TEXT PRIMARY KEY,
   departamento_id TEXT NOT NULL,
@@ -47,9 +66,12 @@ CREATE TABLE IF NOT EXISTS atividades (
   status          TEXT NOT NULL CHECK (
                     status IN ('ideia', 'rascunho', 'agendado', 'publicado', 'concluido')
                   ),
-  link_midia      TEXT
+  link_midia      TEXT,
+  -- NULL = atividade avulsa. Apagar a série não apaga o que já foi cumprido.
+  serie_id        TEXT REFERENCES series (id) ON DELETE SET NULL
 );
 CREATE INDEX IF NOT EXISTS idx_atividades_dep_data ON atividades (departamento_id, data);
+CREATE INDEX IF NOT EXISTS idx_atividades_serie ON atividades (serie_id);
 
 -- Extensão 1:1 de uma atividade do tipo 'reuniao'. Pauta e decisões são listas ordenadas
 -- sempre lidas e escritas inteiras — JSON evita uma tabela só para guardar posição.

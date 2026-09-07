@@ -295,3 +295,76 @@ conter nenhum furo, e o registro de trocas gravado mas nunca exibido — o opost
 Push e widget de tela inicial (dependem da decisão nativo vs PWA); upload de foto;
 multi-departamento; app nativo; integração com WhatsApp; e-mail transacional de verdade — o
 convite gera um **link copiável** que o coordenador manda pelo canal que já usa.
+
+---
+
+## 8. Segunda rodada — de agenda para ferramenta de gestão
+
+A primeira rodada entregou um app que **mostra** a escala. A avaliação de uso foi que ele
+"está ok, mas para ser uma boa ferramenta de gestão falta coisa": o calendário só desenha,
+e a escala é difícil de entender **de quem é** e de **dividir**. A referência trazida foi o
+Trello / Monday para a divisão, e o Notion Calendar para o calendário.
+
+### 8.0 O que a leitura do código acrescentou ao diagnóstico
+
+`grep -rin "recorren\|rodizio\|repetir\|frequencia"` devolvia **três strings de subtítulo
+de tela** e um comentário. Não havia recorrência nem rodízio em lugar nenhum: cada atividade
+era uma linha criada à mão. Escalar o Terço Diário de um mês custava abrir o diálogo trinta
+vezes — pior que a planilha, onde ao menos se arrasta para baixo.
+
+Isso é o outro lado do "difícil de dividir": dividir de verdade não é atribuir *uma*
+atividade, é decidir **quem pega quais dias** do que se repete. Por isso a recorrência veio
+antes das duas telas pedidas.
+
+### 8.1 Trello e Monday: o gesto, não o pacote
+
+`decisoes-estrutura.md` §2 diz, por escrito, que isto **"não é ferramenta genérica de
+projetos"**. Trazer o Trello inteiro — listas livres, etiquetas, checklists, comentários,
+campos customizados — contraria uma decisão que o projeto já tomou, e entrega ao
+departamento a complexidade que a planilha não tinha.
+
+A regra desta rodada é: **adotar o gesto (arrastar para atribuir, arrastar para avançar),
+não o conjunto de recursos.** As colunas de status não são inventadas — `ideia → rascunho →
+agendado → publicado` já está no `CHECK` do banco desde a Fase 2. É um quadro que já estava
+escrito no schema e nunca foi desenhado.
+
+### 8.2 Notion Calendar: por que não copiar a grade de horas
+
+A unidade do Notion Calendar é compromisso **com duração**, e a grade de 24 horas é a
+informação. Aqui a unidade é "um post que sai às 7h": sem duração, sem colisão, sem sala
+disputada. Uma grade de horas gastaria a tela para desenhar 23 faixas vazias.
+
+O que torna o calendário um app não é a grade — é **poder agir na data**: criar clicando no
+dia, arrastar para remarcar, ver a carga de cada pessoa no mês.
+
+### Fase 8 — Série (recorrência + rodízio)
+
+Uma **série** é a *regra* que gerou um conjunto de atividades. A atividade continua sendo a
+unidade que a pessoa cumpre; a série é o que a coordenação manipula de uma vez.
+
+- `series` (tabela nova) + `atividades.serie_id`. Coluna nova entra em **dois** lugares: no
+  `CREATE TABLE` de `schema.sql` (bancos novos) e em `COLUNAS_ACRESCENTADAS` de
+  `lib/db/index.ts` (bancos que já existem). `acrescentarColunas` roda **antes** do schema —
+  o schema cria índices sobre essas colunas, e índice sobre coluna ausente é erro.
+- `lib/escala/serie.ts` — domínio puro: `datasDaSerie` (dias da semana × período, com teto
+  de 400 datas) e `distribuirRodizio`.
+- O rodízio **não é circular cego**. Para cada data, entre quem está disponível naquele dia
+  da semana, entrega a quem tem menos até ali. Determinístico (empate resolve pela ordem do
+  grupo), respeita a disponibilidade declarada, e **prefere deixar furo a escalar quem não
+  pode** — o furo o app sabe cobrar, o "não pode" ele não sabe.
+- **A prévia usa as mesmas funções puras que o servidor.** O diálogo mostra a divisão
+  inteira antes de existir; o servidor recalcula a partir da regra e do grupo, porque o
+  navegador nunca manda a escala pronta.
+- Redistribuir só alcança o que está por vir e não foi publicado, usa a carga já cumprida
+  como peso, e **cada mudança de mãos vira uma `troca` registrada** (`decisoes-estrutura.md`
+  §5). Desfazer apaga o que vem pela frente e deixa o que já saiu no ar virar avulso.
+
+**Fora, de propósito:** recorrência por posição no mês ("toda 2ª terça"); editar a regra de
+uma série já criada (o problema "esta e as futuras" é caro e mal resolvido em toda ferramenta
+que o tenta — aqui se desfaz e se cria de novo); rodízio separado para suplente.
+
+### Fase 9 — Quadro da escala
+
+### Fase 10 — Calendário que age
+
+---

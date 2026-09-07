@@ -28,8 +28,38 @@ function lerSchema(): string {
   return readFileSync(caminho, "utf8");
 }
 
+/**
+ * `schema.sql` é o alvo, mas `CREATE TABLE IF NOT EXISTS` não mexe numa tabela que já
+ * existe: um banco criado antes de uma coluna nunca a ganharia. Esta lista alcança esses
+ * bancos, e roda ANTES do schema — o schema cria índices sobre essas colunas, e um índice
+ * sobre coluna que ainda não existe é erro.
+ *
+ * Coluna nova vai nos dois lugares: aqui (bancos que já existem) e no `CREATE TABLE`
+ * (bancos novos). Os dois caminhos têm de chegar na mesma estrutura.
+ */
+const COLUNAS_ACRESCENTADAS: { tabela: string; coluna: string; definicao: string }[] = [
+  // Fase 8: a atividade passou a saber de que série veio.
+  {
+    tabela: "atividades",
+    coluna: "serie_id",
+    definicao: "TEXT REFERENCES series (id) ON DELETE SET NULL",
+  },
+];
+
+function acrescentarColunas(db: DB): void {
+  for (const { tabela, coluna, definicao } of COLUNAS_ACRESCENTADAS) {
+    // Tabela ausente = banco novo: quem cria é o schema, com a coluna já dentro.
+    const colunas = db.prepare(`PRAGMA table_info(${tabela})`).all() as { name: string }[];
+    if (colunas.length === 0) continue;
+    if (colunas.some((c) => c.name === coluna)) continue;
+
+    db.exec(`ALTER TABLE ${tabela} ADD COLUMN ${coluna} ${definicao}`);
+  }
+}
+
 /** Cria (ou atualiza) a estrutura. Idempotente — é seguro rodar a cada boot. */
 export function migrar(db: DB): void {
+  acrescentarColunas(db);
   db.exec(lerSchema());
 }
 

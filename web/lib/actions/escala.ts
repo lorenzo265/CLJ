@@ -1,7 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { exigirCoordenadorEmAction } from "@/lib/auth/sessao";
+import { revalidarEscala } from "@/lib/actions/revalidar";
 import {
   dataISO,
   hora,
@@ -17,15 +17,6 @@ import { buscarPessoa } from "@/lib/repos/pessoas";
 import { buscarFuncao } from "@/lib/repos/funcoes";
 import type { EstadoForm } from "@/lib/actions/auth";
 import type { DadosAtividade } from "@/lib/repos/atividades";
-
-function revalidarEscala(): void {
-  revalidatePath("/coordenador/escala");
-  revalidatePath("/coordenador");
-  revalidatePath("/escala");
-  revalidatePath("/calendario");
-  revalidatePath("/hoje");
-  revalidatePath("/reunioes");
-}
 
 /** Pessoa de outro departamento nunca vira responsável — a checagem é no servidor. */
 function pessoaDoDepartamento(id: string | null, departamentoId: string): string | null {

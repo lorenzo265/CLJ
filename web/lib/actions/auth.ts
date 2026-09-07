@@ -15,6 +15,8 @@ import {
 export interface EstadoForm {
   erro?: string;
   ok?: boolean;
+  /** Confirmação para quando o resultado não é óbvio na tela ("30 atividades criadas"). */
+  mensagem?: string;
 }
 
 /*

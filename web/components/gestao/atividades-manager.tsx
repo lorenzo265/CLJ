@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useId, useState, type ReactNode } from "react";
-import { ChevronDown, ExternalLink, Pencil, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, ExternalLink, Pencil, Plus, Repeat, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { StatusPill, rotuloStatus } from "@/components/fio/status-pill";
 import { Vazio } from "@/components/fio/tipografia";
@@ -579,6 +579,24 @@ function SeloTipo({ tipo }: { tipo: Atividade["tipo"] }) {
   );
 }
 
+/**
+ * A marca de que a linha veio de uma regra, não de uma criação avulsa. Sem isto, editar
+ * uma data de série parece editar uma atividade solta — e a pessoa não entende por que
+ * existem outras vinte e nove iguais.
+ */
+function SeloSerie({ nome }: { nome?: string }) {
+  if (!nome) return null;
+  return (
+    <span
+      className="inline-flex shrink-0 items-center gap-1 rounded bg-accent px-1.5 py-px text-[10px] font-bold tracking-wide text-accent-ink uppercase"
+      title={`Faz parte da série "${nome}"`}
+    >
+      <Repeat className="size-2.5" aria-hidden />
+      Série
+    </span>
+  );
+}
+
 function AcoesLinha({
   titulo,
   aoEditar,
@@ -668,6 +686,7 @@ export function AtividadesManager({
   pessoas,
   funcoes,
   trocas,
+  nomesDeSerie,
   dataPadrao,
   mensagemVazia,
 }: {
@@ -676,6 +695,8 @@ export function AtividadesManager({
   funcoes: Funcao[];
   /** Histórico por atividade — o que já foi trocado, para o diálogo de troca mostrar. */
   trocas: Record<string, Troca[]>;
+  /** id da série → título, para a linha dizer de onde veio. */
+  nomesDeSerie: Record<string, string>;
   /** "Hoje" calculado no servidor: o fuso de quem lê não decide a data sugerida. */
   dataPadrao: string;
   /** A frase do vazio muda com o filtro, então quem filtra é quem a escreve. */
@@ -692,6 +713,7 @@ export function AtividadesManager({
     funcao: atividade.funcaoId ? funcaoPorId.get(atividade.funcaoId) : undefined,
     responsavel: atividade.responsavelId ? pessoaPorId.get(atividade.responsavelId) : undefined,
     suplente: atividade.suplenteId ? pessoaPorId.get(atividade.suplenteId) : undefined,
+    serie: atividade.serieId ? nomesDeSerie[atividade.serieId] : undefined,
   }));
 
   if (atividades.length === 0) {
@@ -706,7 +728,7 @@ export function AtividadesManager({
     <>
       {/* Celular: um cartão por atividade, com a mesma informação da tabela empilhada. */}
       <div className="flex flex-col gap-3 lg:hidden">
-        {linhas.map(({ atividade, funcao, responsavel, suplente }) => (
+        {linhas.map(({ atividade, funcao, responsavel, suplente, serie }) => (
           <article
             key={atividade.id}
             className="flex flex-col gap-3 rounded-2xl border border-border bg-panel p-4"
@@ -720,6 +742,7 @@ export function AtividadesManager({
                 <p className="mt-1 flex flex-wrap items-center gap-2 text-[14.5px] font-bold">
                   {atividade.titulo}
                   <SeloTipo tipo={atividade.tipo} />
+                  <SeloSerie nome={serie} />
                 </p>
                 <p className="mt-0.5 text-[12.5px] text-muted-foreground">
                   {funcao ? funcao.nome : "Sem função definida"}
@@ -796,7 +819,7 @@ export function AtividadesManager({
             </tr>
           </thead>
           <tbody className="[&_tr:last-child_td]:border-b-0">
-            {linhas.map(({ atividade, funcao, responsavel, suplente }) => (
+            {linhas.map(({ atividade, funcao, responsavel, suplente, serie }) => (
               <tr key={atividade.id} className="transition-colors hover:bg-muted/40">
                 <td className={cn(TD, "pl-4 font-mono text-[12.5px] font-medium whitespace-nowrap")}>
                   {formatarDataCurta(atividade.data)}
@@ -810,6 +833,7 @@ export function AtividadesManager({
                   <span className="flex items-center gap-2">
                     <span className="font-semibold">{atividade.titulo}</span>
                     <SeloTipo tipo={atividade.tipo} />
+                    <SeloSerie nome={serie} />
                   </span>
                 </td>
                 <td className={cn(TD, "text-muted-foreground")}>

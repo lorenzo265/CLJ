@@ -777,60 +777,9 @@ Elementos por quadrante de ativos distintivos (fama medida em 0 até o teste com
 
 ## Apêndice B — O briefing v2, pronto para preencher
 
-Responda por escrito antes do workshop; o workshop discute, não começa do zero.
-
-**Bloco 1 — Quem somos (coordenação)**
-
-1. O departamento em 2030: o que existe que hoje não existe? _____
-2. Por que o departamento existe (uma frase, sem "para")? _____
-3. Como fazemos isso de um jeito que ninguém mais faz? _____
-4. Três valores, em ordem: _____ / _____ / _____
-5. Três audiências, em ordem (a v1 diz: participante no celular, coordenador no desktop,
-   nunca "usuário avançado"): confirmar ou mudar. _____
-
-**Bloco 2 — Personalidade**
-
-6. Se o departamento fosse uma pessoa na missa de domingo, quem seria? _____
-7. Réguas (marque 0–10, para *hoje* e para *como deveria ser*):
-   - reverente 0 ———— 10 leve: hoje __ / deveria __
-   - impresso 0 ———— 10 digital: hoje __ / deveria __
-   - sereno 0 ———— 10 energético: hoje __ / deveria __
-   - comunidade 0 ———— 10 ferramenta: hoje __ / deveria __
-   - tradição 0 ———— 10 contemporâneo: hoje __ / deveria __
-   - sério 0 ———— 10 bem-humorado: hoje __ / deveria __
-8. O que o CLJ NSR **nunca** pode parecer (três): _____ / _____ / _____
-9. O que o participante deve sentir em meio segundo (uma palavra): _____
-   O que a coordenação deve sentir ao abrir a gestão (uma palavra): _____
-
-**Bloco 3 — Mundo**
-
-10. Objetos físicos do departamento/paróquia que gostariam de ver na tela: _____
-11. O azul `#253990`: de onde vem e onde a paróquia o usa? _____
-12. A última coisa bonita que o departamento fez, e por que era bonita: _____
-13. Marcas/apps/materiais católicos que acham bonitos: _____ ; feios: _____
-    Fora do universo católico, bonitos: _____
-14. Como o grupo escreve (três expressões típicas): _____
-
-**Bloco 4 — Posição**
-
-15. Frase de onliness: "O CLJ NSR é a única _____ que _____."
-16. Mapa 2×2 (eixos sugeridos: reverente ↔ leve; ferramenta ↔ comunidade): onde estão a
-    planilha, o WhatsApp, Hallow, um app de tarefas, e onde queremos estar. _____
-
-**Bloco 5 — Reverência (pároco)**
-
-17. A metáfora do terço na estrutura é reverente ou decorativa? _____
-18. Algum uso inadequado (dezena como progresso, carimbo, cruz pequena)? _____
-19. Cor, imagem ou palavra que a paróquia considera sua: _____
-
-**Bloco 6 — Participantes (três pessoas, sem a coordenação)**
-
-20. (Tela Hoje, 5 s) O que é? De quem é? Como se sente? _____
-21. (Conta, azul, marca, frase — isolados) De que é isto? _____
-22. Que app você abre sem pensar todo dia, e o que ele tem que este não tem? _____
-
-**Bloco 7 — Decisão**
-
-23. Quem decide o território: _____ Até quando: _____
-24. Ativos da v1 que ficam, custe o que custar: _____
-25. Orçamento para tipografia (R$ 0 / até R$ 500 / mais): _____
+**Movido para um documento próprio:** [briefing-identidade-v2.md](briefing-identidade-v2.md)
+(versão 1.0 do formulário, 2026-09-07). A versão que estava aqui foi refinada: cada pergunta
+ganhou a decisão de design que a resposta muda, entrou uma parte de fatos (nome, marca
+existente, aparelhos, orçamento, direitos), as réguas ganharam extremos descritos, o pároco e
+os participantes viraram roteiros, e as perguntas de orgulho/vergonha, voz e "três momentos"
+foram acrescentadas. Responda lá, não aqui.

@@ -18,6 +18,7 @@ Plataforma interna de gestão de pessoas do Departamento Cultural da **Paróquia
 - **Briefing de design** (conceito, princípios, pesquisa): https://claude.ai/code/artifact/00c156b4-8382-460b-96d4-1ac2a8df0f96
 - **Documento de abertura**: https://claude.ai/code/artifact/a2733bb6-d7fc-45b1-a749-74b41f2e80bb
 - **Pesquisa de identidade visual (entrega 1 da v2)** (leitura): https://claude.ai/code/artifact/b5a9460f-9d6f-4e44-8206-019329565f4a — fonte: [docs/pesquisa-identidade-visual.md](docs/pesquisa-identidade-visual.md)
+- **Briefing da identidade v2 (entrega 2)** (leitura): https://claude.ai/code/artifact/616d85b5-4a11-406c-8dd2-a44c38c95787 — fonte: [docs/briefing-identidade-v2.md](docs/briefing-identidade-v2.md) — as perguntas que decidem a identidade, com a decisão que cada resposta muda
 - **SDD do projeto completo** (leitura): https://claude.ai/code/artifact/21ee0664-b983-4d4a-a017-a316415aceb2 — fonte: [docs/sdd-projeto-completo.md](docs/sdd-projeto-completo.md)
 
 ## A identidade em uma linha

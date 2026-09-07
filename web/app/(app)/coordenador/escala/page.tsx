@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { ChevronDown } from "lucide-react";
 import { AtividadesManager, NovaAtividadeBotao } from "@/components/gestao/atividades-manager";
 import { NovaSerieBotao, SeriesManager } from "@/components/gestao/series-manager";
+import { QuadroEscala } from "@/components/gestao/quadro-escala";
 import { rotuloStatus } from "@/components/fio/status-pill";
 import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import { getFuncoes } from "@/lib/data/funcoes";
 import { getPessoas } from "@/lib/data/pessoas";
 import { getSeries } from "@/lib/data/series";
 import { comPapel, ordenarCronologico } from "@/lib/escala/agenda";
+import type { Agrupamento } from "@/lib/escala/quadro";
 import { STATUS_ATIVIDADE } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import type { StatusAtividade } from "@/lib/types";
@@ -24,6 +26,21 @@ const TODAS = "todas";
 const TODOS = "todos";
 /** O recorte que o alerta de furo do painel abre: só o que ainda não tem quem faça. */
 const SEM_RESPONSAVEL = "sem";
+
+/*
+  Três leituras do MESMO recorte — os filtros valem para as três.
+
+  O padrão é o quadro por pessoa, e não a tabela, porque é a pergunta que quem coordena faz
+  primeiro: "de quem é isso?". A tabela responde "o que existe", que é auditoria, e continua
+  a um clique. Ver docs/sdd-implementacao.md §8.
+*/
+const VISTAS = [
+  { chave: "pessoa", rotulo: "Por pessoa" },
+  { chave: "status", rotulo: "Por status" },
+  { chave: "tabela", rotulo: "Tabela" },
+] as const;
+
+type Vista = (typeof VISTAS)[number]["chave"];
 
 /**
  * A tela onde a escala é montada. Os três filtros moram na querystring e são aplicados no
@@ -57,6 +74,10 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
     : TODOS;
 
   const soFuros = texto(params.responsavel) === SEM_RESPONSAVEL;
+  const vistaParam = texto(params.vista);
+  const vista: Vista = (VISTAS as readonly { chave: string }[]).some((v) => v.chave === vistaParam)
+    ? (vistaParam as Vista)
+    : "pessoa";
 
   const noRecorte = atividades.filter(
     (a) =>
@@ -84,6 +105,12 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
   const dataPadrao = hojeISO.startsWith(mesAtual) ? hojeISO : `${mesAtual}-01`;
   const filtrado =
     soFuros || funcaoAtual !== TODAS || statusAtual !== TODOS || mesAtual !== hojeISO.slice(0, 7);
+
+  const mensagemVazia = soFuros
+    ? "Nenhuma atividade sem responsável neste mês — está tudo com dono."
+    : funcaoAtual === TODAS && statusAtual === TODOS
+      ? `Nada marcado em ${formatarMesAno(referencia).toLowerCase()} por enquanto.`
+      : "Nada neste recorte. Tente outro mês, função ou status.";
 
   return (
     <>
@@ -129,6 +156,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
             ]}
           />
           {soFuros && <input type="hidden" name="responsavel" value={SEM_RESPONSAVEL} />}
+          <input type="hidden" name="vista" value={vista} />
           <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
             <button
               type="submit"
@@ -138,7 +166,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
             </button>
             {filtrado && (
               <Link
-                href="/coordenador/escala"
+                href={`/coordenador/escala?vista=${vista}`}
                 className="inline-flex min-h-11 items-center rounded text-[12.5px] text-muted-foreground underline underline-offset-2 outline-none hover:text-accent-ink focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 lg:min-h-0"
               >
                 Voltar para este mês
@@ -158,7 +186,7 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
             <>
               {" · "}
               <Link
-                href={`/coordenador/escala?${new URLSearchParams({ mes: mesAtual, funcao: funcaoAtual, status: statusAtual, responsavel: SEM_RESPONSAVEL })}`}
+                href={`/coordenador/escala?${new URLSearchParams({ mes: mesAtual, funcao: funcaoAtual, status: statusAtual, responsavel: SEM_RESPONSAVEL, vista })}`}
                 className="font-semibold text-warn underline underline-offset-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {semResponsavel} ainda sem responsável
@@ -173,6 +201,16 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
           )}
         </p>
 
+        <SeletorDeVista
+          vista={vista}
+          base={{
+            mes: mesAtual,
+            funcao: funcaoAtual,
+            status: statusAtual,
+            ...(soFuros ? { responsavel: SEM_RESPONSAVEL } : {}),
+          }}
+        />
+
         {/*
           As séries vêm antes da tabela porque são o nível de cima: mexer no conjunto
           ("o João saiu, redistribui outubro") não deveria custar trinta edições de linha.
@@ -184,23 +222,56 @@ export default async function GestaoEscalaPage({ searchParams }: PageProps<"/coo
           <SeriesManager series={series} pessoas={pessoas} />
         </section>
 
-        <AtividadesManager
-          atividades={emOrdem}
-          pessoas={pessoas}
-          funcoes={funcoes}
-          trocas={trocas}
-          nomesDeSerie={Object.fromEntries(series.map(({ serie }) => [serie.id, serie.titulo]))}
-          dataPadrao={dataPadrao}
-          mensagemVazia={
-            soFuros
-              ? "Nenhuma atividade sem responsável neste mês — está tudo com dono."
-              : funcaoAtual === TODAS && statusAtual === TODOS
-              ? `Nada marcado em ${formatarMesAno(referencia).toLowerCase()} por enquanto.`
-              : "Nada neste recorte. Tente outro mês, função ou status."
-          }
-        />
+        {vista === "tabela" ? (
+          <AtividadesManager
+            atividades={emOrdem}
+            pessoas={pessoas}
+            funcoes={funcoes}
+            trocas={trocas}
+            nomesDeSerie={Object.fromEntries(series.map(({ serie }) => [serie.id, serie.titulo]))}
+            dataPadrao={dataPadrao}
+            mensagemVazia={mensagemVazia}
+          />
+        ) : (
+          <QuadroEscala
+            atividades={emOrdem}
+            pessoas={pessoas}
+            funcoes={funcoes}
+            agrupamento={vista as Agrupamento}
+            mensagemVazia={mensagemVazia}
+          />
+        )}
       </div>
     </>
+  );
+}
+
+/**
+ * Trocar de leitura é navegação, não estado: são links, o endereço carrega a escolha, e
+ * outro coordenador abre o mesmo recorte na mesma vista pelo link colado no grupo.
+ */
+function SeletorDeVista({ vista, base }: { vista: Vista; base: Record<string, string> }) {
+  return (
+    <nav aria-label="Como ver a escala" className="flex w-fit gap-1 rounded-xl bg-muted p-1">
+      {VISTAS.map((v) => {
+        const atual = v.chave === vista;
+        return (
+          <Link
+            key={v.chave}
+            href={`/coordenador/escala?${new URLSearchParams({ ...base, vista: v.chave })}`}
+            aria-current={atual ? "page" : undefined}
+            className={cn(
+              "inline-flex min-h-11 items-center rounded-lg px-3.5 text-[12.5px] font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 lg:min-h-9",
+              atual
+                ? "bg-panel text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {v.rotulo}
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
 

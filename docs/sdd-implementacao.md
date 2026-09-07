@@ -365,6 +365,30 @@ que o tenta — aqui se desfaz e se cria de novo); rodízio separado para suplen
 
 ### Fase 9 — Quadro da escala
 
+Três leituras do **mesmo recorte**, na querystring (`?vista=pessoa|status|tabela`) — os
+filtros de mês, função e status valem para as três, e o endereço é compartilhável.
+
+- **Por pessoa** é o padrão, e não a tabela. A pergunta que quem coordena faz primeiro é
+  "de quem é isso?"; a coluna *é* a resposta, e o tamanho dela mostra o desequilíbrio sem
+  ninguém contar linha. A tabela responde "o que existe", que é auditoria, e fica a um clique.
+- **Furos na primeira coluna**, com destaque: é o que pede decisão.
+- **Por status** usa `ideia → rascunho → agendado → publicado → concluido`, que não foi
+  inventado para o quadro — está no `CHECK` do banco desde a Fase 2.
+- **Arrastar é para quem tem mouse.** Todo cartão carrega também um `<select>` nativo
+  rotulado (`Mover "Terço Diário" de QUI 01/10`) que faz a mesma coisa: é o caminho de
+  teclado, de leitor de tela e do celular, onde arrastar entre colunas é hostil. Os dois
+  chamam a mesma Server Action, então a troca fica registrada dos dois jeitos.
+- A coluna **rola por dentro** (`max-h-[60vh]`). Sem isso, uma pessoa com trinta contas
+  estica a página e o quadro deixa de ser o lugar de onde se vê o conjunto.
+- No celular as colunas passam de lado; **a página nunca rola na horizontal**.
+- `lib/escala/quadro.ts` guarda o que é decisão de produto e é testável sem navegador: quem
+  vira coluna, em que ordem, e o que soltar significa — inclusive que **soltar onde já está
+  não vira troca nenhuma**, e que chave de coluna vinda do DOM não é de confiar.
+
+**Fora, de propósito** (é o pacote do Trello, não o gesto): lista livre, etiqueta,
+checklist, comentário, campo customizado, reordenar dentro da coluna.
+
+
 ### Fase 10 — Calendário que age
 
 ---

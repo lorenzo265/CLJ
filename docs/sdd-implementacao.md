@@ -1,6 +1,11 @@
 # Plano de Implementação (SDD) — CLJ NSR
 
 Spec e plano de execução do aplicativo `web/`. Escrito em **2026-09-05**.
+
+> **Superado em 2026-09-07** por [sdd-projeto-completo.md](sdd-projeto-completo.md), que consolida
+> este plano (as Fases 1–7, todas fechadas) e define as Fases 8–13. Este arquivo fica como
+> histórico da construção; decisão nova entra no documento completo.
+
 É o contrato entre as sessões de trabalho: cada fase tem escopo fechado, arquivos donos e
 critério de aceite verificável. Fonte das regras: [decisoes-design.md](decisoes-design.md)
 (identidade) e [decisoes-estrutura.md](decisoes-estrutura.md) (produto).

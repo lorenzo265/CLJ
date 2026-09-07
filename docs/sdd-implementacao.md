@@ -316,6 +316,11 @@ Isso é o outro lado do "difícil de dividir": dividir de verdade não é atribu
 atividade, é decidir **quem pega quais dias** do que se repete. Por isso a recorrência veio
 antes das duas telas pedidas.
 
+E não era escopo novo: `decisoes-estrutura.md` §5 já pedia, por escrito, **"escala mensal
+com rodízio"**. A primeira rodada entregou a metade que era leitura e deixou a outra
+metade em branco — a Fase 8 fecha uma dívida contra o contrato do próprio projeto, não
+acrescenta um desejo.
+
 ### 8.1 Trello e Monday: o gesto, não o pacote
 
 `decisoes-estrutura.md` §2 diz, por escrito, que isto **"não é ferramenta genérica de
@@ -414,3 +419,44 @@ coberto em `lib/actions/autorizacao.test.ts`).
 
 
 ---
+
+## 9. Onde a segunda rodada terminou
+
+`npm run lint`, `npm test` (**151 testes**, eram 100) e `npm run build` limpos, e as três
+fases percorridas num navegador de verdade nos dois papéis — série criada do zero, arrasto
+no quadro e no calendário sobrevivendo ao reload, participante barrado mesmo passando
+`?modo=montar` na URL.
+
+**O defeito que só a verificação pegou:** as três telas novas furaram o piso de 44px de
+alvo de toque (`decisoes-design.md` §8) — 21 elementos no celular: o seletor de mover do
+cartão (32px), a ficha do calendário (35px) e o botão de redistribuir (36px). As telas que
+não foram tocadas estavam em zero, o que localizou a regressão na rodada. `tsc`, `eslint`,
+os testes e o `build` passaram por todos os três — como na primeira rodada, o que o
+navegador mostra o pipeline não mostra.
+
+O outro achado veio da prévia da série: quem era marcado para o rodízio e não pegava
+nenhuma data **sumia sem explicação** — exatamente o "difícil de entender" que motivou a
+rodada. A prévia agora nomeia essas pessoas e diz por quê.
+
+### O que continua sabido e não feito
+
+Tudo de §6 segue valendo, mais:
+
+- **Editar a regra de uma série já criada** não existe. "Esta e as futuras" é um problema
+  caro e mal resolvido em toda ferramenta que o tenta; aqui se desfaz e se cria de novo.
+- **Recorrência por posição no mês** ("toda 2ª terça") não existe — a reunião mensal ainda
+  é criada à mão.
+- **Rodízio de suplente** não existe: a série só divide o responsável.
+- **Reordenar cartões dentro da coluna** do quadro não existe, e é de propósito — ordem
+  dentro do dia é a hora, não a preferência de quem arrasta.
+- **`better-sqlite3` continua nativo.** A troca por um SQLite em WASM (para que nenhuma
+  instalação precise de flag) segue pendente; a fronteira `lib/repos/` existe justamente
+  para que ela custe uma camada e não uma refatoração.
+
+### O que precisa da equipe, não do código
+
+- Validar a metáfora do terço com a coordenação e o pároco (continua de §6).
+- **Confirmar que o calendário pode ser lugar de ação.** `decisoes-design.md` não proíbe,
+  e §7.2 ("a plataforma carrega o peso, não a pessoa") empurra nessa direção — mas quem
+  escreveu aquelas decisões não decidiu isto. O modo de leitura ficou intacto de propósito,
+  então voltar atrás é apagar um botão.

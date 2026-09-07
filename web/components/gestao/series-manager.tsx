@@ -733,6 +733,7 @@ export function SeriesManager({
                 type="button"
                 variant="outline"
                 size="sm"
+                className="h-11 lg:h-9"
                 onClick={() => setFoco({ modo: "redistribuir", serie })}
               >
                 <Repeat aria-hidden />

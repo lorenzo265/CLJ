@@ -131,7 +131,8 @@ function Cartao({
             aria-label={`Mover “${atividade.titulo}” de ${formatarDataKicker(atividade.data)}`}
             value={destinoAtual}
             onChange={(e) => aoMover(e.target.value)}
-            className="h-8 max-w-[9rem] appearance-none rounded-lg border border-input bg-background pr-6 pl-2 text-[11.5px] text-muted-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50"
+            // 44px no toque, 32 no desktop: lá o alvo é o ponteiro, aqui é o polegar.
+            className="h-11 max-w-[9rem] appearance-none rounded-lg border border-input bg-background pr-6 pl-2 text-[11.5px] text-muted-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 lg:h-8"
           >
             {destinos.map((d) => (
               <option key={d.valor} value={d.valor}>

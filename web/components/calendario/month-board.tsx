@@ -67,7 +67,10 @@ function Ficha({
       onDragEnd={() => aoArrastar(null)}
       onClick={aoAbrir}
       className={cn(
-        "flex w-full cursor-grab flex-col items-start gap-px rounded px-1.5 py-1 text-left outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring active:cursor-grabbing",
+        // Na lista do celular a ficha é alvo de dedo; na grade do desktop, de ponteiro —
+        // e lá três fichas de 44px estourariam a altura da semana.
+        "flex w-full cursor-grab flex-col items-start justify-center gap-px rounded px-2 py-1.5 text-left outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring active:cursor-grabbing",
+        "min-h-11 lg:min-h-0 lg:px-1.5 lg:py-1",
         furo ? "bg-warn-soft" : "bg-accent",
         arrastando && "opacity-40",
       )}

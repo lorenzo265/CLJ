@@ -46,6 +46,18 @@ Use `npm ci`, não `npm install`: ele instala exatamente o que está no
 ao compilador — neste projeto só um pacote roda script de instalação
 (`unrs-resolver`, do ESLint), então só o `npm run lint` fica prejudicado.
 
+## O que a coordenação faz aqui
+
+| Onde | O quê |
+|---|---|
+| **Gestão de Escala → Nova série** | Descreve a regra uma vez ("seg a sex, 7h, outubro inteiro") e o app cria e divide todas as datas. A prévia mostra a divisão inteira antes de salvar. |
+| **Gestão de Escala → Redistribuir** | Divide de novo o que ainda está por vir, equilibrando entre quem você escolher. Cada mudança de mãos entra no histórico. |
+| **Gestão de Escala → Por pessoa / Por status / Tabela** | Três leituras do mesmo recorte. Arraste um cartão para outra coluna, ou use o seletor dentro dele. |
+| **Calendário → Montar a escala** | O `+` de um dia cria ali; arrastar uma ficha remarca. A faixa embaixo mostra como o mês está dividido. |
+
+O rodízio respeita a disponibilidade que cada pessoa declarou e **prefere deixar furo a
+escalar quem não pode** — o furo o app sabe cobrar, o "não pode" ele não sabe.
+
 ## Como o código está organizado
 
 | Pasta | Papel |
@@ -59,7 +71,7 @@ ao compilador — neste projeto só um pacote roda script de instalação
 | `lib/repos/` | SQL cru. Só `lib/data/` e `lib/actions/` importam daqui. |
 | `lib/db/` | Conexão, `schema.sql`, semeadura. |
 | `lib/auth/` | Senha (scrypt), sessão em cookie httpOnly, guardas de rota e de papel. |
-| `lib/escala/`, `lib/calendario/`, `lib/format.ts` | Domínio puro — sem React, sem banco. É onde ficam os testes. |
+| `lib/escala/`, `lib/calendario/`, `lib/format.ts` | Domínio puro — sem React, sem banco. É onde ficam os testes. O rodízio (`escala/serie.ts`), as colunas do quadro (`escala/quadro.ts`) e a carga do mês (`calendario/carga.ts`) moram aqui. |
 
 Regra que a revisão cobra: **página e componente nunca importam `lib/repos/` nem `lib/db/`.**
 

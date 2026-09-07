@@ -145,3 +145,46 @@ export async function excluirAtividade(
   revalidarEscala();
   return { ok: true };
 }
+
+/**
+ * Remarcar: muda só a data, mantendo o resto. É o que o arrasto no calendário faz.
+ *
+ * Não gera `troca` — trocar é sobre quem faz, e ninguém mudou de mãos aqui. O registro
+ * existe para tirar a combinação de responsável da conversa privada
+ * (`decisoes-estrutura.md` §5); encher o histórico de mudanças de data afogaria isso.
+ */
+export async function remarcarAtividade(
+  _estado: EstadoForm,
+  formData: FormData,
+): Promise<EstadoForm> {
+  const coordenador = await exigirCoordenadorEmAction();
+
+  const id = texto(formData, "id", 64);
+  const atual = repo.buscarAtividade(id);
+  if (!atual || atual.departamentoId !== coordenador.departamentoId) {
+    return { erro: "Atividade não encontrada." };
+  }
+
+  const data = dataISO(formData, "data");
+  if (!data) return { erro: "Data inválida." };
+  if (data === atual.data) return { ok: true };
+
+  repo.atualizarAtividade(
+    id,
+    {
+      tipo: atual.tipo,
+      titulo: atual.titulo,
+      funcaoId: atual.funcaoId,
+      data,
+      hora: atual.hora,
+      responsavelId: atual.responsavelId,
+      suplenteId: atual.suplenteId,
+      status: atual.status,
+      linkMidia: atual.linkMidia,
+    },
+    { feitaPor: coordenador.id },
+  );
+
+  revalidarEscala();
+  return { ok: true };
+}

@@ -391,4 +391,26 @@ checklist, comentário, campo customizado, reordenar dentro da coluna.
 
 ### Fase 10 — Calendário que age
 
+O `/calendario` é tela de **todo mundo** (`exigirPessoa`), então agir nela é só de quem
+coordena. `?modo=montar` aparece apenas para a coordenação — e as Server Actions por trás
+exigem coordenador, então esconder o botão é conveniência, **não é a trava** (§2, regra 3;
+coberto em `lib/actions/autorizacao.test.ts`).
+
+- **Ler** continua sendo a grade de contas: responde "que dias são meus", sem clique e sem
+  estado. Nada dela mudou.
+- **Montar** troca as contas por fichas: clicar no `+` de um dia cria ali com a data já
+  preenchida, arrastar uma ficha para outro dia remarca de verdade, e a ficha aberta é o
+  formulário inteiro. Furo é ficha em `warn`, não ausência silenciosa.
+- **Remarcar não gera `troca`.** Trocar é sobre quem faz; ninguém mudou de mãos ao mudar de
+  data, e encher o histórico de remarcações afogaria o registro que a plataforma existe para
+  guardar (`decisoes-estrutura.md` §5).
+- **A faixa "Como o mês está dividido"** é o que a grade sozinha nunca deu: dá para ver que o
+  mês está cheio, mas não que ele está cheio *para uma pessoa só*.
+- No celular a semana vira lista de dias: mesmo `+`, mesmas fichas, e remarcar é o campo de
+  data em vez do arrasto (§7.3 — mesma informação e mesmas ações nas duas densidades). A
+  frase de ajuda muda junto, para não prometer um gesto que ali não existe.
+
+**Fora, de propósito:** grade de horas. A unidade aqui é o dia, não o intervalo — ver §8.2.
+
+
 ---

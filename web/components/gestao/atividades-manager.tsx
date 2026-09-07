@@ -643,6 +643,51 @@ const TH =
 const TD = "border-b border-border-soft px-3 py-2.5 align-middle";
 
 /** O botão do cabeçalho. Vive fora da tabela: criar não depende de nenhuma linha. */
+/**
+ * Criar e editar num diálogo controlado de fora. O calendário precisa disto: lá quem abre
+ * o formulário é um clique num dia, não um botão de cabeçalho.
+ */
+export function DialogoAtividade({
+  atividade,
+  pessoas,
+  funcoes,
+  dataPadrao,
+  aberto,
+  aoFechar,
+}: {
+  /** Ausente = criar. Presente = editar aquela linha. */
+  atividade?: Atividade;
+  pessoas: Pessoa[];
+  funcoes: Funcao[];
+  dataPadrao: string;
+  aberto: boolean;
+  aoFechar: () => void;
+}) {
+  return (
+    <Dialog disablePointerDismissal open={aberto} onOpenChange={(a) => !a && aoFechar()}>
+      <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-lg">
+        <DialogHeader>
+          <DialogTitle>{atividade ? "Editar atividade" : "Nova atividade"}</DialogTitle>
+          <DialogDescription>
+            {atividade
+              ? "Mudar a data aqui é o mesmo que arrastar no calendário."
+              : "Ela entra na escala de todo mundo assim que você salvar."}
+          </DialogDescription>
+        </DialogHeader>
+        {/* `key`: abrir noutro dia (ou noutra linha) recarrega o formulário do zero. */}
+        <FormAtividade
+          key={atividade?.id ?? dataPadrao}
+          atividade={atividade}
+          pessoas={pessoas}
+          funcoes={funcoes}
+          dataPadrao={dataPadrao}
+          aoConcluir={aoFechar}
+        />
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 export function NovaAtividadeBotao({
   pessoas,
   funcoes,
@@ -661,22 +706,13 @@ export function NovaAtividadeBotao({
         Nova atividade
       </Button>
 
-      <Dialog disablePointerDismissal open={aberto} onOpenChange={setAberto}>
-        <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle>Nova atividade</DialogTitle>
-            <DialogDescription>
-              Ela entra na escala de todo mundo assim que você salvar.
-            </DialogDescription>
-          </DialogHeader>
-          <FormAtividade
-            pessoas={pessoas}
-            funcoes={funcoes}
-            dataPadrao={dataPadrao}
-            aoConcluir={() => setAberto(false)}
-          />
-        </DialogContent>
-      </Dialog>
+      <DialogoAtividade
+        pessoas={pessoas}
+        funcoes={funcoes}
+        dataPadrao={dataPadrao}
+        aberto={aberto}
+        aoFechar={() => setAberto(false)}
+      />
     </>
   );
 }

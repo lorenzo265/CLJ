@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MonthBoard } from "@/components/calendario/month-board";
 import { MonthGrid } from "@/components/calendario/month-grid";
+import { CargaDoMesFaixa } from "@/components/calendario/carga-do-mes";
 import { LegendaContas } from "@/components/escala/linha-atividade";
 import { Kicker, Vazio } from "@/components/fio/tipografia";
 import { FiltroMeusTodos } from "@/components/shell/filtro-meus-todos";
@@ -19,7 +21,9 @@ import {
   parseReferenciaMes,
 } from "@/lib/calendario/mes";
 import { getAtividades } from "@/lib/data/atividades";
+import { getFuncoes } from "@/lib/data/funcoes";
 import { getPessoas } from "@/lib/data/pessoas";
+import { cargaDoMes } from "@/lib/calendario/carga";
 import { comPapel, filtrarMeus, ordenarCronologico } from "@/lib/escala/agenda";
 import { contextoDaAtividade, fraseDaAtividade, rotuloTipo } from "@/lib/escala/frase";
 import { formatarDataKicker } from "@/lib/format";
@@ -48,9 +52,21 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
   const referencia = parseReferenciaMes(typeof mes === "string" ? mes : undefined, agora);
   const mesAtual = formatarReferenciaMes(referencia);
 
-  const [atividades, pessoas] = await Promise.all([
+  /*
+    Duas leituras da mesma tela. Quem participa lê: o mês responde "que dias são meus", e a
+    conta preenchida é a resposta. Quem coordena também MONTA: `?modo=montar` troca as contas
+    por fichas que se arrastam. Ver docs/sdd-implementacao.md §8, Fase 10.
+
+    Só a coordenação vê o modo — e só ela consegue usá-lo: as Server Actions por trás exigem
+    coordenador, então esconder o botão é conveniência, não é a trava.
+  */
+  const coordena = eu.papelSistema === "coordenador";
+  const montando = coordena && (await searchParams).modo === "montar";
+
+  const [atividades, pessoas, funcoes] = await Promise.all([
     getAtividades(eu.departamentoId),
     getPessoas(eu.departamentoId),
+    coordena ? getFuncoes(eu.departamentoId) : Promise.resolve([]),
   ]);
 
   const doDepartamento = comPapel(atividades, eu.id);
@@ -66,7 +82,11 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
   );
 
   const hrefMes = (ref: Date) =>
-    `/calendario?${new URLSearchParams({ mes: formatarReferenciaMes(ref), filtro: atual })}`;
+    `/calendario?${new URLSearchParams({
+      mes: formatarReferenciaMes(ref),
+      filtro: atual,
+      ...(montando ? { modo: "montar" } : {}),
+    })}`;
 
   const setaClasse = cn(buttonVariants({ variant: "outline", size: "icon" }), "text-muted-foreground");
 
@@ -98,16 +118,66 @@ export default async function CalendarioPage({ searchParams }: PageProps<"/calen
         */}
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:gap-6">
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            <FiltroMeusTodos
-              base="/calendario"
-              atual={atual}
-              extraParams={{ mes: mesAtual }}
-            />
-            <MonthGrid dias={getGradeDoMes(referencia, agora)} itens={itens} />
-            {atual === "todos" && <LegendaContas />}
+            {coordena && (
+              <nav aria-label="Como usar o calendário" className="flex w-fit gap-1 rounded-xl bg-muted p-1">
+                {[
+                  { chave: "", rotulo: "Ver o mês" },
+                  { chave: "montar", rotulo: "Montar a escala" },
+                ].map((m) => {
+                  const ativo = (montando ? "montar" : "") === m.chave;
+                  return (
+                    <Link
+                      key={m.rotulo}
+                      href={`/calendario?${new URLSearchParams({
+                        mes: mesAtual,
+                        filtro: atual,
+                        ...(m.chave ? { modo: m.chave } : {}),
+                      })}`}
+                      aria-current={ativo ? "page" : undefined}
+                      className={cn(
+                        "inline-flex min-h-11 items-center rounded-lg px-3.5 text-[12.5px] font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 lg:min-h-9",
+                        ativo
+                          ? "bg-panel text-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      {m.rotulo}
+                    </Link>
+                  );
+                })}
+              </nav>
+            )}
+
+            {montando ? (
+              <>
+                <MonthBoard
+                  dias={getGradeDoMes(referencia, agora)}
+                  atividades={atividades}
+                  pessoas={pessoas}
+                  funcoes={funcoes}
+                />
+                <CargaDoMesFaixa carga={cargaDoMes(atividades, pessoas, mesAtual)} />
+              </>
+            ) : (
+              <>
+                <FiltroMeusTodos
+                  base="/calendario"
+                  atual={atual}
+                  extraParams={{ mes: mesAtual }}
+                />
+                <MonthGrid dias={getGradeDoMes(referencia, agora)} itens={itens} />
+                {atual === "todos" && <LegendaContas />}
+              </>
+            )}
           </div>
 
-          <section className="flex w-full flex-col gap-2.5 xl:w-[250px] xl:shrink-0">
+          <section
+            className={cn(
+              "flex w-full flex-col gap-2.5 xl:w-[250px] xl:shrink-0",
+              // Montando, a grade precisa da largura toda — e "Próximos" é leitura pessoal.
+              montando && "hidden",
+            )}
+          >
             <Kicker>Próximos</Kicker>
             {proximos.length === 0 ? (
               <Vazio>

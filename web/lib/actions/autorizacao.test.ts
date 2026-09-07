@@ -33,7 +33,12 @@ const { listarAtividades, listarTrocas } = await import("@/lib/repos/atividades"
 const { listarFuncoes } = await import("@/lib/repos/funcoes");
 const { DEPARTAMENTO_CULTURAL } = await import("@/lib/departamento");
 const { salvarFuncao, excluirFuncao } = await import("@/lib/actions/funcoes");
-const { trocarResponsavel, salvarAtividade } = await import("@/lib/actions/escala");
+const { trocarResponsavel, salvarAtividade, remarcarAtividade } = await import(
+  "@/lib/actions/escala",
+);
+const { criarSerie, redistribuirSerie, excluirSerie } = await import("@/lib/actions/series");
+const { buscarAtividade } = await import("@/lib/repos/atividades");
+const { listarSeries } = await import("@/lib/repos/series");
 const { alternarPresenca } = await import("@/lib/actions/reunioes");
 const { alternarStatusPessoa, cancelarConvite, mudarPapel } = await import(
   "@/lib/actions/participantes",
@@ -78,6 +83,25 @@ describe("actions de coordenação", () => {
       trocarResponsavel({}, form({ id: "a4", papel: "responsavel", pessoaId: "p2" })),
     ).rejects.toThrow(/coordenação/i);
     await expect(alternarStatusPessoa({}, form({ id: "p2" }))).rejects.toThrow(/coordenação/i);
+  });
+
+  it("recusam participante nas telas novas — quadro, calendário e séries", async () => {
+    entrarComo(PARTICIPANTE);
+
+    // O arrasto do calendário. `?modo=montar` na URL não abre porta: a trava é aqui.
+    await expect(
+      remarcarAtividade({}, form({ id: "a4", data: "2026-12-25" })),
+    ).rejects.toThrow(/coordenação/i);
+
+    // O arrasto do quadro passa por `trocarResponsavel`, já coberto acima — e a série:
+    await expect(
+      criarSerie(
+        {},
+        form({ titulo: "Invadida", dias: ["seg"], inicio: "2026-10-05", fim: "2026-10-26" }),
+      ),
+    ).rejects.toThrow(/coordenação/i);
+    await expect(redistribuirSerie({}, form({ serieId: "x" }))).rejects.toThrow(/coordenação/i);
+    await expect(excluirSerie({}, form({ serieId: "x" }))).rejects.toThrow(/coordenação/i);
   });
 
   it("aceitam a coordenação", async () => {
@@ -135,6 +159,91 @@ describe("regras de negócio que a UI não pode contornar", () => {
       form({ id: "id-inventado", papel: "responsavel", pessoaId: "p2" }),
     );
     expect(resultado.erro).toMatch(/não encontrada/);
+  });
+
+  it("remarcar muda a data e não inventa troca — ninguém mudou de mãos", async () => {
+    entrarComo(COORDENADORA);
+    const antes = buscarAtividade("a4")!;
+    const trocasAntes = listarTrocas("a4").length;
+
+    await expect(remarcarAtividade({}, form({ id: "a4", data: "2026-12-25" }))).resolves.toEqual({
+      ok: true,
+    });
+
+    const depois = buscarAtividade("a4")!;
+    expect(depois.data).toBe("2026-12-25");
+    expect(depois.responsavelId).toBe(antes.responsavelId);
+    expect(listarTrocas("a4")).toHaveLength(trocasAntes);
+  });
+
+  it("remarcar recusa data que não é data — a chave do dia vem do DOM", async () => {
+    entrarComo(COORDENADORA);
+    const resultado = await remarcarAtividade({}, form({ id: "a4", data: "amanhã de manhã" }));
+    expect(resultado.erro).toMatch(/Data inválida/);
+  });
+
+  it("a série cobra dia da semana e período antes de escrever qualquer coisa", async () => {
+    entrarComo(COORDENADORA);
+    const antes = listarSeries(DEPARTAMENTO_CULTURAL).length;
+
+    expect((await criarSerie({}, form({ titulo: "" }))).erro).toMatch(/título/);
+    expect((await criarSerie({}, form({ titulo: "X", dias: [] }))).erro).toMatch(/dia da semana/);
+    expect(
+      (await criarSerie({}, form({ titulo: "X", dias: ["seg"], inicio: "", fim: "" }))).erro,
+    ).toMatch(/começo e o fim/);
+    expect(
+      (
+        await criarSerie(
+          {},
+          form({ titulo: "X", dias: ["seg"], inicio: "2026-10-26", fim: "2026-10-05" }),
+        )
+      ).erro,
+    ).toMatch(/antes do começo/);
+    // Regra válida, mas nenhuma data cai nela dentro do período.
+    expect(
+      (
+        await criarSerie(
+          {},
+          form({ titulo: "X", dias: ["dom"], inicio: "2026-10-05", fim: "2026-10-09" }),
+        )
+      ).erro,
+    ).toMatch(/Nenhuma data/);
+
+    expect(listarSeries(DEPARTAMENTO_CULTURAL)).toHaveLength(antes);
+  });
+
+  it("a série de outro departamento não é redistribuível nem apagável pelo id", async () => {
+    entrarComo(COORDENADORA);
+    expect((await redistribuirSerie({}, form({ serieId: "inventado" }))).erro).toMatch(
+      /não encontrada/,
+    );
+    expect((await excluirSerie({}, form({ serieId: "inventado" }))).erro).toMatch(
+      /não encontrada/,
+    );
+  });
+
+  it("o grupo do rodízio só aceita gente ativa deste departamento", async () => {
+    entrarComo(COORDENADORA);
+
+    const resultado = await criarSerie(
+      {},
+      form({
+        titulo: "Só gente de fora",
+        tipo: "post",
+        dias: ["seg"],
+        inicio: "2026-11-02",
+        fim: "2026-11-30",
+        // p6 = Rafael, inativo no seed; o outro id nunca existiu.
+        grupo: ["p6", "id-de-outra-paroquia"],
+      }),
+    );
+    expect(resultado.ok).toBe(true);
+
+    const serie = listarSeries(DEPARTAMENTO_CULTURAL).find((s) => s.titulo === "Só gente de fora")!;
+    const geradas = listarAtividades(DEPARTAMENTO_CULTURAL).filter((a) => a.serieId === serie.id);
+    expect(geradas.length).toBeGreaterThan(0);
+    // Ninguém elegível: a série nasce inteira de furos, e não com o nome de quem saiu.
+    expect(geradas.every((a) => a.responsavelId === null)).toBe(true);
   });
 
   it("trocar responsável grava a troca com o motivo e quem fez", async () => {

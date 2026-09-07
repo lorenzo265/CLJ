@@ -182,7 +182,7 @@ function FormAtividade({
           name="titulo"
           defaultValue={atividade?.titulo ?? ""}
           maxLength={160}
-          placeholder="Post — Terço Diário"
+          placeholder="Terço Diário"
           required
         />
       </Campo>

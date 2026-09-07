@@ -25,6 +25,27 @@ npm run build    # build de produção
 npm run db:reset # apaga o banco local; ele é recriado e semeado no próximo boot
 ```
 
+### Se a instalação quebrar
+
+O `better-sqlite3` é um módulo nativo, mas **não precisa de compilador**: a versão
+travada aqui (13.0.3) já traz o binário pronto de cada plataforma dentro do pacote
+(`prebuilds/win32-x64.node`, `linux-x64.node`, …) e declara `gypfile: false`, que
+manda o npm não chamar o `node-gyp`.
+
+Se mesmo assim o npm tentar compilar e reclamar de Visual Studio (Windows) ou de
+`make`/`g++` (Linux), o problema é uma árvore de `node_modules` suja ou travada —
+não a sua máquina. Feche o editor e qualquer `npm run dev` aberto (no Windows eles
+seguram os arquivos e o npm falha com `EPERM`), e reinstale a partir do lockfile:
+
+```bash
+rm -rf node_modules && npm ci     # PowerShell: Remove-Item -Recurse -Force node_modules
+```
+
+Use `npm ci`, não `npm install`: ele instala exatamente o que está no
+`package-lock.json`. Em último caso, `npm ci --ignore-scripts` pula qualquer chamada
+ao compilador — neste projeto só um pacote roda script de instalação
+(`unrs-resolver`, do ESLint), então só o `npm run lint` fica prejudicado.
+
 ## Como o código está organizado
 
 | Pasta | Papel |

@@ -651,8 +651,10 @@ marca redesenhada para *dizer* terço; ícones próprios; a assinatura levada ao
 
 **Como isso se encaixa no SDD:** a identidade v2 entra **antes** da Fase 8 (validação com o
 pároco) — o pároco deve ver a v2, não a v1 — e antes da Fase 9 (produção). A semana 4 se
-sobrepõe à Fase 10. O piloto de outubro continua de pé se a decisão de território acontecer
-até o fim da semana 2; se atrasar, a decisão honesta é adiar o piloto, não lançar com a v1.
+sobrepõe à Fase 10. O piloto de outubro **não espera a v2**: ele mede a escala, não a estética.
+A decisão de território precisa sair até o fim da semana 2; se o código da v2 não estiver
+pronto em 30/09, o piloto começa com a v1 e a v2 entra até 15/10 (regra registrada no SDD,
+§7.8 e §11).
 Registrar a decisão no §11 do SDD.
 
 **O que a coordenação precisa fazer agora:** marcar o workshop de 3 h e responder as perguntas

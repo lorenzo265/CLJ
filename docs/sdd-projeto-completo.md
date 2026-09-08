@@ -1,7 +1,8 @@
 # SDD do Projeto Completo — CLJ NSR
 
 **Software Design Document** da plataforma do Departamento Cultural da Paróquia Nossa Senhora
-do Rosário. Escrito em **2026-09-07**, sobre o estado verificado do repositório nesse dia.
+do Rosário. Escrito em **2026-09-07**, sobre o estado verificado do repositório nesse dia. Atualizado em
+**2026-09-08**: a identidade v2 entra na Fase 8.
 
 Este documento consolida os três registros anteriores — [decisoes-design.md](decisoes-design.md)
 (identidade), [decisoes-estrutura.md](decisoes-estrutura.md) (produto) e
@@ -137,6 +138,7 @@ Herdado de `sdd-implementacao.md` §6 e reavaliado aqui. Cada item tem uma fase 
 | Pendência | Efeito | Fase |
 |---|---|---|
 | Validar a aplicação do terço com coordenação e pároco | **a única que bloqueia lançar** | 8 |
+| A identidade v1 lê como genérica: metáfora em 12px, marca que lê como spinner, tipografia neutra (pesquisa de 2026-09-07) | o participante não tem motivo para abrir sem lembrete | 8 |
 | Dark mode não foi olhado tela a tela | tokens prontos, varredura visual não feita | 10 |
 | Artboards do canvas ainda mostram os hex antigos (pré-correção AA) | design e app divergem em 5 tokens | 10 |
 | `getUsoDaFuncao` é uma consulta por função | não pesa com 5 funções; o certo é `GROUP BY` | 10 |
@@ -520,6 +522,12 @@ Não há `.env` no repositório; variáveis vão pelo ambiente do host.
 
 ## 6. Estrutura de design
 
+> **Esta seção descreve a identidade v1, que é a que está no código.** Em 2026-09-07 a pesquisa
+> [pesquisa-identidade-visual.md](pesquisa-identidade-visual.md) diagnosticou a v1 como "bonita,
+> mas genérica" e abriu a **identidade v2** (Fase 8, §7.8). Tokens, marca e primitivos abaixo
+> continuam valendo até a v2 entrar no código; quando entrar, esta seção é reescrita no mesmo
+> commit.
+
 ### 6.1 O conceito: "O Fio"
 
 > A plataforma é o **terço** do Departamento Cultural: cada responsabilidade é uma conta no
@@ -622,10 +630,11 @@ repositório de pesquisa a um app que a coordenação consegue usar num mês rea
 sucessão garantida antes do fim do mandato.
 
 ```
-2026 ─ ago ──────── set ──────────── out ──────────── nov ──────────── dez ─┐
-      F0–F7 feitas  F8 validação      F11 PILOTO         F12 PWA + push       F13 sucessão
-                    F9 produção       (mês do Rosário)                       e encerramento
-                    F10 dívidas                                              do mandato
+2026 ─ ago ──────── set ────────────────── out ──────────────── nov ──────────── dez ─┐
+      F0–F7 feitas  F8 identidade v2 +       F11 PILOTO             F12 PWA + push       F13 sucessão
+                       validação             (mês do Rosário;                            e encerramento
+                    F9 produção               v2 entra até 15/10                         do mandato
+                    F10 dívidas               se não estiver pronta)
 ```
 
 Toda fase termina com `npm run lint && npm test && npm run build` limpos, um commit próprio e a
@@ -710,34 +719,57 @@ furo; registro de trocas gravado mas nunca exibido.
 
 ---
 
-### Fase 8 — Validação com a coordenação e o pároco ⏳
+### Fase 8 — Identidade v2 e validação com a coordenação e o pároco ⏳
 
-**Por quê:** é a única pendência que **bloqueia lançar**. O terço é objeto de oração; a
-aplicação dele como estrutura de um software precisa do "sim" de quem responde pela paróquia,
-antes de qualquer participante ver.
+**Por quê:** duas coisas bloqueiam lançar com a cara certa. A primeira já estava aqui: a
+aplicação do terço precisa do "sim" de quem responde pela paróquia. A segunda apareceu em
+2026-09-07, quando o app foi fotografado e lido pela pesquisa
+([pesquisa-identidade-visual.md](pesquisa-identidade-visual.md)): a identidade v1 é bonita e
+genérica — estética clássica alta, expressiva quase nula; a metáfora do terço ocupa uma fração
+mínima dos pixels; a marca lê como spinner; a tipografia é neutra. O pároco e os participantes
+devem ver a v2, não a v1.
 
-**Entrega:** uma sessão de 30 minutos com a coordenação e o pároco, com o app rodando no
-celular (tela Hoje, Escala, a sidebar no desktop) e o canvas ao lado. Três perguntas, nessa
-ordem:
+**Como a v2 é decidida** (o método está na pesquisa; as perguntas em
+[briefing-identidade-v2.md](briefing-identidade-v2.md)):
 
-1. O fio, as contas e o anel-auréola como estrutura de navegação são **reverentes** ou
-   **decorativos**? (Se decorativos: o que sai?)
-2. "Dezena da semana" e "Semana em dia ✓" como progresso — cabe, ou parece gamificar?
-3. A marca A (Auréola) representa o departamento? (B e C ficam na mesa.)
+| Etapa | Entrega | Estado |
+|---|---|---|
+| 8.1 Pesquisa | ciência da memorabilidade, método dos estúdios, fontes de estilo, entregáveis, diagnóstico do app fotografado, três territórios | ✅ 2026-09-07 |
+| 8.2 Briefing v2 | 25 perguntas em 8 partes, cada uma com a decisão que muda; roteiros para o pároco e para participantes | ✅ formulário 1.0 · **respostas pendentes** |
+| 8.3 Imersão e mundo | fotos do terço, da igreja, da folhinha, do boletim; Instagram e Canva do departamento; mood boards por território | ⏳ semana 1 |
+| 8.4 Territórios | um stylescape por território sobrevivente ("A Folhinha", "Contas", "Azul do Rosário"): tipo, cor, material, marca, tela Hoje em 390px, um Story | ⏳ semana 2 |
+| 8.5 Testes e decisão | 5 segundos com 5 participantes; troca de marca; ativo isolado; réguas antes/depois; olhar do pároco (Parte 5 do briefing) | ⏳ semana 2 |
+| 8.6 Sistema | marca que *diz* terço, cor nomeada, tipografia com sotaque, forma e material, ícones próprios, motion no celular, voz em dez frases, componentes e tokens no Figma; `docs/identidade-v2.md` | ⏳ semana 3 |
+| 8.7 Código | tokens em `globals.css`, `components/fio/`, `marca/`, `ui/` e ícones re-estilizados; assinatura "passar a conta" no celular; AA, reduced-motion e testes | ⏳ semana 4 (sobrepõe a Fase 10) |
 
-**Decisões possíveis e o custo de cada uma:**
+**O que já está decidido pela pesquisa, para qualquer território:** o azul da paróquia como
+único acento; a voz da v1; reverência (a metáfora organiza, não enfeita); estrutura de uso
+típica (bottom nav de 4, lista, calendário-grade, tabela na gestão); uma face tipográfica com
+sotaque; a marca redesenhada para se ler como terço; ícones próprios; a assinatura de motion
+levada ao celular.
+
+**Validação com o pároco** (10 min, roteiro na Parte 5 do briefing): o app v1 no celular mais
+os stylescapes da v2. Três perguntas: reverente ou decorativo; algum uso inadequado; que cor,
+imagem ou palavra a paróquia considera sua. Decisões possíveis e o custo de cada uma:
 
 | Resposta | Custo |
 |---|---|
-| Aprovado como está | zero; registra em §11 e segue para a Fase 9 |
-| Trocar a marca (B ou C) | uma tela: reescrever `marca-aureola.tsx` |
-| Tirar a metáfora de um lugar (ex.: a dezena) | um componente; o resto da identidade fica |
-| Tirar a metáfora inteira | sidebar vira lista, contas viram pontos; tokens, tipografia e voz ficam. ~2 dias |
+| Aprovado | zero; registra em §11 e o território escolhido segue para 8.6 |
+| Tirar a metáfora de um lugar (ex.: a dezena) | um componente; o resto fica |
+| Tirar a metáfora inteira | o fio vira lista, contas viram pontos; cor, tipografia e voz ficam; os territórios são refeitos sem o terço — cerca de uma semana a mais |
 
-**Aceite:** decisão escrita em §11 com data e nome de quem decidiu. Sem isso, a Fase 11 não
-começa.
+**Regra para o piloto:** o piloto de outubro **não espera a v2**. Ele mede a escala (furos,
+trocas, "tenho algo?"), não a estética. Se a v2 não estiver no código em 30/09, o piloto
+começa com a v1 e a v2 entra até 15/10. A decisão de território, essa sim, precisa sair até o
+fim da semana 2 (por volta de 20/09).
 
-**Dono:** coordenação. **Quando:** primeira quinzena de setembro.
+**Aceite:** briefing respondido; território decidido por teste com participantes, não por
+gosto, com data e nome em §11; pároco ouvido, com as palavras dele registradas;
+`docs/identidade-v2.md` escrito; a v2 no código passando nos testes da §5.4 da pesquisa
+(5 segundos, troca de marca, ativo isolado, AA, reduced-motion, alvos de 44px).
+
+**Dono:** coordenação (briefing e decisão) + design + desenvolvimento. **Quando:** 8 a 30 de
+setembro; código até 15/10 no pior caso.
 
 ### Fase 9 — Produção: hospedagem, backup, CI ⏳
 
@@ -993,6 +1025,7 @@ Fora de escopo de propósito, registrado para a próxima coordenação não rede
 | 9 | Defeito que só aparece com o app no ar (padrão já visto 3×) | alta | médio | e2e smoke no CI (Fase 10.7) | dev |
 | 10 | Módulo nativo `better-sqlite3` quebra em uma máquina | baixa | baixo | binário pré-compilado; `npm ci` do lockfile; receita no README | dev |
 | 11 | Escopo cresce ("já que tem app, coloca X") | alta | médio | §1.4 e §7.14 são a resposta escrita; toda adição passa por "muda a escala?" | coordenação |
+| 12 | A identidade v2 atrasa e arrasta o piloto | média | médio | o piloto não espera a v2 (regra em §7.8); decisão de território até 20/09; a v1 continua válida | design |
 
 ---
 
@@ -1052,6 +1085,8 @@ Ordem cronológica. "Reversível" diz o custo de voltar atrás.
 | 2026-09-07 | PWA + Web Push; widget e app nativo fora do mandato | um código, sem loja; ~12 pessoas | sim, se houver orçamento |
 | 2026-09-07 | Agendador de push dentro do processo (`instrumentation.ts`), sem fila externa | instância única; nenhum serviço a mais | sim, trocar por cron externo |
 | 2026-09-07 | Sucessão como Fase própria; `mudarPapel` é o mecanismo de transferência | mandato termina em dezembro; órfão técnico é o risco nº 1 da pesquisa | — |
+| 2026-09-07 | Identidade v2: a v1 é "bonita, mas genérica"; a v2 é decidida por pesquisa → briefing → três territórios no Figma → teste com participantes, não por gosto | estética clássica alta e expressiva nula; metáfora anã; marca que lê como spinner; tipografia neutra | sim: a v1 continua no código até a v2 entrar |
+| 2026-09-08 | O piloto de outubro não espera a v2; se a v2 não estiver no código em 30/09, entra até 15/10 | o piloto mede a escala, não a estética | — |
 
 ---
 
@@ -1113,6 +1148,9 @@ senha `terco2026` para todas.
 | `docs/sdd-implementacao.md` | o plano das Fases 1–7 (histórico) |
 | `docs/sdd-projeto-completo.md` | **este documento** — o SDD de ponta a ponta e o caminho até dezembro |
 | `docs/abertura-clj-nsr.html` | documento de abertura |
+| `docs/pesquisa-identidade-visual.md` | entrega 1 da identidade v2: ciência, método, fontes de estilo, diagnóstico, territórios |
+| `docs/briefing-identidade-v2.md` | entrega 2: as perguntas que decidem a identidade, com a decisão que cada uma muda |
+| `docs/identidade/atual/` | as telas da v1 fotografadas em 2026-09-07 (o "antes") |
 | `compass_artifact_*.md` | os dois relatórios de pesquisa |
 | `web/` | o app |
 | `.claude/launch.json` | como a IDE sobe o app |
@@ -1121,7 +1159,7 @@ senha `terco2026` para todas.
 
 | Fase | Cria | Toca |
 |---|---|---|
-| 8 | `docs/` (decisão em §11) | `components/marca/` se a marca mudar |
+| 8 | `docs/pesquisa-identidade-visual.md` ✅, `docs/briefing-identidade-v2.md` ✅, arquivo Figma "CLJ NSR — Identidade v2", `docs/identidade-v2.md` | `app/globals.css`, `components/fio/`, `components/marca/`, `components/ui/`, ícones, `components/shell/mobile-nav.tsx` (assinatura no celular), `docs/decisoes-design.md` (reescrita como v2) |
 | 9 | `web/Dockerfile`, `fly.toml`, `.github/workflows/ci.yml`, `web/.env.example`, `docs/runbook.md` | `next.config.ts` (`output: "standalone"`) |
 | 10 | `lib/db/migracoes/`, `web/e2e/`, `playwright.config.ts` | `lib/db/index.ts`, `lib/data/funcoes.ts`, `design/*.dc.html`, `globals.css` (dark) |
 | 11 | `docs/piloto-outubro-2026.md`, opcionalmente `scripts/importar-escala.ts` | — |
